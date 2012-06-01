@@ -1,0 +1,4 @@
+RoxeePlayer is a (very) thin layer on top of libvlc that exposes a uniform scriptable API for it.
+
+It is primarily meant to serve as part of the Roxee runner application, though other people might find interest in it.
+It's released with the same license as libvlc itself (LGPL).

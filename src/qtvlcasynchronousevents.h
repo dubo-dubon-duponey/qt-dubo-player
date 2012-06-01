@@ -1,7 +1,7 @@
 #ifndef QTVLCASYNCHRONOUSEVENTS_H
 #define QTVLCASYNCHRONOUSEVENTS_H
 
-#include <QObject>
+#include <QtCore/QObject>
 
 namespace QtVlc
 {

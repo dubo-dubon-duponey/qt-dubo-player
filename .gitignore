@@ -5,3 +5,4 @@ Makefile
 Makefile.Debug
 Makefile.Release
 qtvlc.pro.user
+.DS_Store

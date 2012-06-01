@@ -1,80 +1,28 @@
-#include "qtvlccore.h"
-#include <QDebug>
+/*****************************************************************************
+ * Copyright (c) 2012, WebItUp
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
+ *****************************************************************************/
 
-using namespace QtVlc;
+#include "core.h"
+#include <QtCore/QDebug>
 
+#include "coreinstance.h"
+
+namespace RoxeePlayer{
 Core* Core::m_Instance = 0;
-
-Core::Core(QObject *parent) :
-    QObject(parent)
-{
-// 1.1
-//    // Convert arguments
-//    std::string stdStrings[args.size()];
-//    const char *vlcArgs[args.size()];
-//    for(int i = 0; i < args.size(); i++) {
-//            stdStrings[i] = args[i].toStdString();
-//            vlcArgs[i] = stdStrings[i].c_str();
-//    }
-
-//    // libvlc_instance_t * 	libvlc_new (int argc, const char *const *argv)
-//    // Create and initialize a libvlc instance.
-//    _vlc = libvlc_new(sizeof(vlcArgs) / sizeof(*vlcArgs), vlcArgs);
-
-    // Create and initialize a libvlc instance.
-    if((_vlc = libvlc_new(0,NULL)) == NULL) {
-        qDebug() << "Could not init libVLC";
-    }
-}
-
-
-Core::~Core()
-{
-    // void 	libvlc_release (libvlc_instance_t *p_instance)
-    // Decrement the reference count of a libvlc instance, and destroy it if it reaches zero.
-    libvlc_release(_vlc);
-
-    // Free singleton
-    static QMutex mutex;
-    mutex.lock();
-    delete m_Instance;
-    m_Instance = 0;
-    mutex.unlock();
-}
-
-
-Core* Core::instance()
-{
-//    QStringList args;
-//    args << "--intf=dummy"
-//             << "--no-media-library"
-//             << "--reset-plugins-cache"
-//             << "-I"
-//             << "-dummy"
-//             << "--no-stats"
-//             << "--ignore-config"      // Don't use VLC's config
-
-//             << "--verbose=-1"
-//             << "--quiet"
-//          #ifdef Q_WS_MAC
-////             << "--vout=caca"
-////             << "--vout=minimal_macosx"
-////             << "--opengl-provider=minimal_macosx"
-//          #endif
-//             << "--no-osd"
-//             <<  ("--plugin-path=" + appPath);
-
-//    qDebug() << "Received plugin path:";
-//    qDebug() << appPath;
-    static QMutex mutex;
-    if (!m_Instance){
-        mutex.lock();
-        if (!m_Instance)
-            m_Instance = new Core();
-        mutex.unlock();
-    }
-    return m_Instance;
-}
 
 void Core::setUserAgent(const QString &appName, const QString &appVersion)
 {
@@ -82,7 +30,7 @@ void Core::setUserAgent(const QString &appName, const QString &appVersion)
 //            Sets the application name.
     QString applicationOutput = appName + " " + appVersion;
     QString httpOutput = appName + "/" + appVersion + " qt-libvlc/" + (this->getVersion()) + "("+ this->getCompiler() +")";
-    libvlc_set_user_agent(_vlc, applicationOutput.toAscii().data(), httpOutput.toAscii().data());
+    libvlc_set_user_agent(LRPCoreInstance::instance()->getSession(), applicationOutput.toAscii().data(), httpOutput.toAscii().data());
 }
 
 QString Core::getVersion()
@@ -156,7 +104,7 @@ typedef int64_t 	libvlc_time_t
 QStringList Core::audioFilterList()
 {
     QStringList l = QStringList();
-    libvlc_module_description_t * md = libvlc_audio_filter_list_get(_vlc);
+    libvlc_module_description_t * md = libvlc_audio_filter_list_get(LRPCoreInstance::instance()->getSession());
     do{
         l.append(QString().fromLocal8Bit(md->psz_name));
         l.append(QString().fromLocal8Bit(md->psz_shortname));
@@ -170,7 +118,7 @@ QStringList Core::audioFilterList()
 QStringList Core::videoFilterList()
 {
     QStringList l = QStringList();
-    libvlc_module_description_t * md = libvlc_video_filter_list_get(_vlc);
+    libvlc_module_description_t * md = libvlc_video_filter_list_get(LRPCoreInstance::instance()->getSession());
     do{
         l.append(QString().fromLocal8Bit(md->psz_name));
         l.append(QString().fromLocal8Bit(md->psz_shortname));
@@ -179,4 +127,6 @@ QStringList Core::videoFilterList()
     }while(md->p_next);
     libvlc_module_description_list_release(md);
     return l;
+}
+
 }

@@ -1,15 +1,32 @@
-#ifndef QTVLCMEDIAPLAYER_H
-#define QTVLCMEDIAPLAYER_H
+/*****************************************************************************
+ * Copyright (c) 2012, WebItUp
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
+ *****************************************************************************/
 
-#include <QObject>
-#include <QWIdget>
-#include <qtvlccore.h>
+#ifndef ROXEEPLAYER_MEDIAPLAYER_H
+#define ROXEEPLAYER_MEDIAPLAYER_H
 
-struct libvlc_media_player_t;
+#include "libroxeeplayer_global.h"
 
-namespace QtVlc
+#include <QtCore/QObject>
+#include <QtCore/QStringList>
+
+namespace RoxeePlayer
 {
-    class MediaPlayer : public QObject
+    class LIBROXEEPLAYERSHARED_EXPORT MediaPlayer : public QObject
     {
         Q_OBJECT
     public:
@@ -55,10 +72,10 @@ namespace QtVlc
         Q_INVOKABLE void setKeyInput(const bool on );
         Q_INVOKABLE void setMouseInput(const bool on);
         /*getSize()*/
-        Q_PROPERTY(int height READ height)
-        Q_PROPERTY(int width READ width)
-        int height();
-        int width();
+        Q_PROPERTY(uint height READ height)
+        Q_PROPERTY(uint width READ width)
+        uint height();
+        uint width();
 
         /*cursor()*/
         Q_PROPERTY(float scale READ scale WRITE setScale)
@@ -138,13 +155,9 @@ namespace QtVlc
 
     public slots:
 
-    protected:
-        libvlc_media_player_t * _vlcmp;
-
-
     private:
 
     };
 }
 
-#endif // QTVLCMEDIAPLAYER_H
+#endif // ROXEEPLAYER_MEDIAPLAYER_H

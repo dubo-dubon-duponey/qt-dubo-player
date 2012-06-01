@@ -1,8 +1,27 @@
+/*****************************************************************************
+ * Copyright (c) 2012, WebItUp
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
+ *****************************************************************************/
+
+// Don't remember where the inspiration came from: likely stackoverflow and/or videolan wiki and/or forums
+// If you feel this contains parts of your code, write me a note
+
 #include "qtvlcwidget.h"
-#include <QPalette>
-#include <QColor>
-#include <QVBoxLayout>
-#include <QDebug>
+#include <QtGui/QVBoxLayout>
+#include <QtCore/QDebug>
 
 #import <Cocoa/Cocoa.h>
 #import <QuartzCore/QuartzCore.h>
@@ -44,35 +63,29 @@ BOOL stretchesVideo;
 - (void) removeVoutSubview:(NSView *)aView {}
 @end
 
-QtVlcWidget::QtVlcWidget( const QString & appPath, QWidget *parent ) :
+QtVlcWidget::QtVlcWidget( QWidget *parent ) :
 //  QGLWidget( parent )
   QWidget( parent )
 {
-    _vp = 0;
     setAttribute(Qt::WA_NativeWindow, true);
-    qDebug() << "Going in";
-    // setAutoBufferSwap(false);
-
 
     _layout = new QVBoxLayout(parent);
     _layout->setContentsMargins(0, 0, 0, 0);
-
 //    _layout = new QStackedLayout();
 //    _layout->setStackingMode(QStackedLayout::StackAll);
-
     setLayout(_layout);
 
 //    NSView *video = [[NSView alloc] init];
 //    setCocoaView(video);
 //    [video release];
 
-    QtVlc::Core::instance();
+    CoreInstance::instance();
 
     m_video = [[VLCNSView alloc] init];
 
-    m_container = new QMacCocoaViewContainer( m_video, this );
+    QMacCocoaViewContainer*  container = new QMacCocoaViewContainer( m_video, this );
     // m_container->setAutoFillBackground( true );
-    m_container->setCocoaView(m_video);
+    container->setCocoaView(m_video);
 
 //    QPalette videoPalette = m_container->palette();
 //    videoPalette.setColor( QPalette::Window, QColor( Qt::red) );
@@ -80,7 +93,7 @@ QtVlcWidget::QtVlcWidget( const QString & appPath, QWidget *parent ) :
 
 
 
-    _layout->addWidget( m_container );
+    _layout->addWidget( container );
 
 }
 
@@ -101,10 +114,10 @@ setLayout( layout );
 
 
 
-QMacCocoaViewContainer* QtVlcWidget::getInnerStuff()
-{
-    return m_container;
-}
+//QMacCocoaViewContainer* QtVlcWidget::getInnerStuff()
+//{
+//    return m_container;
+//}
 
 
 
@@ -128,41 +141,40 @@ QtVlcWidget::~QtVlcWidget()
 {
 }
 /*
-QtVlc::MediaPlayer * QtVlcWidget::start(const QString & path)
+RoxeePlayer::MediaPlayer * QtVlcWidget::start(const QString & path)
 {
     // Works, in a way
     // VENISE TRY
 
     if(!_vp){
-        _vp = new QtVlc::MediaPlayer((void *) static_cast< QtVlcWidget* >(this)->id(), this);
+        _vp = new RoxeePlayer::MediaPlayer((void *) static_cast< QtVlcWidget* >(this)->id(), this);
     }else{
         _vp->stop();
     }
     _vp->setMedia(path);
     _vp->play();
     return _vp;
-//    _vp = new QtVlc::MediaPlayer(path, m_container->cocoaView(), this);
+//    _vp = new RoxeePlayer::MediaPlayer(path, m_container->cocoaView(), this);
 
-    // _vp = new QtVlc::MediaPlayer(path, (void * ) m_container->winId(), this);// this->id()
+    // _vp = new RoxeePlayer::MediaPlayer(path, (void * ) m_container->winId(), this);// this->id()
     // m_container->show();
 
 
-    //    _vp = new QtVlc::MediaPlayer(path, (void *) m_container->winId(), this);
+    //    _vp = new RoxeePlayer::MediaPlayer(path, (void *) m_container->winId(), this);
 
     // QMacCocoaViewContainer
 }
 */
 
-QtVlc::MediaPlayer * QtVlcWidget::mediaPlayer()
-{
-    if(!_vp){
-        _vp = new QtVlc::MediaPlayer((void *) static_cast< QtVlcWidget* >(this)->id(), this);
-    }
-    return _vp;
-}
+//RoxeePlayer::MediaPlayer * QtVlcWidget::mediaPlayer()
+//{
+//    if(!_vp){
+//        _vp = new RoxeePlayer::MediaPlayer((void *) static_cast< QtVlcWidget* >(this)->id(), this);
+//    }
+//    return _vp;
+//}
 
-
-/* winId should return pointer to the NSView, m_video */
+/* winId returns a pointer to the NSView */
 NativeNSViewRef
 QtVlcWidget::id() const
 {
@@ -174,5 +186,3 @@ QtVlcWidget::release()
 {
     [m_video release];
 }
-
-// #include "qtvlcwidget.moc"

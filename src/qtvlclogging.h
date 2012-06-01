@@ -1,7 +1,7 @@
 #ifndef QTVLCLOGGING_H
 #define QTVLCLOGGING_H
 
-#include <QObject>
+#include <QtCore/QObject>
 
 namespace QtVlc
 {

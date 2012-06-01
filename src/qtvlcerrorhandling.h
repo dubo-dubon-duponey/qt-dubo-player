@@ -1,7 +1,7 @@
 #ifndef QTVLCERROR_H
 #define QTVLCERROR_H
 
-#include <QObject>
+#include <QtCore/QObject>
 
 namespace QtVlc
 {
