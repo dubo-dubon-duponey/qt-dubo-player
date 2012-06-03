@@ -22,29 +22,73 @@
 #include "libroxeeplayer_global.h"
 #include <QtCore/QObject>
 
+/*!
+\mainpage
+This library is primarily meant to be used by the Roxee Webrunner.
+Its purpose is to provide a clean, QT-ified, scriptable API that introduces as little extra complexity as possible over
+the underyling video player library, and ideally, be API independent from that library.
+Right now though, it only supports (and is meant for) libvlc (http://www.videolan.org/vlc/libvlc.html).
+
+To compile:
+- build or install libvlc (http://wiki.videolan.org/LibVLC)
+- edit the vars.pri file at the root of the project so that it matches your mileage:
+ - DEPDIR=# should point to wherever your lib and include folders reside (under which libtorrent can be found)
+ - DESTDIR=# should point to wherever you want the library to be compiled
+- qmake, then make
+
+To use it, just create a RoxeePlayer::SimplePlayer object.
+This is specifically meant to be exposed for a QWebPluginFactory.
+
+If you want to have a QT Widget that will switch over a regular widget, use StackedPlayer.
+
+Big fat warning: this pile of code may or may not work for you. If it does, you may send a thank you note :).
+If it doesn't, you can probably:
+- live with it
+- ask me for help
+
+... though neither of these is guaranteed to have any result - of course you may also fix it and possibly ask for a pull request :)
+
+
+This code is distributed under the terms of the LGPL license.
+*/
+
+/*! \namespace RoxeePlayer
+\brief The library namespace.
+*/
+
 namespace RoxeePlayer
 {
 
+    /*! \brief Library root object. */
     class LIBROXEEPLAYERSHARED_EXPORT Root: public QObject {
         Q_OBJECT
     public:
-        explicit Root(){}
-
-        Q_PROPERTY(const QString name READ getName)
+        /*! \brief The name of the library.*/
+        Q_PROPERTY(const QString ROXEE_NAME READ getName)
+        /*! \brief The version of the library.*/
         Q_PROPERTY(const QString ROXEE_VERSION READ getVersion)
+        /*! \brief The (git) revision of the library.*/
         Q_PROPERTY(const QString ROXEE_REVISION READ getRevision)
+        /*! \brief The (git) changeset of the library.*/
         Q_PROPERTY(const QString ROXEE_CHANGESET READ getChangeset)
 
+        /*! \brief The nameof the underlying player library.*/
+        Q_PROPERTY(const QString PLUGIN_NAME READ getLibName)
+        /*! \brief The version of the underlying player library.*/
         Q_PROPERTY(const QString PLUGIN_VERSION READ getLibVersion)
+        /*! \brief The revision of the underlying player library.*/
         Q_PROPERTY(const QString PLUGIN_REVISION READ getLibRevision)
 
+        /*! \cond */
         const QString getName();
         const QString getVersion();
         const QString getRevision();
         const QString getChangeset();
 
+        const QString getLibName(){ return QString::fromAscii("libvlc");}
         const QString getLibVersion();
         const QString getLibRevision();
+        /*! \endcond */
     };
 }
 

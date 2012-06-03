@@ -16,14 +16,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#include "qtvlc2.h"
+#include "simpleplayer.h"
 
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QStackedLayout>
+#include <QtCore/QDebug>
+
+/*! \cond */
 
 namespace RoxeePlayer{
 
-qtvlc2::qtvlc2(QWidget *parent) :
+SimplePlayer::SimplePlayer(QWidget *parent) :
     QWidget(parent)
 {
     setAttribute(Qt::WA_NativeWindow, true);
@@ -33,7 +36,7 @@ qtvlc2::qtvlc2(QWidget *parent) :
         layout->addWidget(videoWidget);
         this->setLayout(layout);
 
-        _vp = new RoxeePlayer::MediaPlayer((void *) videoWidget->winId());
+        _rp_mediaplayer = new RoxeePlayer::MediaPlayer((void *) videoWidget->winId());
 
 //    _vp = new RoxeePlayer::MediaPlayer((void *) this->winId());
 
@@ -53,14 +56,32 @@ qtvlc2::qtvlc2(QWidget *parent) :
 
 }
 
-qtvlc2::~qtvlc2()
+SimplePlayer::~SimplePlayer()
 {
-
+    qDebug() << " [M] VLC: destructor";
+    this->~QObject();
 }
 
-RoxeePlayer::MediaPlayer * qtvlc2::mediaPlayer()
+RoxeePlayer::Root * SimplePlayer::root()
 {
-    return _vp;
+    qDebug() << " [M] VLC: root getter";
+    if(!_rp_root){
+        _rp_root = new RoxeePlayer::Root();
+    }
+    return _rp_root;
+}
+
+RoxeePlayer::Core * SimplePlayer::core()
+{
+    qDebug() << " [M] VLC: core getter";
+    return RoxeePlayer::Core::instance();
+}
+
+RoxeePlayer::MediaPlayer * SimplePlayer::mediaPlayer()
+{
+    qDebug() << " [M] VLC: media player getter";
+    return _rp_mediaplayer;
 }
 
 }
+/*! \endcond */

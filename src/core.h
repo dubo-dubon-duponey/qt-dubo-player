@@ -27,10 +27,12 @@
 
 namespace RoxeePlayer{
 
+/*! \brief A core object with a couple of random infos / helpers (this is a singleton) */
 class LIBROXEEPLAYERSHARED_EXPORT Core : public QObject
 {
     Q_OBJECT
 public:
+    /*! \brief Instance (singleton pattern) */
     static Core* instance()
     {
         static QMutex mutex;
@@ -43,6 +45,7 @@ public:
         return m_Instance;
     }
 
+    /*! \brief Destructor */
     ~Core()
     {
         static QMutex mutex;
@@ -52,18 +55,23 @@ public:
         mutex.unlock();
     }
 
+    /*! \brief Allows to control the UA string that will be set for http streams retrieval. */
     Q_INVOKABLE void setUserAgent(const QString &appName, const QString &appVersion);
-
+    /*! \brief Gets the underlying library version */
     Q_PROPERTY(const QString version READ getVersion)
+    /*! \brief Gets the underlying library changeset */
     Q_PROPERTY(const QString changeset READ getChangeset)
+    /*! \brief Gets the compiler used to build the underlying library */
     Q_PROPERTY(const QString compiler READ getCompiler)
 
+    /*! \cond */
     QString getVersion();
     QString getChangeset();
     QString getCompiler();
 
     QStringList audioFilterList();
     QStringList videoFilterList();
+    /*! \endcond */
 
 signals:
 

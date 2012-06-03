@@ -16,37 +16,55 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#ifndef ROXEEPLAYER_QTVLC2_H
-#define ROXEEPLAYER_QTVLC2_H
+#ifndef ROXEEPLAYER_SIMPLEPLAYER_H
+#define ROXEEPLAYER_SIMPLEPLAYER_H
 
 #include "libroxeeplayer_global.h"
 
 #include <QtCore/QObject>
 #include <QtGui/QWidget>
 
+#include "root.h"
+#include "core.h"
 #include "mediaplayer.h"
 
 //using namespace RoxeePlayer;
 
 namespace RoxeePlayer{
 
-class LIBROXEEPLAYERSHARED_EXPORT qtvlc2 : public QWidget
+/*! \brief. One of the top-level user classes.
+
+Provides with a simple QWidget player.
+Useful as-is for a QWebPlugin.
+*/
+
+class LIBROXEEPLAYERSHARED_EXPORT SimplePlayer : public QWidget
 {
     Q_OBJECT
 public:
-    explicit qtvlc2(QWidget *parent = 0);// const QString & appPath,
-    ~qtvlc2();
-    MediaPlayer * mediaPlayer();
+    /*! \brief Constructor */
+    explicit SimplePlayer(QWidget *parent = 0);// const QString & appPath,
+    /*! \cond */
+    ~SimplePlayer();
+    /*! \endcond */
+
+    /*! \brief Get a reference to the library Root object. */
+    RoxeePlayer::Root * root();
+    /*! \brief Get a reference to the player Core object. */
+    RoxeePlayer::Core * core();
+    /*! \brief Get a reference to the media player itself. */
+    RoxeePlayer::MediaPlayer * mediaPlayer();
 
 signals:
 
 public slots:
 
 private:
-    MediaPlayer * _vp;
+    RoxeePlayer::Root * _rp_root;
+    RoxeePlayer::MediaPlayer * _rp_mediaplayer;
 
 };
 
 }
 
-#endif // ROXEEPLAYER_QTVLC2_H
+#endif // ROXEEPLAYER_SIMPLEPLAYER_H

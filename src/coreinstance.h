@@ -12,6 +12,7 @@
 
 // XXX allow more than one vlc instance instead of this crap
 
+/*! \cond */
 struct libvlc_instance_t;
 struct libvlc_media_player_t;
 
@@ -76,5 +77,7 @@ private:
     static LRPCoreInstance* m_Instance;
 
 };
+
+/*! \endcond */
 
 #endif // ROXEEPLAYER_COREINSTANCE_H

@@ -14,6 +14,7 @@ OTHER_FILES += vars.pri.in \
     res/redist/AUTHORS \
     res/redist/ChangeLog \
     README \
+    res/doxygen.tpl \
     res/redist/LICENSE.LGPL
 #    src/qtvlcwidget.mm
 
@@ -50,7 +51,7 @@ OTHER_FILES += vars.pri.in \
 #    qtvlclogging.h \
 #    qtvlcasynchronousevents.h \
 #    qtvlcwidget.h \
-#    qtvlc2.h
+#    SimplePlayer.h
 ##    vlc_on_qt.h
 ##    qtvlcaudiocontrols.h \
 ##    qtvlcvideocontrols.h \
@@ -82,7 +83,7 @@ OTHER_FILES += vars.pri.in \
 #    qtvlcerrorhandling.cpp \
 #    qtvlclogging.cpp \
 #    qtvlcasynchronousevents.cpp \
-#    qtvlc2.cpp
+#    SimplePlayer.cpp
 ##    qtvlcaudiocontrols.cpp \
 ##    qtvlcvideocontrols.cpp \
 ##    LibVLCpp/GenericRenderer.cpp \

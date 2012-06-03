@@ -21,6 +21,8 @@
 
 #include "coreinstance.h"
 
+/*! \cond */
+
 namespace RoxeePlayer{
 Core* Core::m_Instance = 0;
 
@@ -130,3 +132,5 @@ QStringList Core::videoFilterList()
 }
 
 }
+
+/*! \endcond */

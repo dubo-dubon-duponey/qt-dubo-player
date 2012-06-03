@@ -20,6 +20,8 @@
 
 #include <vlc/vlc.h>
 
+/*! \cond */
+
 namespace RoxeePlayer{
 const QString Root::getName(){
     return PROJECT_NAME;
@@ -48,3 +50,5 @@ const QString Root::getLibRevision(){
 }
 
 }
+
+/*! \endcond */

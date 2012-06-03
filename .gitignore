@@ -1,8 +1,7 @@
-debug/
-release/
-lib/
-Makefile
-Makefile.Debug
-Makefile.Release
-qtvlc.pro.user
+Makefile*
+buildd/
 .DS_Store
+*.pro.user
+buildd*
+doc/
+libroxeeplayer

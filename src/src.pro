@@ -14,7 +14,6 @@ CONFIG +=   QT_NO_CAST_FROM_ASCII \
             QT_USE_FAST_CONCATENATION QT_USE_FAST_OPERATOR_PLUS
 
 # Yes, this will build a lib
-DEFINES += LIBROXEETORRENT_LIBRARY
 DEFINES += LIBROXEEPLAYER_LIBRARY
 
 # Basic stuff (version and build/path magic)
@@ -48,11 +47,12 @@ INSTALLS += target dist
 HEADERS += \
     libroxeeplayer_global.h \
 #    qtvlcwidget.h \
-    qtvlc2.h \
     core.h \
     coreinstance.h \
     mediaplayer.h \
-    root.h
+    root.h \
+    simpleplayer.h \
+    stackedplayer.h
 #    qtvlcerrorhandling.h \
 #    qtvlclogging.h \
 #    qtvlcasynchronousevents.h \
@@ -70,16 +70,19 @@ HEADERS += \
 #    OBJECTIVE_SOURCES += qtvlcwidget.mm
 #}
 
+
+
 #qtvlc.cpp \
 SOURCES += \
 #    qtvlcerrorhandling.cpp \
 #    qtvlclogging.cpp \
 #    qtvlcasynchronousevents.cpp \
-    qtvlc2.cpp \
     core.cpp \
     coreinstance.cpp \
     mediaplayer.cpp \
-    root.cpp
+    root.cpp \
+    simpleplayer.cpp \
+    stackedplayer.cpp
 #    qtvlcaudiocontrols.cpp \
 #    qtvlcvideocontrols.cpp \
 #    LibVLCpp/GenericRenderer.cpp \

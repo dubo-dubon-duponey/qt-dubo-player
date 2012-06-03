@@ -20,6 +20,8 @@
 #include <QtCore/QDebug>
 #include "coreinstance.h"
 
+/*! \cond */
+
 struct libvlc_media_player_t;
 
 using namespace RoxeePlayer;
@@ -736,8 +738,4 @@ LIBVLC_API int 	libvlc_audio_set_delay (libvlc_media_player_t *LRPCoreInstance::
 
 }
 
-
-
-
-
-
+/*! \endcond */
