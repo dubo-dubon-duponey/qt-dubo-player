@@ -22,6 +22,45 @@
 
 LRPCoreInstance* LRPCoreInstance::m_Instance = 0;
 
+LRPCoreInstance::LRPCoreInstance()
+{
+    const char * const vlcArgs[] = {
+        "-I", "dummy", /* Don't use any interface */
+        "--ignore-config", /* Don't use VLC's config */
+        "--extraintf=logger", /* Log everything */
+        "--verbose=2", /* Be much more verbose then normal for debugging purpose */
+        "--no-osd" };
+
+    if((_vlc = libvlc_new(sizeof(vlcArgs) / sizeof(*vlcArgs), vlcArgs)) == NULL) {
+        qDebug() << QString::fromAscii("Could not init libVLC");
+    }
+}
+
+
+LRPCoreInstance* LRPCoreInstance::instance()
+{
+    static QMutex mutex;
+    if (!m_Instance){
+        mutex.lock();
+        if (!m_Instance)
+            m_Instance = new LRPCoreInstance;
+        mutex.unlock();
+    }
+    return m_Instance;
+}
+
+LRPCoreInstance::~LRPCoreInstance()
+{
+    libvlc_release(_vlc);
+    _vlc = 0;
+
+    static QMutex mutex;
+    mutex.lock();
+    delete m_Instance;
+    m_Instance = 0;
+    mutex.unlock();
+}
+
 /*! \endcond */
 
 // 1.1

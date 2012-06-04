@@ -20,29 +20,8 @@ class LRPCoreInstance : public QObject
 {
     Q_OBJECT
 public:
-    static LRPCoreInstance* instance()
-    {
-        static QMutex mutex;
-        if (!m_Instance){
-            mutex.lock();
-            if (!m_Instance)
-                m_Instance = new LRPCoreInstance;
-            mutex.unlock();
-        }
-        return m_Instance;
-    }
-
-    ~LRPCoreInstance()
-    {
-        libvlc_release(_vlc);
-        _vlc = 0;
-
-        static QMutex mutex;
-        mutex.lock();
-        delete m_Instance;
-        m_Instance = 0;
-        mutex.unlock();
-    }
+    static LRPCoreInstance* instance();
+    ~LRPCoreInstance();
 
 //    void setSession (libvlc_instance_t* val) { _vlc = val; }
     libvlc_instance_t* getSession () { return _vlc; }
@@ -54,23 +33,7 @@ private:
     libvlc_instance_t* _vlc;
     libvlc_media_player_t * _vlcmp;
 
-    LRPCoreInstance()
-    {
-        QStringList args;
-        args << QString::fromAscii("--no-osd");
-
-        std::string stdStrings[args.size()];
-        const char *vlcArgs[args.size()];
-        for(int i = 0; i < args.size(); i++) {
-                stdStrings[i] = args[i].toStdString();
-                vlcArgs[i] = stdStrings[i].c_str();
-        }
-
-        if((_vlc = libvlc_new(sizeof(vlcArgs) / sizeof(*vlcArgs), vlcArgs)) == NULL) {
-            qDebug() << QString::fromAscii("Could not init libVLC");
-        }
-    }
-
+    LRPCoreInstance();
     LRPCoreInstance(const LRPCoreInstance &); // hide copy constructor
     LRPCoreInstance& operator=(const LRPCoreInstance &); // hide assign op
 
