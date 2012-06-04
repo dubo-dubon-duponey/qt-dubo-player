@@ -18,6 +18,7 @@
 
 #include "core.h"
 #include <QtCore/QDebug>
+#include <QtCore/QMutex>
 
 #include "coreinstance.h"
 
@@ -25,6 +26,31 @@
 
 namespace RoxeePlayer{
 Core* Core::m_Instance = 0;
+
+Core* Core::instance()
+{
+    qDebug() << " [M] VLC: Getting core instance";
+    static QMutex mutex;
+    if (!m_Instance){
+        mutex.lock();
+        if (!m_Instance)
+            m_Instance = new Core;
+        mutex.unlock();
+    }
+    return m_Instance;
+}
+
+/*! \brief Destructor */
+Core::~Core()
+{
+//    qDebug() << " [M] VLC: Destructing core instance";
+//    static QMutex mutex;
+//    mutex.lock();
+//    delete m_Instance;
+//    m_Instance = 0;
+//    mutex.unlock();
+}
+
 
 void Core::setUserAgent(const QString &appName, const QString &appVersion)
 {

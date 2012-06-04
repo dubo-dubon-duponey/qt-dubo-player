@@ -21,7 +21,6 @@
 
 #include "libroxeeplayer_global.h"
 
-#include <QtCore/QMutex>
 #include <QtCore/QObject>
 #include <QtCore/QStringList>
 
@@ -33,27 +32,10 @@ class LIBROXEEPLAYERSHARED_EXPORT Core : public QObject
     Q_OBJECT
 public:
     /*! \brief Instance (singleton pattern) */
-    static Core* instance()
-    {
-        static QMutex mutex;
-        if (!m_Instance){
-            mutex.lock();
-            if (!m_Instance)
-                m_Instance = new Core;
-            mutex.unlock();
-        }
-        return m_Instance;
-    }
+    static Core* instance();
 
     /*! \brief Destructor */
-    ~Core()
-    {
-        static QMutex mutex;
-        mutex.lock();
-        delete m_Instance;
-        m_Instance = 0;
-        mutex.unlock();
-    }
+    ~Core();
 
     /*! \brief Allows to control the UA string that will be set for http streams retrieval. */
     Q_INVOKABLE void setUserAgent(const QString &appName, const QString &appVersion);
