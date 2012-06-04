@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Copyright (c) 2012, WebItUp
+ * Copyright (c) 2012, WebItUp <contact@webitup.fr>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -375,8 +375,8 @@ uint MediaPlayer::height()
 //        Get current video height.
 //    return libvlc_video_get_height (LRPCoreInstance::instance()->getPlayer());
     int t = libvlc_video_get_track (LRPCoreInstance::instance()->getPlayer());
-    uint * px;
-    uint * py;
+    uint * px = 0;
+    uint * py = 0;
     libvlc_video_get_size(LRPCoreInstance::instance()->getPlayer(), t, px, py);
     return * py;
 }
@@ -384,8 +384,8 @@ uint MediaPlayer::height()
 uint MediaPlayer::width()
 {
     int t = libvlc_video_get_track (LRPCoreInstance::instance()->getPlayer());
-    uint * px;
-    uint * py;
+    uint * px = 0;
+    uint * py = 0;
     libvlc_video_get_size(LRPCoreInstance::instance()->getPlayer(), t, px, py);
     return * px;
 //LIBVLC_DEPRECATED int 	libvlc_video_get_width (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer())
