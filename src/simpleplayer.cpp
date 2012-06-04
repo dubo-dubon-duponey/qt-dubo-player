@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Copyright (c) 2012, WebItUp
+ * Copyright (c) 2012, WebItUp <contact@webitup.fr>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -59,7 +59,7 @@ SimplePlayer::SimplePlayer(QWidget *parent) :
 SimplePlayer::~SimplePlayer()
 {
     qDebug() << " [M] VLC: destructor";
-    QObject::~QObject();
+//    QObject::~QObject();
 }
 
 RoxeePlayer::Root * SimplePlayer::root()
