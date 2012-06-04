@@ -59,7 +59,7 @@ SimplePlayer::SimplePlayer(QWidget *parent) :
 SimplePlayer::~SimplePlayer()
 {
     qDebug() << " [M] VLC: destructor";
-    this->~QObject();
+    QObject::~QObject();
 }
 
 RoxeePlayer::Root * SimplePlayer::root()

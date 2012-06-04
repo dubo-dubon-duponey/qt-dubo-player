@@ -27,11 +27,10 @@
 namespace RoxeePlayer{
 
 StackedPlayer::StackedPlayer(QStackedLayout * layout, QObject *parent) :
-    QObject(parent)
+    QObject(parent), _rp_root(0)
 {
     qDebug() << " [M] VLC: constructor";
     _outer_layout = layout;
-    _rp_root = 0;
     _shifted_widget = 0;
     _video_widget = new QWidget;
     QWidget * videoWidget = new QWidget;
@@ -45,7 +44,7 @@ StackedPlayer::StackedPlayer(QStackedLayout * layout, QObject *parent) :
 StackedPlayer::~StackedPlayer()
 {
     qDebug() << " [M] VLC: destructor";
-    this->~QObject();
+    QObject::~QObject();
 }
 
 RoxeePlayer::Root * StackedPlayer::root()
