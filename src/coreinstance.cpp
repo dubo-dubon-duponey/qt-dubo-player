@@ -27,9 +27,10 @@ LRPCoreInstance::LRPCoreInstance()
     const char * const vlcArgs[] = {
         "-I", "dummy", /* Don't use any interface */
         "--ignore-config", /* Don't use VLC's config */
-        "--extraintf=logger", /* Log everything */
-        "--verbose=2", /* Be much more verbose then normal for debugging purpose */
         "--no-osd" };
+
+//    "--extraintf=logger", /* Log everything */
+//    "--verbose=2", /* Be much more verbose then normal for debugging purpose */
 
     if((_vlc = libvlc_new(sizeof(vlcArgs) / sizeof(*vlcArgs), vlcArgs)) == NULL) {
         qDebug() << QString::fromAscii("Could not init libVLC");
