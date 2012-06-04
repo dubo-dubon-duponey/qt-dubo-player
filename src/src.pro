@@ -41,7 +41,7 @@ INCLUDEPATH += $$PWD
 
 # XXX watcha the fuck?
 target.path = $$DESTDIR
-INSTALLS += target dist
+INSTALLS += target
 
 #qtvlc.h\
 HEADERS += \
