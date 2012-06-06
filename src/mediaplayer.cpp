@@ -90,8 +90,8 @@ void MediaPlayer::setMedia(const QString &path)
 QString MediaPlayer::media()
 {
     // XXX not implemented
-    throw "NOT_IMPLEMENTED";
-    return "";//QString(libvlc_media_player_get_media(LRPCoreInstance::instance()->getPlayer()));
+//    throw "NOT_IMPLEMENTED";
+    return QString::fromAscii("");//QString(libvlc_media_player_get_media(LRPCoreInstance::instance()->getPlayer()));
 }
 
 void MediaPlayer::play()
@@ -111,6 +111,8 @@ void MediaPlayer::pause()
 
 bool MediaPlayer::isPlaying()
 {
+//    if(!LRPCoreInstance::instance()->getPlayer())
+//        return 0;
     return libvlc_media_player_is_playing(LRPCoreInstance::instance()->getPlayer());
 }
 
@@ -375,6 +377,9 @@ uint MediaPlayer::height()
 //        Get current video height.
 //    return libvlc_video_get_height (LRPCoreInstance::instance()->getPlayer());
     int t = libvlc_video_get_track (LRPCoreInstance::instance()->getPlayer());
+    // Otherwise will crash
+    if(t == -1)
+        return 0;
     uint * px = 0;
     uint * py = 0;
     libvlc_video_get_size(LRPCoreInstance::instance()->getPlayer(), t, px, py);
@@ -384,6 +389,8 @@ uint MediaPlayer::height()
 uint MediaPlayer::width()
 {
     int t = libvlc_video_get_track (LRPCoreInstance::instance()->getPlayer());
+    if(t == -1)
+        return 0;
     uint * px = 0;
     uint * py = 0;
     libvlc_video_get_size(LRPCoreInstance::instance()->getPlayer(), t, px, py);
