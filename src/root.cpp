@@ -31,6 +31,14 @@ const QString Root::getVersion(){
     return VERSION_FULL;
 }
 
+const QString Root::getBuildType(){
+    return PROJECT_BUILDTYPE;
+}
+
+const QString Root::getLinkType(){
+    return PROJECT_LINKTYPE;
+}
+
 const QString Root::getRevision(){
     return VERSION_GIT;
 }

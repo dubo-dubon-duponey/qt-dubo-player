@@ -4,7 +4,7 @@ include(../vars.pri)
 # This is a library (to be ovveridden by eg MSVC specific config)
 TEMPLATE = lib
 
-# Requires only core
+# Requires
 QT = core gui
 
 # And be boring
@@ -38,10 +38,12 @@ unix:!macx {
 }
 
 INCLUDEPATH += $$PWD
-
-# XXX watcha the fuck?
 target.path = $$DESTDIR
 INSTALLS += target
+
+
+CONFIG += absolute_library_soname
+
 
 #qtvlc.h\
 HEADERS += \
