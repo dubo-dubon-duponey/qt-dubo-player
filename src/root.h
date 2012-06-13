@@ -20,7 +20,7 @@
 #define ROXEEPLAYER_ROOT_H
 
 #include "libroxeeplayer_global.h"
-#include <QtCore/QObject>
+#include <QtCore/qobject.h>
 
 /*!
 \mainpage

@@ -29,7 +29,7 @@ Core* Core::m_Instance = 0;
 
 Core* Core::instance()
 {
-    qDebug() << " [M] VLC: Getting core instance";
+    qDebug() << "     +++ [Lib] {Player}: getting core instance";
     static QMutex mutex;
     if (!m_Instance){
         mutex.lock();
@@ -43,7 +43,7 @@ Core* Core::instance()
 /*! \brief Destructor */
 Core::~Core()
 {
-//    qDebug() << " [M] VLC: Destructing core instance";
+    qDebug() << "     --- [Lib] {Player}: destructing core instance";
 //    static QMutex mutex;
 //    mutex.lock();
 //    delete m_Instance;

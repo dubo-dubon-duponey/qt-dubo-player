@@ -21,14 +21,12 @@
 
 #include "libroxeeplayer_global.h"
 
-#include <QtCore/QObject>
-#include <QtGui/QWidget>
+#include <QtCore/qobject.h>
+#include <QtGui/qwidget.h>
 
 #include "root.h"
 #include "core.h"
 #include "mediaplayer.h"
-
-//using namespace RoxeePlayer;
 
 namespace RoxeePlayer{
 

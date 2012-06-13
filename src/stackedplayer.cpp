@@ -29,7 +29,7 @@ namespace RoxeePlayer{
 StackedPlayer::StackedPlayer(QStackedLayout * layout, QObject *parent) :
     QObject(parent), _rp_root(0)
 {
-    qDebug() << " [M] VLC: constructor";
+    qDebug() << "     +++ [Lib] {Player}: stacked player constructor";
     _outer_layout = layout;
     _shifted_widget = 0;
     _video_widget = new QWidget;
@@ -43,13 +43,11 @@ StackedPlayer::StackedPlayer(QStackedLayout * layout, QObject *parent) :
 
 StackedPlayer::~StackedPlayer()
 {
-    qDebug() << " [M] VLC: destructor";
-//    QObject::~QObject();
+    qDebug() << "     --- [Lib] {Player}: stacked player destructor";
 }
 
 RoxeePlayer::Root * StackedPlayer::root()
 {
-    qDebug() << " [M] VLC: root getter";
     if(!_rp_root){
         _rp_root = new RoxeePlayer::Root();
     }
@@ -58,24 +56,22 @@ RoxeePlayer::Root * StackedPlayer::root()
 
 RoxeePlayer::Core * StackedPlayer::core()
 {
-    qDebug() << " [M] VLC: core getter";
     return RoxeePlayer::Core::instance();
 }
 
 RoxeePlayer::MediaPlayer * StackedPlayer::mediaPlayer()
 {
-    qDebug() << " [M] VLC: media player getter";
     return _rp_mediaplayer;
 }
 
 void StackedPlayer::start(const QString & path)
 {
+    qDebug() << "     *** [Lib] {Player}: stacked player start";
     //    _mp->stop();
     //    _video_widget->show();
 
     if(_shifted_widget)
         return;
-    qDebug() << " [M] VLC: start";
     _outer_layout->addWidget( _video_widget );
     _rp_mediaplayer->setMedia(path);
     _rp_mediaplayer->play();
@@ -85,9 +81,9 @@ void StackedPlayer::start(const QString & path)
 
 void StackedPlayer::stop()
 {
+    qDebug() << "     *** [Lib] {Player}: stacked player stop";
     if(!_shifted_widget)
         return;
-    qDebug() << " [M] VLC: stop";
     _rp_mediaplayer->stop();
     _outer_layout->removeWidget( _video_widget );
     if(_shifted_widget){
@@ -98,7 +94,7 @@ void StackedPlayer::stop()
 
 void StackedPlayer::setGeometry(const int & x, const int & y, const int & w, const int & h)
 {
-    qDebug() << " [M] VLC: set geometry";
+    qDebug() << "     *** [Lib] {Player}: stacked player set geometry";
     _video_widget->setGeometry(x, y, w, h);
 }
 

@@ -21,8 +21,8 @@
 
 #include "libroxeeplayer_global.h"
 
-#include <QtCore/QObject>
-#include <QtCore/QStringList>
+#include <QtCore/qobject.h>
+#include <QtCore/qstringlist.h>
 
 namespace RoxeePlayer
 {

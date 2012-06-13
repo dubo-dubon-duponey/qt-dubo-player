@@ -21,8 +21,8 @@
 
 #include "libroxeeplayer_global.h"
 
-#include <QObject>
-#include <QStackedLayout>
+#include <QtCore/qobject.h>
+#include <QtGui/qstackedlayout.h>
 
 #include "root.h"
 #include "core.h"

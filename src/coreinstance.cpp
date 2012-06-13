@@ -18,6 +18,8 @@
 
 #include "coreinstance.h"
 
+#include <QtCore/qdebug.h>
+
 /*! \cond */
 
 LRPCoreInstance* LRPCoreInstance::m_Instance = 0;

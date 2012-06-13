@@ -29,6 +29,7 @@ namespace RoxeePlayer{
 SimplePlayer::SimplePlayer(QWidget *parent) :
     QWidget(parent)
 {
+    qDebug() << "     +++ [Lib] {Player}: single player constructor";
     setAttribute(Qt::WA_NativeWindow, true);
 
     QWidget * videoWidget = new QWidget;
@@ -58,13 +59,11 @@ SimplePlayer::SimplePlayer(QWidget *parent) :
 
 SimplePlayer::~SimplePlayer()
 {
-    qDebug() << " [M] VLC: destructor";
-//    QObject::~QObject();
+    qDebug() << "     --- [Lib] {Player}: single player destructor";
 }
 
 RoxeePlayer::Root * SimplePlayer::root()
 {
-    qDebug() << " [M] VLC: root getter";
     if(!_rp_root){
         _rp_root = new RoxeePlayer::Root();
     }
@@ -73,13 +72,11 @@ RoxeePlayer::Root * SimplePlayer::root()
 
 RoxeePlayer::Core * SimplePlayer::core()
 {
-    qDebug() << " [M] VLC: core getter";
     return RoxeePlayer::Core::instance();
 }
 
 RoxeePlayer::MediaPlayer * SimplePlayer::mediaPlayer()
 {
-    qDebug() << " [M] VLC: media player getter";
     return _rp_mediaplayer;
 }
 
