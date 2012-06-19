@@ -57,7 +57,7 @@ void Core::setUserAgent(const QString &appName, const QString &appVersion)
 //    void 	libvlc_set_user_agent (libvlc_instance_t *p_instance, const char *name, const char *http)
 //            Sets the application name.
     QString applicationOutput = appName + " " + appVersion;
-    QString httpOutput = appName + "/" + appVersion + " qt-libvlc/" + (this->getVersion()) + "("+ this->getCompiler() +")";
+    QString httpOutput = appName + "/" + appVersion + " roxeeplayer/" + (this->getVersion()) + "("+ this->getCompiler() +")";
     libvlc_set_user_agent(LRPCoreInstance::instance()->getSession(), applicationOutput.toAscii().data(), httpOutput.toAscii().data());
 }
 
