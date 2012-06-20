@@ -96,11 +96,13 @@ CONFIG += link_prl
 !isEmpty(ADDITIONAL_DEPENDENCIES_DIR){
     INCLUDEPATH += $${ADDITIONAL_DEPENDENCIES_DIR}/include
     LIBS += -L$${ADDITIONAL_DEPENDENCIES_DIR}/lib
+    message( -> Link/inc using $${ADDITIONAL_DEPENDENCIES_DIR})
 }
 
 !isEmpty(ROXEE_DEPENDENCIES_DIR){
     INCLUDEPATH += $${ROXEE_DEPENDENCIES_DIR}/$${ROXEE_BUILD_TYPE}/$${ROXEE_LINK_TYPE}/include
     LIBS += -L$${ROXEE_DEPENDENCIES_DIR}/$${ROXEE_BUILD_TYPE}/$${ROXEE_LINK_TYPE}/lib
+    message( -> Link/inc using $${ROXEE_DEPENDENCIES_DIR}/$${ROXEE_BUILD_TYPE}/$${ROXEE_LINK_TYPE})
 }
 
 # Copying source to install destination
