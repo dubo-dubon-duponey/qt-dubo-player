@@ -4,7 +4,7 @@
 #include "libroxeeplayer_global.h"
 
 #include <QtCore/qobject.h>
-#include <QtCore/qmutex.H>
+#include <QtCore/qmutex.h>
 #include <QtCore/qstringlist.h>
 
 #include <vlc/vlc.h>
