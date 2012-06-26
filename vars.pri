@@ -1,11 +1,17 @@
 ROXEE_PROJECT_NAME = RoxeePlayer
 ROXEE_VENDOR_NAME = WebItUp
 ROXEE_PROJECT_VERSION_MAJOR = 0
-ROXEE_PROJECT_VERSION_MINOR = 3
-ROXEE_PROJECT_VERSION_BUGFIX = 1
-ROXEE_DESTDIR =
-ADDITIONAL_DEPENDENCIES_DIR =
-ROXEE_DEPENDENCIES_DIR = /Users/dmp/buildd/deploy.webitup.org/client/Darwin
-ROXEE_LINK_TYPE = dynamic
+ROXEE_PROJECT_VERSION_MINOR = 5
+ROXEE_PROJECT_VERSION_BUGFIX = 0
+
+# Wether to build static, shared, or plugin
 #ROXEE_LINK_TYPE = static
+#ROXEE_LINK_TYPE = plugin
+ROXEE_LINK_TYPE = dynamic
+# Where to find additional dependencies (eg: external (win)-sparkle)
+# This will take precedence over the provided third-party builds
+ADDITIONAL_DEPENDENCIES_DIR = /Users/dmp/buildd/deploy.webitup.org/client/Darwin/release/$${ROXEE_LINK_TYPE}/
+# Where to output the final build
+ROXEE_DESTDIR =
+
 TARGET = roxeeplayer
