@@ -13,4 +13,7 @@ ROXEE_DESTDIR = {PUKE-OUTPUT-DIR}
 ROXEE_LINK_TYPE = static
 #ROXEE_LINK_TYPE = plugin
 #ROXEE_LINK_TYPE = dynamic
+# Wether to link to dependency statically or dynamically
+ROXEE_DEPEND_LINK = static
+#ROXEE_DEPEND_LINK = dynamic
 TARGET = roxeeplayer
