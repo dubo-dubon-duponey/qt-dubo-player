@@ -18,9 +18,9 @@
 
 #include "simpleplayer.h"
 
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QStackedLayout>
-#include <QtCore/QDebug>
+#include <QtGui/qboxlayout.h>
+#include <QtGui/qstackedlayout.h>
+#include <QtCore/qdebug.h>
 
 /*! \cond */
 

@@ -17,8 +17,8 @@
  *****************************************************************************/
 
 #include "core.h"
-#include <QtCore/QDebug>
-#include <QtCore/QMutex>
+#include <QtCore/qdebug.h>
+#include <QtCore/qmutex.h>
 
 #include "coreinstance.h"
 

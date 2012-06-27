@@ -1,5 +1,6 @@
 # Pointing to include and lib dirs
-LIBS += -lvlc
+LIBS += -Bstatic -lvlc
+# -Bstatic -lvlccore
 # Only if static
-LIBS += -lvlccore
+#LIBS += -lvlccore
 LIBS += -framework Cocoa

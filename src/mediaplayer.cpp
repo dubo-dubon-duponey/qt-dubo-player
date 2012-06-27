@@ -17,7 +17,7 @@
  *****************************************************************************/
 
 #include "mediaplayer.h"
-#include <QtCore/QDebug>
+#include <QtCore/qdebug.h>
 #include "coreinstance.h"
 
 /*! \cond */
@@ -32,7 +32,7 @@ MediaPlayer::MediaPlayer(void * id, QObject *parent) :
 {
     libvlc_media_player_t * mp = libvlc_media_player_new(LRPCoreInstance::instance()->getSession());
     LRPCoreInstance::instance()->setPlayer(mp);
-#if defined ( Q_WS_MAC )
+#if defined ( Q_OS_MAC )
     libvlc_media_player_set_nsobject( mp, (void *) id );
 #elif defined ( Q_OS_UNIX )
     libvlc_media_player_set_xwindow( mp, reinterpret_cast<intptr_t>( id ) );
@@ -57,7 +57,7 @@ MediaPlayer::~MediaPlayer()
 //    qDebug() << id;
 
     qDebug() << "Trying to go";
-    #if defined ( Q_WS_MAC )
+    #if defined ( Q_OS_MAC )
         // XXX THIS WORKS WITH GLWIDGET
         libvlc_media_player_set_nsobject( LRPCoreInstance::instance()->getPlayer(), (void *) id );
         // Renders out of frame

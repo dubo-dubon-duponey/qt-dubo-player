@@ -18,9 +18,9 @@
 
 #include "stackedplayer.h"
 
-#include <QtCore/QDebug>
-#include <QtCore/QRect>
-#include <QtGui/QWidget>
+#include <QtCore/qdebug.h>
+#include <QtCore/qrect.h>
+#include <QtGui/qwidget.h>
 
 /*! \cond */
 
