@@ -12,7 +12,9 @@ DEFINES += LIBROXEEPLAYER_LIBRARY
 include(../conf/confbase.pri)
 
 # Third-party stuff
-include(../third-party/bootstrap.pri)
+exists(../third-party/bootstrap.pri){
+    include(../third-party/bootstrap.pri)
+}
 
 # Windows specific configuration
 win32{
