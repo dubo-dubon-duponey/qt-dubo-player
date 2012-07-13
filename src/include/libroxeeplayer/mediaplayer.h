@@ -24,6 +24,8 @@
 #include <QtCore/qobject.h>
 #include <QtCore/qstringlist.h>
 
+// Need to implement events damnit http://www.videolan.org/developers/vlc/doc/doxygen/html/group__libvlc__event.html#_details
+
 namespace RoxeePlayer
 {
     /*! \brief A media player class, exposed through the top-level classes. */

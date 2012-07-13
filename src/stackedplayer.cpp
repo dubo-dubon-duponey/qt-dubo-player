@@ -66,7 +66,7 @@ RoxeePlayer::MediaPlayer * StackedPlayer::mediaPlayer()
 
 void StackedPlayer::start(const QString & path)
 {
-    qDebug() << "     *** [Lib] {Player}: stacked player start";
+    qDebug() << "     *** [Lib] {Player}: stacked player start" << path;
     //    _mp->stop();
     //    _video_widget->show();
 

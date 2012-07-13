@@ -82,9 +82,17 @@ MediaPlayer::~MediaPlayer()
     // XXX
     // https://bugreports.qt.nokia.com//browse/QTBUG-16274
 
+
+//void MediaPlayer::setEventHandler(const QString &path)
+//{-> SHOULD EMIT / CONNECT
+//    libvlc_event_manager_t * p_event_manager = libvlc_media_player_event_manager(LRPCoreInstance::instance()->getPlayer());
+
+//    int libvlc_event_attach( p_event_manager, libvlc_event_type_t i_event_type, libvlc_callback_t f_callback, void * user_data);
+//}
+
 void MediaPlayer::setMedia(const QString &path)
 {
-    libvlc_media_player_set_media(LRPCoreInstance::instance()->getPlayer(), libvlc_media_new_path(LRPCoreInstance::instance()->getSession(), path.toAscii()));
+    libvlc_media_player_set_media(LRPCoreInstance::instance()->getPlayer(), libvlc_media_new_path(LRPCoreInstance::instance()->getSession(), path.toLocal8Bit()));
 }
 
 QString MediaPlayer::media()
