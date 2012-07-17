@@ -37,6 +37,9 @@ StackedPlayer::StackedPlayer(QStackedLayout * layout, QObject *parent) :
     QHBoxLayout * inlayout = new QHBoxLayout;
     inlayout->addWidget(videoWidget);
     _video_widget->setLayout(inlayout);
+    // Enable mouse tracking in case the parent widget wants to do something with the mouse
+    videoWidget->setMouseTracking(true);
+    _video_widget->setMouseTracking(true);
 
     _rp_mediaplayer = new RoxeePlayer::MediaPlayer((void *) videoWidget->winId());
 }
