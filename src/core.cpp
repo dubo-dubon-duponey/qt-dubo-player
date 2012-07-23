@@ -22,9 +22,43 @@
 
 #include "coreinstance.h"
 
+#include <vlc/vlc.h>
+
+
+/*
+Typedefs
+
+typedef struct
+libvlc_module_description_t 	libvlc_module_description_t
+    Description of a module.
+Functions
+
+libvlc_instance_t * 	libvlc_new (int argc, const char *const *argv)
+    Create and initialize a libvlc instance.
+void 	libvlc_release (libvlc_instance_t *p_instance)
+    Decrement the reference count of a libvlc instance, and destroy it if it reaches zero.
+void 	libvlc_retain (libvlc_instance_t *p_instance)
+    Increments the reference count of a libvlc instance.
+int 	libvlc_add_intf (libvlc_instance_t *p_instance, const char *name)
+    Try to start a user interface for the libvlc instance.
+void 	libvlc_set_exit_handler (libvlc_instance_t *p_instance, void(*cb)(void *), void *opaque)
+    Registers a callback for the LibVLC exit event.
+void 	libvlc_wait (libvlc_instance_t *p_instance)
+    Waits until an interface causes the instance to exit.
+void 	libvlc_free (void *ptr)
+    Frees an heap allocation returned by a LibVLC function.
+
+typedef struct libvlc_instance_t 	libvlc_instance_t
+    This structure is opaque.
+typedef int64_t 	libvlc_time_t
+*/
+
+
+
 /*! \cond */
 
 namespace RoxeePlayer{
+
 Core* Core::m_Instance = 0;
 
 Core* Core::instance()
@@ -57,8 +91,8 @@ void Core::setUserAgent(const QString &appName, const QString &appVersion)
 //    void 	libvlc_set_user_agent (libvlc_instance_t *p_instance, const char *name, const char *http)
 //            Sets the application name.
     QString applicationOutput = appName + " " + appVersion;
-    QString httpOutput = appName + "/" + appVersion + " roxeeplayer/" + (this->getVersion()) + "("+ this->getCompiler() +")";
-    libvlc_set_user_agent(LRPCoreInstance::instance()->getSession(), applicationOutput.toAscii().data(), httpOutput.toAscii().data());
+    QString httpOutput = appName + "/" + appVersion + " " + PROJECT_NAME + "/" + VERSION_FULL + "(" + this->getVersion() + " " + this->getCompiler() +")";
+    libvlc_set_user_agent(LRPCoreInstance::instance()->getSession(), applicationOutput.toLocal8Bit(), httpOutput.toLocal8Bit());
 }
 
 QString Core::getVersion()
@@ -68,13 +102,6 @@ QString Core::getVersion()
     return QString(libvlc_get_version());
 }
 
-QString Core::getChangeset()
-{
-//    const char * 	libvlc_get_changeset (void)
-//            Retrieve libvlc changeset.
-    return QString(libvlc_get_changeset());
-}
-
 QString Core::getCompiler()
 {
 //    const char * 	libvlc_get_compiler (void)
@@ -82,77 +109,49 @@ QString Core::getCompiler()
     return QString(libvlc_get_compiler());
 }
 
-
-/*
-
-Data Structures
-
-struct  	libvlc_module_description_t
-    Description of a module. More...
-Modules
-
-    LibVLC error handling
-    LibVLC asynchronous events
-
-LibVLC emits asynchronous events.
-
-
-    LibVLC logging
-
-libvlc_log_* functions provide access to the LibVLC messages log.
-
-
-Typedefs
-
-typedef struct
-libvlc_module_description_t 	libvlc_module_description_t
-    Description of a module.
-Functions
-
-void 	libvlc_retain (libvlc_instance_t *p_instance)
-    Increments the reference count of a libvlc instance.
-int 	libvlc_add_intf (libvlc_instance_t *p_instance, const char *name)
-    Try to start a user interface for the libvlc instance.
-void 	libvlc_set_exit_handler (libvlc_instance_t *p_instance, void(*cb)(void *), void *opaque)
-    Registers a callback for the LibVLC exit event.
-void 	libvlc_wait (libvlc_instance_t *p_instance)
-    Waits until an interface causes the instance to exit.
-void 	libvlc_free (void *ptr)
-    Frees an heap allocation returned by a LibVLC function.
-
-
-typedef struct libvlc_instance_t 	libvlc_instance_t
-    This structure is opaque.
-typedef int64_t 	libvlc_time_t
-
-*/
-
-
-
-QStringList Core::audioFilterList()
+QString Core::getChangeset()
 {
+//    const char * 	libvlc_get_changeset (void)
+//            Retrieve libvlc changeset.
+    return QString(libvlc_get_changeset());
+}
+
+QStringList Core::getAudioFilterList()
+{
+//    void 	libvlc_module_description_list_release (libvlc_module_description_t *p_list)
+//        Release a list of module descriptions.
+//    libvlc_module_description_t * 	libvlc_audio_filter_list_get (libvlc_instance_t *p_instance)
+//        Returns a list of audio filters that are available.
     QStringList l = QStringList();
     libvlc_module_description_t * md = libvlc_audio_filter_list_get(LRPCoreInstance::instance()->getSession());
     do{
+        qDebug() << md->psz_name;
         l.append(QString().fromLocal8Bit(md->psz_name));
         l.append(QString().fromLocal8Bit(md->psz_shortname));
         l.append(QString().fromLocal8Bit(md->psz_longname));
         l.append(QString().fromLocal8Bit(md->psz_help));
-    }while(md->p_next);
+        md = md->p_next;
+    }while(md);
     libvlc_module_description_list_release(md);
     return l;
 }
 
-QStringList Core::videoFilterList()
+QStringList Core::getVideoFilterList()
 {
+//    void 	libvlc_module_description_list_release (libvlc_module_description_t *p_list)
+//        Release a list of module descriptions.
+//    libvlc_module_description_t * 	libvlc_video_filter_list_get (libvlc_instance_t *p_instance)
+//        Returns a list of video filters that are available.
     QStringList l = QStringList();
     libvlc_module_description_t * md = libvlc_video_filter_list_get(LRPCoreInstance::instance()->getSession());
     do{
+        qDebug() << md->psz_name;
         l.append(QString().fromLocal8Bit(md->psz_name));
         l.append(QString().fromLocal8Bit(md->psz_shortname));
         l.append(QString().fromLocal8Bit(md->psz_longname));
         l.append(QString().fromLocal8Bit(md->psz_help));
-    }while(md->p_next);
+        md = md->p_next;
+    }while(md);
     libvlc_module_description_list_release(md);
     return l;
 }

@@ -39,6 +39,7 @@ public:
 
     /*! \brief Allows to control the UA string that will be set for http streams retrieval. */
     Q_INVOKABLE void setUserAgent(const QString &appName, const QString &appVersion);
+
     /*! \brief Gets the underlying library version */
     Q_PROPERTY(const QString version READ getVersion)
     /*! \brief Gets the underlying library changeset */
@@ -46,13 +47,17 @@ public:
     /*! \brief Gets the compiler used to build the underlying library */
     Q_PROPERTY(const QString compiler READ getCompiler)
 
+
+    Q_PROPERTY(const QStringList audioFilterList READ getAudioFilterList)
+    Q_PROPERTY(const QStringList videoFilterList READ getVideoFilterList)
+
     /*! \cond */
     QString getVersion();
     QString getChangeset();
     QString getCompiler();
 
-    QStringList audioFilterList();
-    QStringList videoFilterList();
+    QStringList getAudioFilterList();
+    QStringList getVideoFilterList();
     /*! \endcond */
 
 signals:

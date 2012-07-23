@@ -6,7 +6,7 @@ lessThan(QT_VERSION, 4.8) {
 # Explore subdirs in order
 TEMPLATE = subdirs
 CONFIG = ordered
-SUBDIRS = src
+SUBDIRS = src demo
 
 OTHER_FILES += vars.pri.in \
     res/doxygen.tpl \
@@ -14,3 +14,7 @@ OTHER_FILES += vars.pri.in \
     res/redist/ChangeLog \
     res/redist/LICENSE.LGPL \
     README
+
+# Existing implementations:
+# https://bitbucket.org/trollixx/qtvlc/
+# https://github.com/ntadej/vlc-qt/tree/master/src/core
