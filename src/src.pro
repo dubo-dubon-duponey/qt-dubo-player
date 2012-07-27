@@ -1,56 +1,50 @@
-# Basic consumer variables
-include(../vars.pri)
-
-# Requires
+TEMPLATE = lib
 QT = core gui
 
-# Build a lib
-TEMPLATE = lib
-DEFINES += LIBROXEEPLAYER_LIBRARY
-
-# Basic stuff (version and build/path magic)
-include(../conf/confbase.pri)
-
-# Third-party stuff
-exists(../third-party/bootstrap.pri){
-    include(../third-party/bootstrap.pri)
-}
+include($$PWD/../vars.pri)
+include($$PWD/../conf/confbase.pri)
 
 # Windows specific configuration
 win32{
     message( -> Targetting windows)
-    include(../conf/confwin.pri)
+    include($$PWD/../conf/confwin.pri)
 }
 
 # Mac specific configuration
 mac{
     message( -> Targetting osx)
-    include(../conf/confmacx.pri)
+    include($$PWD/../conf/confmacx.pri)
 }
 
 # Unix specific configuration
 unix:!mac {
     message( -> Targetting *nux)
-    include(../conf/confunix.pri)
+    include($$PWD/../conf/confunix.pri)
+}
+
+DEFINES += LIBROXEEPLAYER_LIBRARY
+
+contains(ROXEE_LINK_TYPE, static){
+    DEFINES += LIBROXEEPLAYER_USE_STATIC
 }
 
 INCLUDEPATH += $$PWD
-INCLUDEPATH += $$PWD/include/libroxeeplayer
+INCLUDEPATH += $$PWD/include
 target.path = $$DESTDIR
 INSTALLS += target
 
 HEADERS += \
-    include/libroxeeplayer/libroxeeplayer_global.h \
-    include/libroxeeplayer/core.h \
-    include/libroxeeplayer/root.h \
-    include/libroxeeplayer/simpleplayer.h \
-    include/libroxeeplayer/stackedplayer.h \
-    include/libroxeeplayer/mediaplayer.h \
-    coreinstance.h
+    $$PWD/include/libroxeeplayer/libroxeeplayer_global.h \
+    $$PWD/include/libroxeeplayer/core.h \
+    $$PWD/include/libroxeeplayer/root.h \
+    $$PWD/include/libroxeeplayer/simpleplayer.h \
+    $$PWD/include/libroxeeplayer/stackedplayer.h \
+    $$PWD/include/libroxeeplayer/mediaplayer.h \
+    $$PWD/coreinstance.h
 
-SOURCES +=  root.cpp \
-    core.cpp \
-    coreinstance.cpp \
-    mediaplayer.cpp \
-    simpleplayer.cpp \
-    stackedplayer.cpp
+SOURCES +=  $$PWD/root.cpp \
+    $$PWD/core.cpp \
+    $$PWD/coreinstance.cpp \
+    $$PWD/mediaplayer.cpp \
+    $$PWD/simpleplayer.cpp \
+    $$PWD/stackedplayer.cpp

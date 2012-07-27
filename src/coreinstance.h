@@ -1,7 +1,7 @@
 #ifndef ROXEEPLAYER_COREINSTANCE_H
 #define ROXEEPLAYER_COREINSTANCE_H
 
-#include "libroxeeplayer_global.h"
+#include "libroxeeplayer/libroxeeplayer_global.h"
 
 #include <QtCore/qobject.h>
 #include <QtCore/qmutex.h>

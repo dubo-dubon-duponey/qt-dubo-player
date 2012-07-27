@@ -16,7 +16,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#include "root.h"
+#include "libroxeeplayer/root.h"
 
 #include <vlc/vlc.h>
 
@@ -56,12 +56,10 @@ const QString Root::getChangeset(){
 }
 
 const QString Root::getLibVersion(){
-//            return LIBVLC_VERSION_MAJOR + "." + LIBVLC_VERSION_MINOR + '.' + LIBVLC_VERSION_EXTRA;
     return QString(libvlc_get_version());
 }
 
 const QString Root::getLibRevision(){
-//            return LIBVLC_VERSION_EXTRA;
     return QString(libvlc_get_changeset());
 }
 

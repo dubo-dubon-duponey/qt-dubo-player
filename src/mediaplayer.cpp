@@ -16,7 +16,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#include "mediaplayer.h"
+#include "libroxeeplayer/mediaplayer.h"
 #include <QtCore/qdebug.h>
 #include "coreinstance.h"
 

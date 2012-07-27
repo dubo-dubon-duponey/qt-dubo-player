@@ -1,3 +1,9 @@
+RoxeePlayer-0.6.0:
+    Fix broken filepath fed to mediaPath preventing to play.
+    Fix modules list.
+    Fix mouse tracking.
+    Build cleanup.
+
 RoxeePlayer-0.5.0:
     Clean-up build system
     Linux building

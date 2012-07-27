@@ -16,7 +16,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#include "stackedplayer.h"
+#include "libroxeeplayer/stackedplayer.h"
 
 #include <QtCore/qdebug.h>
 #include <QtCore/qrect.h>
