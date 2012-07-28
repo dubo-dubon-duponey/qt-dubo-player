@@ -33,10 +33,20 @@ ROXEE_EXTERNAL =
 
 
 
+renvlt=$$(ROXEE_LINK_TYPE)
+isEmpty(renvlt){
+    renvlt=$$ROXEE_LINK_TYPE
+}
 
-# Internal stuff - to be enhanced
-CONFIG(debug, debug|release){
-    ROXEE_EXTERNAL = /Users/dmp/buildd/deploy.webitup.org/client/Darwin/debug/$${ROXEE_LINK_TYPE}
-}else{
-    ROXEE_EXTERNAL = /Users/dmp/buildd/deploy.webitup.org/client/Darwin/release/$${ROXEE_LINK_TYPE}
+# XXX private stuff - to be enhanced
+isEmpty(ROXEE_EXTERNAL){
+    CONFIG(debug, debug|release){
+        mac{
+            ROXEE_EXTERNAL = /Users/dmp/buildd/deploy.webitup.org/client/Darwin/debug/$${renvlt}
+        }
+    }else{
+        mac{
+            ROXEE_EXTERNAL = /Users/dmp/buildd/deploy.webitup.org/client/Darwin/release/$${renvlt}
+        }
+    }
 }
