@@ -2,13 +2,59 @@
 RoxeePlayer
 ================
 
-This is a (very) thin layer on top of libvlc that exposes a uniform scriptable API for it.
+RoxeePlayer is a thin layer on top of libvlc that exposes a QT-ified scriptable API for it.
+It is meant to be cross-platform (specifically sports OSX, unlike other libraries).
 
 It is primarily meant to serve as part of the Roxee runner application, though other people might find interest in it.
 
-There exist at least two other implementations with similar purpose (except scriptability and vlc isolation):
+There exist at least two other implementations with similar purpose (save scriptability and strict libvlc isolation):
 - https://bitbucket.org/trollixx/qtvlc/
 - https://github.com/ntadej/vlc-qt/tree/master/src/core
 
-
 Licensed under LGPL (same as libvlc).
+
+***************
+One line how to build
+***************
+
+qmake && make
+
+Output is in the buildd directory.
+
+***************
+One line how to use
+***************
+
+Look into the demo.
+
+Pretty much:
+
+player = new RoxeePlayer::SimplePlayer();
+player->show();
+player->mediaPlayer()->setMedia(QString("file:///Volumes/MacGrosse/MyTrailer.mov"));
+player->mediaPlayer()->play();
+
+
+***************
+About the build
+***************
+
+You may edit and modify the vars.pri file to fit your mileage (read the comments).
+You can build either a dynamic or static library, customize where to find the (libvlc) dependency (if you decide to use your own).
+
+By default, the project builds a shared library, and fetches VLC from the network (on OSX).
+
+Note that any of the vars.pri variables (ROXEE_*) may be overriden from the environment.
+eg: ROXEE_LINK_TYPE=static ROXEE_INTERNAL_VERSION=2.0.3 qmake CONFIG+=debug
+
+***************
+About the "third-party" folder
+***************
+
+On OSX, ./bootstrap.sh is called and does fetch VLC *binary* release to be linked by the project.
+You can use bootstrap manually, and may pass as first argument a specific VLC version, and as second argument a boolean
+to force the redownload of the archive.
+
+BE AWARE that no verification of any sort is performed on the retrieved binary, and that it is fetched over
+unencrypted http. You really shouldn't *release* anything using that method if you give a fuck.
+
