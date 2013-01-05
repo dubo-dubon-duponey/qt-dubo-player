@@ -1,7 +1,9 @@
 RoxeePlayer-0.7.0-dev:
     Third-party manager to automatically download VLC on OSX.
-    Working demo.
     Updated README/documentation.
+    Build system cleanup.
+    Working demo.
+    QT5 support.
 
 RoxeePlayer-0.6.0:
     Fix broken filepath fed to mediaPath preventing to play.

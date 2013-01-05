@@ -3,3 +3,14 @@
 ==========================================
 
 http://www.videolan.org/
+
+Build time fecth is implemented only for OSX at the time.
+Linux users are expected to aptitude install vlc-dev (or whichever dev package required).
+Windows users have to link manually using appropriate ROXEE_EXTERNAL path.
+
+We do link against libvlc library and headers, which are LGPL.
+VLC plugins though, have varied licenses you need to verify before you distribute.
+
+BIG FAT WARNING: no verification is done on the retrieved network archive, and the fetch is done over http.
+You really shouldn't use this as a basis to distribute, but rather fetch VLC using your own build system / manually,
+then verify the archive, and point ROXEE_EXTERNAL to it.

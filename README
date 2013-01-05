@@ -2,7 +2,7 @@
 RoxeePlayer
 ================
 
-RoxeePlayer is a thin layer on top of libvlc that exposes a QT-ified scriptable API for it.
+RoxeePlayer is a thin layer library on top of libvlc that exposes a QT-ified scriptable API for it.
 It is meant to be cross-platform (specifically sports OSX, unlike other libraries).
 
 It is primarily meant to serve as part of the Roxee runner application, though other people might find interest in it.
@@ -13,17 +13,17 @@ There exist at least two other implementations with similar purpose (save script
 
 Licensed under LGPL (same as libvlc).
 
-***************
+================
 One line how to build
-***************
+================
 
 qmake && make
 
 Output is in the buildd directory.
 
-***************
+================
 One line how to use
-***************
+================
 
 Look into the demo.
 
@@ -35,9 +35,9 @@ player->mediaPlayer()->setMedia(QString("file:///Volumes/MacGrosse/MyTrailer.mov
 player->mediaPlayer()->play();
 
 
-***************
+================
 About the build
-***************
+================
 
 You may edit and modify the vars.pri file to fit your mileage (read the comments).
 You can build either a dynamic or static library, customize where to find the (libvlc) dependency (if you decide to use your own).
@@ -47,9 +47,9 @@ By default, the project builds a shared library, and fetches VLC from the networ
 Note that any of the vars.pri variables (ROXEE_*) may be overriden from the environment.
 eg: ROXEE_LINK_TYPE=static ROXEE_INTERNAL_VERSION=2.0.3 qmake CONFIG+=debug
 
-***************
+================
 About the "third-party" folder
-***************
+================
 
 On OSX, ./bootstrap.sh is called and does fetch VLC *binary* release to be linked by the project.
 You can use bootstrap manually, and may pass as first argument a specific VLC version, and as second argument a boolean
@@ -58,3 +58,15 @@ to force the redownload of the archive.
 BE AWARE that no verification of any sort is performed on the retrieved binary, and that it is fetched over
 unencrypted http. You really shouldn't *release* anything using that method if you give a fuck.
 
+================
+Caveats
+================
+
+It's unlikely multiple player instances will work.
+Events are not implemented (yet).
+
+================
+API
+================
+
+Doxygen documentation is generated as part of the build.
