@@ -68,10 +68,16 @@ renv=$$(ROXEE_LINK_TYPE)
     ROXEE_LINK_TYPE = $$renv
 }
 
-renv=$$(ROXEE_THIRD_PARTY)
+renv=$$(ROXEE_INTERNAL_VERSION)
 !isEmpty(renv){
-    message(Third-party strategy overriden by environment)
-    ROXEE_THIRD_PARTY = $$renv
+    message(Third-party version overriden by environment)
+    ROXEE_INTERNAL_VERSION = $$renv
+}
+
+mac{
+    !isEmpty(ROXEE_INTERNAL_VERSION){
+        ROXEE_EXTERNAL= $$PWD/../third-party/VLC.app/Contents/MacOS/
+    }
 }
 
 renv=$$(ROXEE_DESTDIR)
@@ -86,6 +92,9 @@ renv=$$(ROXEE_EXTERNAL)
     ROXEE_EXTERNAL = $$renv
 }
 
+isEmpty(ROXEE_EXTERNAL){
+    error(You have to specify either a ROXEE_INTERNAL_VERSION or ROXEE_EXTERNAL where to find VLC)
+}
 
 DEFINES += PROJECT_LINKTYPE=\\\"$${ROXEE_LINK_TYPE}\\\"
 
