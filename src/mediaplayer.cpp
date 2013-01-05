@@ -92,6 +92,10 @@ MediaPlayer::~MediaPlayer()
 
 void MediaPlayer::setMedia(const QString &path)
 {
+    if(!LRPCoreInstance::instance()->getSession())
+        return;
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return;
     libvlc_media_player_set_media(LRPCoreInstance::instance()->getPlayer(), libvlc_media_new_path(LRPCoreInstance::instance()->getSession(), path.toLocal8Bit()));
 }
 
@@ -104,63 +108,85 @@ QString MediaPlayer::media()
 
 void MediaPlayer::play()
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return;
     libvlc_media_player_play(LRPCoreInstance::instance()->getPlayer());
 }
 
 void MediaPlayer::stop()
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return;
     libvlc_media_player_stop(LRPCoreInstance::instance()->getPlayer());
 }
 
 void MediaPlayer::pause()
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return;
     libvlc_media_player_pause(LRPCoreInstance::instance()->getPlayer());
 }
 
 bool MediaPlayer::isPlaying()
 {
-//    if(!LRPCoreInstance::instance()->getPlayer())
-//        return 0;
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return false;
     return libvlc_media_player_is_playing(LRPCoreInstance::instance()->getPlayer());
 }
 
 int MediaPlayer::length()
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return 0;
     return libvlc_media_player_get_length(LRPCoreInstance::instance()->getPlayer());
 }
 
 int MediaPlayer::time()
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return 0;
     return libvlc_media_player_get_time(LRPCoreInstance::instance()->getPlayer());
 }
 
 void MediaPlayer::setTime(const int & time)
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return;
     libvlc_media_player_set_time(LRPCoreInstance::instance()->getPlayer(), time);
 }
 
 float MediaPlayer::position()
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return 0;
     return libvlc_media_player_get_position(LRPCoreInstance::instance()->getPlayer());
 }
 
 void MediaPlayer::setPosition(const float & pos)
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return;
     libvlc_media_player_set_position(LRPCoreInstance::instance()->getPlayer(), pos);
 }
 
 int MediaPlayer::chapter()
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return 0;
     return libvlc_media_player_get_chapter(LRPCoreInstance::instance()->getPlayer());
 }
 
 int MediaPlayer::chapterCount()
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return 0;
     return libvlc_media_player_get_chapter_count(LRPCoreInstance::instance()->getPlayer());
 }
 
 void MediaPlayer::setChapter(const int & chap)
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return;
     libvlc_media_player_set_chapter(LRPCoreInstance::instance()->getPlayer(), chap);
 }
 
@@ -339,6 +365,8 @@ typedef void(* 	libvlc_audio_cleanup_cb )(void *data)
 
 void MediaPlayer::toggleFullscreen()
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return;
 //LIBVLC_API void 	libvlc_toggle_fullscreen (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer())
 //        Toggle fullscreen status on non-embedded video outputs.
     libvlc_toggle_fullscreen(LRPCoreInstance::instance()->getPlayer());
@@ -347,6 +375,8 @@ void MediaPlayer::toggleFullscreen()
 
 void MediaPlayer::setFullscreen(const bool on)
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return;
 // LIBVLC_API void 	libvlc_set_fullscreen (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer(), int b_fullscreen)
 //        Enable or disable fullscreen.
     libvlc_set_fullscreen(LRPCoreInstance::instance()->getPlayer(), on);
@@ -354,6 +384,8 @@ void MediaPlayer::setFullscreen(const bool on)
 
 bool MediaPlayer::fullscreen()
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return false;
 //LIBVLC_API int 	libvlc_get_fullscreen (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer())
 //        Get current fullscreen status.
     return libvlc_get_fullscreen(LRPCoreInstance::instance()->getPlayer());
@@ -361,6 +393,8 @@ bool MediaPlayer::fullscreen()
 
 void MediaPlayer::setKeyInput(const bool on )
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return;
 // LIBVLC_API void 	libvlc_video_set_key_input (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer(), unsigned on)
 //        Enable or disable key press events handling, according to the LibVLC hotkeys configuration.
     libvlc_video_set_key_input (LRPCoreInstance::instance()->getPlayer(), on);
@@ -368,6 +402,8 @@ void MediaPlayer::setKeyInput(const bool on )
 
 void MediaPlayer::setMouseInput(const bool on)
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return;
 // LIBVLC_API void 	libvlc_video_set_mouse_input (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer(), unsigned on)
 //        Enable or disable mouse click events handling.
     libvlc_video_set_mouse_input (LRPCoreInstance::instance()->getPlayer(), on);
@@ -381,6 +417,8 @@ void MediaPlayer::setMouseInput(const bool on)
 
 uint MediaPlayer::height()
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return 0;
 // LIBVLC_DEPRECATED int 	libvlc_video_get_height (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer())
 //        Get current video height.
 //    return libvlc_video_get_height (LRPCoreInstance::instance()->getPlayer());
@@ -396,6 +434,8 @@ uint MediaPlayer::height()
 
 uint MediaPlayer::width()
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return 0;
     int t = libvlc_video_get_track (LRPCoreInstance::instance()->getPlayer());
     if(t == -1)
         return 0;
@@ -416,6 +456,8 @@ uint MediaPlayer::width()
 
 float MediaPlayer::scale()
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return 0;
 //LIBVLC_API float 	libvlc_video_get_scale (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer())
 //        Get the current video scaling factor.
     return libvlc_video_get_scale(LRPCoreInstance::instance()->getPlayer());
@@ -423,6 +465,8 @@ float MediaPlayer::scale()
 
 void MediaPlayer::setScale(const float factor)
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return;
 //LIBVLC_API void 	libvlc_video_set_scale (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer(), float f_factor)
 //        Set the video scaling factor.
     libvlc_video_set_scale(LRPCoreInstance::instance()->getPlayer(), factor);
@@ -431,6 +475,8 @@ void MediaPlayer::setScale(const float factor)
 
 QString MediaPlayer::aspectRatio()
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return QString::fromAscii("");
 //LIBVLC_API char * 	libvlc_video_get_aspect_ratio (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer())
 //        Get current video aspect ratio.
     return libvlc_video_get_aspect_ratio(LRPCoreInstance::instance()->getPlayer());
@@ -445,6 +491,8 @@ void MediaPlayer::setAspectRatio(const QString &ar)
 
 int MediaPlayer::spu()
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return 0;
 //LIBVLC_API int 	libvlc_video_get_spu (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer())
 //        Get current video subtitle.
     return libvlc_video_get_spu(LRPCoreInstance::instance()->getPlayer());
@@ -452,6 +500,8 @@ int MediaPlayer::spu()
 
 int MediaPlayer::spuCount()
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return 0;
 //LIBVLC_API int 	libvlc_video_get_spu_count (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer())
 //        Get the number of available video subtitles.
     return libvlc_video_get_spu_count(LRPCoreInstance::instance()->getPlayer());
@@ -460,6 +510,8 @@ int MediaPlayer::spuCount()
 QStringList MediaPlayer::spuTrackDescription()
 {
     QStringList l = QStringList();
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return l;
     libvlc_track_description_t * td = libvlc_video_get_spu_description (LRPCoreInstance::instance()->getPlayer());
     if(td){
         l.append(QString().fromLocal8Bit(td->psz_name));
@@ -474,6 +526,8 @@ QStringList MediaPlayer::spuTrackDescription()
 
 void MediaPlayer::setSpu(uint i)
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return;
 //LIBVLC_API int 	libvlc_video_set_spu (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer(), unsigned i_spu)
 //        Set new video subtitle.
     libvlc_video_set_spu(LRPCoreInstance::instance()->getPlayer(), i);
@@ -481,6 +535,8 @@ void MediaPlayer::setSpu(uint i)
 
 void MediaPlayer::setSubtitleFile(const QString &path)
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return;
 //LIBVLC_API int 	libvlc_video_set_subtitle_file (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer(), const char *psz_subtitle)
 //        Set new video subtitle file.
     libvlc_video_set_subtitle_file(LRPCoreInstance::instance()->getPlayer(), path.toLocal8Bit());
@@ -519,6 +575,8 @@ QStringList* MediaPlayer::chapterDescription(int i)
 
 QString MediaPlayer::cropGeometry()
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return QString();
 // LIBVLC_API char * 	libvlc_video_get_crop_geometry (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer())
 //        Get current crop filter geometry.
     return QString(libvlc_video_get_crop_geometry(LRPCoreInstance::instance()->getPlayer()));
@@ -526,6 +584,8 @@ QString MediaPlayer::cropGeometry()
 
 void MediaPlayer::setCropGeometry(const QString &crop)
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return;
 //LIBVLC_API void 	libvlc_video_set_crop_geometry (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer(), const char *psz_geometry)
 //        Set new crop filter geometry.
     libvlc_video_set_crop_geometry (LRPCoreInstance::instance()->getPlayer(), crop.toLocal8Bit());
@@ -533,6 +593,8 @@ void MediaPlayer::setCropGeometry(const QString &crop)
 
 int MediaPlayer::teletext()
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return 0;
     return libvlc_video_get_teletext(LRPCoreInstance::instance()->getPlayer());
 //LIBVLC_API int 	libvlc_video_get_teletext (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer())
 //        Get current teletext page requested.
@@ -540,6 +602,8 @@ int MediaPlayer::teletext()
 
 void MediaPlayer::setTeletext(const int & i)
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return;
 //LIBVLC_API void 	libvlc_video_set_teletext (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer(), int i_page)
 //        Set new teletext page to retrieve.
     libvlc_video_set_teletext(LRPCoreInstance::instance()->getPlayer(), i);
@@ -556,6 +620,8 @@ void MediaPlayer::toggleTeletext()
 
 int MediaPlayer::videoTrackCount()
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return 0;
 //LIBVLC_API int 	libvlc_video_get_track_count (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer())
 //        Get number of available video tracks.
     return libvlc_video_get_track_count(LRPCoreInstance::instance()->getPlayer());
@@ -567,6 +633,8 @@ QStringList MediaPlayer::videoTrackDescription()
 //libvlc_track_description_t * 	libvlc_video_get_track_description (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer())
 //        Get the description of available video tracks.
     QStringList l = QStringList();
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return l;
     libvlc_track_description_t * td = libvlc_video_get_track_description (LRPCoreInstance::instance()->getPlayer());
     if(td){
         l.append(QString().fromLocal8Bit(td->psz_name));
@@ -581,6 +649,8 @@ QStringList MediaPlayer::videoTrackDescription()
 
 int MediaPlayer::videoTrack()
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return 0;
 //LIBVLC_API int 	libvlc_video_get_track (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer())
 //        Get current video track.
     return libvlc_video_get_track (LRPCoreInstance::instance()->getPlayer());
@@ -588,6 +658,8 @@ int MediaPlayer::videoTrack()
 
 void MediaPlayer::setVideoTrack(const int i)
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return;
 //LIBVLC_API int 	libvlc_video_set_track (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer(), int i_track)
 //        Set video track.
     libvlc_video_set_track (LRPCoreInstance::instance()->getPlayer(), i);
@@ -670,6 +742,8 @@ LIBVLC_API void 	libvlc_audio_output_set_device_type (libvlc_media_player_t *LRP
 
 void MediaPlayer::toggleMute()
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return;
 //    LIBVLC_API void 	libvlc_audio_toggle_mute (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer())
 //            Toggle mute status.
     libvlc_audio_toggle_mute(LRPCoreInstance::instance()->getPlayer());
@@ -677,6 +751,8 @@ void MediaPlayer::toggleMute()
 
 bool MediaPlayer::mute()
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return false;
 //    LIBVLC_API int 	libvlc_audio_get_mute (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer())
 //            Get current mute status.
     return libvlc_audio_get_mute (LRPCoreInstance::instance()->getPlayer());
@@ -684,6 +760,8 @@ bool MediaPlayer::mute()
 
 void MediaPlayer::setMute(const bool status)
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return;
 //    LIBVLC_API void 	libvlc_audio_set_mute (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer(), int status)
 //            Set mute status.
     libvlc_audio_set_mute (LRPCoreInstance::instance()->getPlayer(), status);
@@ -691,6 +769,8 @@ void MediaPlayer::setMute(const bool status)
 
 int MediaPlayer::volume()
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return 0;
 //    LIBVLC_API int 	libvlc_audio_get_volume (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer())
 //            Get current software audio volume.
     return libvlc_audio_get_volume(LRPCoreInstance::instance()->getPlayer());
@@ -698,6 +778,8 @@ int MediaPlayer::volume()
 
 void MediaPlayer::setVolume(const int vol)
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return;
 //    LIBVLC_API int 	libvlc_audio_set_volume (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer(), int i_volume)
 //            Set current software audio volume.
     libvlc_audio_set_volume(LRPCoreInstance::instance()->getPlayer(), vol);
@@ -705,6 +787,8 @@ void MediaPlayer::setVolume(const int vol)
 
 int MediaPlayer::audioTrackCount()
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return 0;
 //    LIBVLC_API int 	libvlc_audio_get_track_count (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer())
 //            Get number of available audio tracks.
     return libvlc_audio_get_track_count (LRPCoreInstance::instance()->getPlayer());
@@ -713,6 +797,8 @@ int MediaPlayer::audioTrackCount()
 QStringList MediaPlayer::audioTrackDescription()
 {
     QStringList l = QStringList();
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return l;
     libvlc_track_description_t * td = libvlc_audio_get_track_description (LRPCoreInstance::instance()->getPlayer());
     if(td){
         l.append(QString().fromLocal8Bit(td->psz_name));
@@ -728,6 +814,8 @@ QStringList MediaPlayer::audioTrackDescription()
 
 int MediaPlayer::audioTrack()
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return 0;
 // LIBVLC_API int 	libvlc_audio_get_track (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer())
 //        Get current audio track.
     return libvlc_audio_get_track (LRPCoreInstance::instance()->getPlayer());
@@ -735,6 +823,8 @@ int MediaPlayer::audioTrack()
 
 void MediaPlayer::setAudioTrack(const int i)
 {
+    if(!LRPCoreInstance::instance()->getPlayer())
+        return;
 //LIBVLC_API int 	libvlc_audio_set_track (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer(), int i_track)
 //        Set current audio track.
     libvlc_audio_set_track ( LRPCoreInstance::instance()->getPlayer(), i );
