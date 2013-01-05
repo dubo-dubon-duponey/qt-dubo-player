@@ -12,6 +12,7 @@ mac{
         message( -> Using internal third-party $${ROXEE_INTERNAL_VERSION})
         system(./bootstrap.sh $${ROXEE_INTERNAL_VERSION})
         system(rm -f $${DESTDIR}/lib/lib)
+        system(mkdir -p $${DESTDIR}/lib)
         system(ln -s `pwd`/VLC.app/Contents/MacOS/lib $${DESTDIR}/lib)
     }
 }
