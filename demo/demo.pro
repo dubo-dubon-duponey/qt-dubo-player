@@ -1,6 +1,26 @@
-TEMPLATE = subdirs
+TEMPLATE = app
+
 ## Basic consumer variables
-#include(../vars.pri)
+QT = core gui
+
+
+#HEADERS += $$PWD/testvideo.h
+
+SOURCES +=  $$PWD/main.cpp
+#    $$PWD/testvideo.cpp
+
+INCLUDEPATH += $$PWD
+target.path = $$DESTDIR/../lib
+INSTALLS += target
+
+
+# You don't "need" any "magic" of the following - just link against the produced library if you are doing it your own way
+include($$PWD/../vars.pri)
+include($$PWD/../conf/confbase.pri)
+
+INCLUDEPATH +=  $$PWD/../src/include/libroxeeplayer
+LIBS +=         -L$$DESTDIR/../lib
+LIBS +=         -lroxeeplayer
 
 ## Requires
 #QT = core gui webkit
@@ -42,22 +62,15 @@ TEMPLATE = subdirs
 #target.path = $$DESTDIR
 #INSTALLS += target
 
-##HEADERS +=
-
-#SOURCES +=  main.cpp \
-#    testvideo.cpp
 
 
 
-## http://forum.videolan.org/viewtopic.php?f=32&t=61157
 #DEPNAME = roxeeplayer
 
 ##isEmpty(ROXEE_DESTDIR){
 ##    INCLUDEPATH +=  $$PWD/../src/include
 ##    LIBS += -L$$PWD/../buildd/$${PLT}/$${QMAKE_CC}/$${ROXEE_LINK_TYPE}-$${ROXEE_BUILD_TYPE}/lib
 ##}
-
-##LIBS +=         -lroxeeplayer
 
 ##mac{
 ##    contains(ROXEE_LINK_TYPE, static){
@@ -69,23 +82,6 @@ TEMPLATE = subdirs
 ##    stupidvlc.h
 ##include <qtvlcwidget.h>
 
-##/*
-##// Dig about VLC
-##// http://developer.qt.nokia.com/doc/qt-4.8/qapplication.html
-##// setGraphicsSystem();
+## http://forum.videolan.org/viewtopic.php?f=32&t=61157
+## http://developer.qt.nokia.com/doc/qt-4.8/qapplication.html
 
-##VLC
-
-##Native Widgets vs Alien Widgets
-##Introduced in Qt 4.4, alien widgets are widgets unknown to the windowing system. They do not have a native window handle associated with them. This feature significantly speeds up widget painting, resizing, and removes flicker.
-##Should you require the old behavior with native windows, you can choose one of the following options:
-##Use the QT_USE_NATIVE_WINDOWS=1 in your environment.
-##Set the Qt::AA_NativeWindows attribute on your application. All widgets will be native widgets.
-##Set the Qt::WA_NativeWindow attribute on widgets: The widget itself and all of its ancestors will become native (unless Qt::WA_DontCreateNativeAncestors is set).
-##Call QWidget::winId to enforce a native window (this implies 3).
-##Set the Qt::WA_PaintOnScreen attribute to enforce a native window (this implies 3).
-
-##*/
-
-#HEADERS += \
-#    testvideo.h
