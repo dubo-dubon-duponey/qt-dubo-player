@@ -18,8 +18,8 @@
 
 #include "libroxeeplayer/simpleplayer.h"
 
-#include <QtGui/qboxlayout.h>
-#include <QtGui/qstackedlayout.h>
+#include <QBoxLayout>
+#include <QStackedLayout>
 #include <QtCore/qdebug.h>
 
 /*! \cond */

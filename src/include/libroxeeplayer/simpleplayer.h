@@ -22,11 +22,8 @@
 #include "libroxeeplayer_global.h"
 
 #include <QtCore/qobject.h>
-#ifdef QT5
-    #include <QtWidgets/qwidget.h>
-#else
-    #include <QtGui/qwidget.h>
-#endif
+
+#include <QWidget>
 
 #include "root.h"
 #include "core.h"

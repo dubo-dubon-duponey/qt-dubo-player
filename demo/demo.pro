@@ -1,30 +1,18 @@
 TEMPLATE = app
 
 ## Basic consumer variables
-QT = core gui
-
-!lessThan(QT_VERSION, 5.0.0) {
-    QT += widgets
-}
-
-
-#HEADERS += $$PWD/testvideo.h
+QT = core widgets
 
 SOURCES +=  $$PWD/main.cpp
-#    $$PWD/testvideo.cpp
+
+# You don't "need" any "magic" of the following - just link against the produced library if you are doing it your own way
+include($$PWD/../conf/conf.pri)
 
 INCLUDEPATH += $$PWD
-target.path = $$DESTDIR/../lib
+target.path = $$DESTDIR
 INSTALLS += target
 
 
-# You don't "need" any "magic" of the following - just link against the produced library if you are doing it your own way
-include($$PWD/../vars.pri)
-include($$PWD/../conf/confbase.pri)
-
-INCLUDEPATH +=  $$PWD/../src/include/libroxeeplayer
-LIBS +=         -L$$DESTDIR/../lib
-LIBS +=         -lroxeeplayer
 
 ## Requires
 #QT = core gui webkit

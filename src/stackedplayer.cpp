@@ -20,11 +20,8 @@
 
 #include <QtCore/qdebug.h>
 #include <QtCore/qrect.h>
-#ifdef QT5
-    #include <QtWidgets/qwidget.h>
-#else
-    #include <QtGui/qwidget.h>
-#endif
+
+#include <QWidget>
 
 /*! \cond */
 

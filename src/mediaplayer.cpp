@@ -47,7 +47,7 @@ MediaPlayer::~MediaPlayer()
 }
 
 /*
-    LRPCoreInstance::instance()->getPlayer() = libvlc_media_player_new_from_media(libvlc_media_new_path(m->_vlc, path.toAscii()));
+    LRPCoreInstance::instance()->getPlayer() = libvlc_media_player_new_from_media(libvlc_media_new_path(m->_vlc, path.toLatin1()));
 
     //    new QtVlcVideoControls(this);
     //    new QtVlcAudioControls(this);

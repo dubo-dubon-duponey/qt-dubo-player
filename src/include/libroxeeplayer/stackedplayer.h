@@ -22,7 +22,7 @@
 #include "libroxeeplayer_global.h"
 
 #include <QtCore/qobject.h>
-#include <QtGui/qstackedlayout.h>
+#include <QStackedLayout>
 
 #include "root.h"
 #include "core.h"
