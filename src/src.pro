@@ -1,30 +1,27 @@
+# XXX private stuff - to be removed
+
+#renvlt=$$(ROXEE_LINK_TYPE)
+#isEmpty(renvlt){
+#    renvlt=$$ROXEE_LINK_TYPE
+#}
+
+#isEmpty(ROXEE_EXTERNAL){
+#    CONFIG(debug, debug|release){
+#        mac{
+#            ROXEE_EXTERNAL = /Users/dmp/buildd/deploy.webitup.org/client/Darwin/debug/$${renvlt}
+#        }
+#    }else{
+#        mac{
+#            ROXEE_EXTERNAL = /Users/dmp/buildd/deploy.webitup.org/client/Darwin/release/$${renvlt}
+#        }
+#    }
+#}
+
+
 TEMPLATE = lib
-QT = core gui
+QT = core widgets
 
-!lessThan(QT_VERSION, 5.0.0) {
-    QT += widgets
-}
-
-include($$PWD/../vars.pri)
-include($$PWD/../conf/confbase.pri)
-
-# Windows specific configuration
-win32{
-    message( -> Targetting windows)
-    include($$PWD/../conf/confwin.pri)
-}
-
-# Mac specific configuration
-mac{
-    message( -> Targetting osx)
-    include($$PWD/../conf/confmacx.pri)
-}
-
-# Unix specific configuration
-unix:!mac {
-    message( -> Targetting *nux)
-    include($$PWD/../conf/confunix.pri)
-}
+include($$PWD/../conf/conf.pri)
 
 DEFINES += LIBROXEEPLAYER_LIBRARY
 
@@ -36,6 +33,14 @@ INCLUDEPATH += $$PWD
 INCLUDEPATH += $$PWD/include
 target.path = $$DESTDIR
 INSTALLS += target
+
+# Copy headers to destination
+system(rm -Rf "$$DESTDIR/../include")
+system(mkdir -p "$$DESTDIR/../")
+system(cp -R "$$PWD/include" "$$DESTDIR/../")
+system(rm -Rf "$$DESTDIR/../share")
+system(mkdir -p "$$DESTDIR/../share/libroxeeplayer")
+system(cp "$$PWD/../res/redist/*" "$$DESTDIR/../share/libroxeeplayer")
 
 HEADERS += \
     $$PWD/include/libroxeeplayer/libroxeeplayer_global.h \
