@@ -3,6 +3,10 @@ TEMPLATE = app
 ## Basic consumer variables
 QT = core gui
 
+!lessThan(QT_VERSION, 5.0.0) {
+    QT += widgets
+}
+
 
 #HEADERS += $$PWD/testvideo.h
 

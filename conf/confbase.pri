@@ -2,6 +2,10 @@ lessThan(QT_VERSION, $$ROXEE_MINIMUM_QT) {
     error("$$ROXEE_PROJECT_NAME works only with Qt $$ROXEE_MINIMUM_QT or greater (you have $$QT_VERSION)")
 }
 
+!lessThan(QT_VERSION, 5.0.0) {
+    DEFINES += QT5=true
+}
+
 contains(TEMPLATE, lib){
     message(************************* Building Library *************************)
 }
@@ -119,7 +123,7 @@ message( -> Link: $${ROXEE_LINK_TYPE} version)
 
 
 # Setting path
-TMP_BASE_DIR = $${PWD}/../buildd/$${PLT}-tmp/$${QMAKE_CC}-$${ROXEE_LINK_TYPE}-$${ROXEE_BUILD_TYPE}
+TMP_BASE_DIR = $${PWD}/../buildd/$${PLT}-tmp/$${QMAKE_CC}-$${QT_MAJOR_VERSION}-$${ROXEE_LINK_TYPE}-$${ROXEE_BUILD_TYPE}
 RCC_DIR     = $${TMP_BASE_DIR}/rcc
 UI_DIR      = $${TMP_BASE_DIR}/ui
 MOC_DIR     = $${TMP_BASE_DIR}/moc
@@ -127,10 +131,9 @@ OBJECTS_DIR = $${TMP_BASE_DIR}/obj
 
 message( -> Temp build dir: $${TMP_BASE_DIR})
 
-
 # If we don't have a specific destination directory
 isEmpty(ROXEE_DESTDIR){
-    DESTDIR = $${PWD}/../buildd/$${PLT}/$${QMAKE_CC}-$${ROXEE_LINK_TYPE}-$${ROXEE_BUILD_TYPE}
+    DESTDIR = $${PWD}/../buildd/$${PLT}/$${QMAKE_CC}-$${QT_MAJOR_VERSION}-$${ROXEE_LINK_TYPE}-$${ROXEE_BUILD_TYPE}
 }else{
     DESTDIR = $${ROXEE_DESTDIR}
 }

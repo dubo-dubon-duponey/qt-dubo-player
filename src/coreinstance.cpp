@@ -35,7 +35,7 @@ LRPCoreInstance::LRPCoreInstance()
 //    "--verbose=2", /* Be much more verbose then normal for debugging purpose */
 
     if((_vlc = libvlc_new(sizeof(vlcArgs) / sizeof(*vlcArgs), vlcArgs)) == NULL) {
-        qDebug() << QString::fromAscii("Could not init libVLC");
+        qDebug() << QString::fromLatin1("Could not init libVLC");
     }
 }
 

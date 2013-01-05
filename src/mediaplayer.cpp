@@ -103,7 +103,7 @@ QString MediaPlayer::media()
 {
     // XXX not implemented
 //    throw "NOT_IMPLEMENTED";
-    return QString::fromAscii("");//QString(libvlc_media_player_get_media(LRPCoreInstance::instance()->getPlayer()));
+    return QString::fromLatin1("");//QString(libvlc_media_player_get_media(LRPCoreInstance::instance()->getPlayer()));
 }
 
 void MediaPlayer::play()
@@ -476,7 +476,7 @@ void MediaPlayer::setScale(const float factor)
 QString MediaPlayer::aspectRatio()
 {
     if(!LRPCoreInstance::instance()->getPlayer())
-        return QString::fromAscii("");
+        return QString::fromLatin1("");
 //LIBVLC_API char * 	libvlc_video_get_aspect_ratio (libvlc_media_player_t *LRPCoreInstance::instance()->getPlayer())
 //        Get current video aspect ratio.
     return libvlc_video_get_aspect_ratio(LRPCoreInstance::instance()->getPlayer());

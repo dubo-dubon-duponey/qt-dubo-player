@@ -1,6 +1,10 @@
 TEMPLATE = lib
 QT = core gui
 
+!lessThan(QT_VERSION, 5.0.0) {
+    QT += widgets
+}
+
 include($$PWD/../vars.pri)
 include($$PWD/../conf/confbase.pri)
 

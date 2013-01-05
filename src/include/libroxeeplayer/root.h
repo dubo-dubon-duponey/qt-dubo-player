@@ -99,7 +99,7 @@ namespace RoxeePlayer
         const QString getLinkType();
         const QString getQt();
 
-        const QString getLibName(){ return QString::fromAscii("libvlc");}
+        const QString getLibName(){ return QString::fromLatin1("libvlc");}
         const QString getLibVersion();
         const QString getLibRevision();
         /*! \endcond */
