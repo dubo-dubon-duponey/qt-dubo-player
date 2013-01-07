@@ -33,11 +33,11 @@ SimplePlayer::SimplePlayer(QWidget *parent) :
     setAttribute(Qt::WA_NativeWindow, true);
 
     QWidget * videoWidget = new QWidget;
-        QHBoxLayout *layout = new QHBoxLayout;
-        layout->addWidget(videoWidget);
-        this->setLayout(layout);
+    QHBoxLayout *layout = new QHBoxLayout;
+    layout->addWidget(videoWidget);
+    this->setLayout(layout);
 
-        _rp_mediaplayer = new RoxeePlayer::MediaPlayer((void *) videoWidget->winId());
+    _rp_mediaplayer = new RoxeePlayer::MediaPlayer((void *) videoWidget->winId());
 
 //    _vp = new RoxeePlayer::MediaPlayer((void *) this->winId());
 

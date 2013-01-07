@@ -30,16 +30,14 @@ the underyling video player library, and ideally, be API independent from that l
 Right now though, it only supports (and is meant for) libvlc (http://www.videolan.org/vlc/libvlc.html).
 
 To compile:
-- build or install libvlc (http://wiki.videolan.org/LibVLC)
+- build or install libvlc (http://wiki.videolan.org/LibVLC) (if you are on OSX, VLC is automatically fetched - see third-party)
 - edit the vars.pri file at the root of the project so that it matches your mileage:
- - DEPDIR=# should point to wherever your lib and include folders reside (under which libtorrent can be found)
- - DESTDIR=# should point to wherever you want the library to be compiled
 - qmake, then make
 
 To use it, just create a RoxeePlayer::SimplePlayer object.
 This is specifically meant to be exposed for a QWebPluginFactory.
 
-If you want to have a QT Widget that will switch over a regular widget, use StackedPlayer.
+If you want to have a QT Widget that will lay over a regular widget, use StackedPlayer.
 
 Big fat warning: this pile of code may or may not work for you. If it does, you may send a thank you note :).
 If it doesn't, you can probably:

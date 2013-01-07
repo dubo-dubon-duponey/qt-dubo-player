@@ -78,8 +78,6 @@ contains(TEMPLATE, lib){
 
 # Allow app to read prl, conversely
 contains(TEMPLATE, app){
-    CONFIG += link_prl
     DESTDIR = $${DESTDIR}/bin
-    LIBS += -L$$DESTDIR/../lib
-    LIBS += -l$${TARGET}
+    CONFIG += link_prl
 }

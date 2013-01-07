@@ -1,6 +1,6 @@
 TEMPLATE = subdirs
 OTHER_FILES +=  $$PWD/doc.sh \
-                $$PWD/doxygen.tpl
+                $$PWD/Doxyfile
 
 message(************************* Building Doc *************************)
 !win32{
