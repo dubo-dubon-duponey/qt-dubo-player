@@ -13,9 +13,9 @@ target.path = $$DESTDIR
 INSTALLS += target
 
 # Include library
-INCLUDEPATH +=  $$DESTDIR/../include
-LIBS += -L$$DESTDIR/../lib
-LIBS += -l$${TARGET}
+#INCLUDEPATH +=  $$DESTDIR/../include
+#LIBS += -L$$DESTDIR/../lib
+#LIBS += -l$${TARGET}
 
 ## http://forum.videolan.org/viewtopic.php?f=32&t=61157
 ## http://developer.qt.nokia.com/doc/qt-4.8/qapplication.html
