@@ -28,6 +28,10 @@
 #include "root.h"
 #include "core.h"
 #include "mediaplayer.h"
+#include "audiocontrol.h"
+#include "videocontrol.h"
+
+#include "vlc2.h"
 
 namespace RoxeePlayer{
 
@@ -43,9 +47,29 @@ class LIBROXEEPLAYERSHARED_EXPORT SimplePlayer : public QWidget
 public:
     /*! \brief Constructor */
     explicit SimplePlayer(QWidget *parent = 0);// const QString & appPath,
-    /*! \cond */
     ~SimplePlayer();
-    /*! \endcond */
+
+    Q_PROPERTY(QVariant media READ getMediaPlayer)
+    Q_PROPERTY(QVariant audio READ getAudio)
+    Q_PROPERTY(QVariant video READ getVideo)
+
+    QVariant getMediaPlayer()
+    {
+        QVariant var = QVariant::fromValue((QObject*) _rp_mediaplayer);
+        return var;
+    }
+
+    Q_INVOKABLE QVariant getAudio()
+    {
+        QVariant var = QVariant::fromValue((QObject*) _rp_audio);
+        return var;
+    }
+
+    Q_INVOKABLE QVariant getVideo()
+    {
+        QVariant var = QVariant::fromValue((QObject*) _rp_video);
+        return var;
+    }
 
     /*! \brief Get a reference to the library Root object. */
     RoxeePlayer::Root * root();
@@ -55,12 +79,17 @@ public:
     RoxeePlayer::MediaPlayer * mediaPlayer();
 
 signals:
+    void notify(const QString & seg);
 
 public slots:
+    void slotNotify(const QString & seg);
 
 private:
     RoxeePlayer::Root * _rp_root;
+    RoxeePlayer::Core * _rp_core;
     RoxeePlayer::MediaPlayer * _rp_mediaplayer;
+    RoxeePlayer::AudioControls * _rp_audio;
+    RoxeePlayer::VideoControls * _rp_video;
 
 };
 

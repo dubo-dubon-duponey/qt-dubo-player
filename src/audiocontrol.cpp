@@ -16,41 +16,64 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#include "libroxeeplayer/core.h"
-#include <QtCore/qdebug.h>
-#include <QtCore/qmutex.h>
+#include "libroxeeplayer/audiocontrol.h"
+#include <qDebug>
 
 /*! \cond */
 
+using namespace RoxeePlayer;
+
 namespace RoxeePlayer{
 
-
-Core::Core(RoxeeVLC * rvlc, QObject *parent):
+AudioControls::AudioControls(RoxeeVLC * rvlc, QObject *parent) :
     QObject(parent)
 {
-    vlc = rvlc;
+    this->vlc = rvlc;
 }
 
-void Core::setUserAgent(const QString &appName, const QString &appVersion)
+void AudioControls::toggleMute()
 {
-    QString applicationOutput = appName + " " + appVersion;
-    QString httpOutput = appName + "/" + appVersion + " " + PROJECT_NAME + "/" + VERSION_FULL + "(" + vlc->get_version() + " " + vlc->get_compiler() +")";
-    vlc->set_user_agent(applicationOutput, httpOutput);
+    vlc->audio_toggle_mute();
 }
 
-QString Core::getCompiler()
+bool AudioControls::mute()
 {
-    return vlc->get_compiler();
+    return vlc->audio_get_mute();
 }
 
-QStringList Core::getAudioFilterList()
+void AudioControls::setMute(const bool status)
 {
-    return vlc->audio_filter_list_get();
+    vlc->audio_set_mute(status);
 }
 
-QStringList Core::getVideoFilterList()
+int AudioControls::volume()
 {
-    return vlc->video_filter_list_get();
+    return vlc->audio_get_volume();
+}
+
+void AudioControls::setVolume(const int vol)
+{
+    vlc->audio_set_volume(vol);
+}
+
+int AudioControls::audioTrackCount()
+{
+    return vlc->audio_get_track_count();
+}
+
+QStringList AudioControls::audioTrackDescription()
+{
+    return vlc->audio_get_track_description();
+}
+
+int AudioControls::audioTrack()
+{
+    return vlc->audio_get_track();
+}
+
+void AudioControls::setAudioTrack(const int i)
+{
+    vlc->audio_set_track(i);
 }
 
 }

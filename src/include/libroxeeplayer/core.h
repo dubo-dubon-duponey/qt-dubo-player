@@ -20,6 +20,7 @@
 #define ROXEEPLAYER_CORE_H
 
 #include "libroxeeplayer_global.h"
+#include "libroxeeplayer/vlc2.h"
 
 #include <QtCore/qobject.h>
 #include <QtCore/qstringlist.h>
@@ -31,29 +32,18 @@ class LIBROXEEPLAYERSHARED_EXPORT Core : public QObject
 {
     Q_OBJECT
 public:
-    /*! \brief Instance (singleton pattern) */
-    static Core* instance();
-
-    /*! \brief Destructor */
-    ~Core();
+    explicit Core(RoxeeVLC * rvlc, QObject *parent = 0);
 
     /*! \brief Allows to control the UA string that will be set for http streams retrieval. */
     Q_INVOKABLE void setUserAgent(const QString &appName, const QString &appVersion);
 
-    /*! \brief Gets the underlying library version */
-    Q_PROPERTY(const QString version READ getVersion)
-    /*! \brief Gets the underlying library changeset */
-    Q_PROPERTY(const QString changeset READ getChangeset)
     /*! \brief Gets the compiler used to build the underlying library */
     Q_PROPERTY(const QString compiler READ getCompiler)
-
 
     Q_PROPERTY(const QStringList audioFilterList READ getAudioFilterList)
     Q_PROPERTY(const QStringList videoFilterList READ getVideoFilterList)
 
     /*! \cond */
-    QString getVersion();
-    QString getChangeset();
     QString getCompiler();
 
     QStringList getAudioFilterList();
@@ -65,12 +55,7 @@ signals:
 public slots:
 
 private:
-    explicit Core(){}
-
-    static Core* m_Instance;
-
-    Core(const Core &);
-    Core& operator=(const Core &);
+    RoxeeVLC * vlc;
 
 };
 }

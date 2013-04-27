@@ -19,8 +19,7 @@
 #include "libroxeeplayer/simpleplayer.h"
 
 #include <QBoxLayout>
-#include <QStackedLayout>
-#include <QtCore/qdebug.h>
+#include <qDebug>
 
 /*! \cond */
 
@@ -37,29 +36,27 @@ SimplePlayer::SimplePlayer(QWidget *parent) :
     layout->addWidget(videoWidget);
     this->setLayout(layout);
 
-    _rp_mediaplayer = new RoxeePlayer::MediaPlayer((void *) videoWidget->winId());
+    RoxeeVLC * rvlc = new RoxeeVLC(this);
+    rvlc->media_player_new();
+    rvlc->media_player_set_window((void *) videoWidget->winId());
 
-//    _vp = new RoxeePlayer::MediaPlayer((void *) this->winId());
+    connect(rvlc, SIGNAL(notify(QString)), this, SLOT(slotNotify(QString)));
 
-
-    //    videoWidget->setAutoFillBackground( true );
-//    QPalette plt = palette();
-//    plt.setColor( QPalette::Window, Qt::black );
-//    videoWidget->setPalette( plt );
-
-//    QVBoxLayout *layout2 = new QVBoxLayout;
-
-
-
-
-
-    // (void *) static_cast< QtVlcWidget* >(this)->id(), this);
-
+    _rp_core = new RoxeePlayer::Core(rvlc, this);
+    _rp_mediaplayer = new RoxeePlayer::MediaPlayer(rvlc, this);
+    _rp_audio = new RoxeePlayer::AudioControls(rvlc, this);
+    _rp_video = new RoxeePlayer::VideoControls(rvlc, this);
 }
 
 SimplePlayer::~SimplePlayer()
 {
-    qDebug() << "     --- [Lib] {Player}: single player destructor";
+    qDebug() << "************************************ DESTRUCTION *****************************";
+}
+
+
+void SimplePlayer::slotNotify(const QString & seg)
+{
+    emit notify(seg);
 }
 
 RoxeePlayer::Root * SimplePlayer::root()
@@ -72,13 +69,26 @@ RoxeePlayer::Root * SimplePlayer::root()
 
 RoxeePlayer::Core * SimplePlayer::core()
 {
-    return RoxeePlayer::Core::instance();
+    return _rp_core;
 }
 
 RoxeePlayer::MediaPlayer * SimplePlayer::mediaPlayer()
 {
     return _rp_mediaplayer;
 }
+
+//RoxeePlayer::Aud * SimplePlayer::mediaPlayer()
+//{
+//    return _rp_mediaplayer;
+//}
+
+
+//RoxeePlayer::MediaPlayer * SimplePlayer::mediaPlayer()
+//{
+//    return _rp_mediaplayer;
+//}
+
+
 
 }
 /*! \endcond */

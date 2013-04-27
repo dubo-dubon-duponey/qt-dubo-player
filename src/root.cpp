@@ -18,7 +18,7 @@
 
 #include "libroxeeplayer/root.h"
 
-#include <vlc/vlc.h>
+#include "libroxeeplayer/vlc2.h"
 
 /*! \cond */
 
@@ -56,11 +56,11 @@ const QString Root::getChangeset(){
 }
 
 const QString Root::getLibVersion(){
-    return QString(libvlc_get_version());
+    return RoxeeVLC::get_version();
 }
 
 const QString Root::getLibRevision(){
-    return QString(libvlc_get_changeset());
+    return RoxeeVLC::get_changeset();
 }
 
 }
