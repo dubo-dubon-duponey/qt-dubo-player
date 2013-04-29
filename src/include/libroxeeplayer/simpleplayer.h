@@ -52,6 +52,7 @@ public:
     Q_PROPERTY(QVariant media READ getMediaPlayer)
     Q_PROPERTY(QVariant audio READ getAudio)
     Q_PROPERTY(QVariant video READ getVideo)
+    Q_PROPERTY(QVariant core READ getCore)
 
     QVariant getMediaPlayer()
     {
@@ -68,6 +69,12 @@ public:
     Q_INVOKABLE QVariant getVideo()
     {
         QVariant var = QVariant::fromValue((QObject*) _rp_video);
+        return var;
+    }
+
+    Q_INVOKABLE QVariant getCore()
+    {
+        QVariant var = QVariant::fromValue((QObject*) _rp_core);
         return var;
     }
 

@@ -45,9 +45,9 @@ mac{
         }
     }
 
-#    isEmpty(ROXEE_EXTERNAL){
-#        error(You have to specify either a ROXEE_INTERNAL_VERSION or ROXEE_EXTERNAL where to find dependencies)
-#    }
+    isEmpty(ROXEE_EXTERNAL){
+        error(You have to specify either a ROXEE_INTERNAL_VERSION or ROXEE_EXTERNAL where to find dependencies)
+    }
 }
 
 # Build type
