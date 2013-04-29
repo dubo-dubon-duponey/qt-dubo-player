@@ -39,13 +39,15 @@ renv=$$(ROXEE_EXTERNAL)
 }
 
 mac{
-    !isEmpty(ROXEE_INTERNAL_VERSION){
-        ROXEE_EXTERNAL= $$PWD/../third-party/$$ROXEE_INTERNAL_PATH
+    isEmpty(ROXEE_EXTERNAL){
+        !isEmpty(ROXEE_INTERNAL_VERSION){
+            ROXEE_EXTERNAL= $$PWD/../third-party/$$ROXEE_INTERNAL_PATH
+        }
     }
 
-    isEmpty(ROXEE_EXTERNAL){
-        error(You have to specify either a ROXEE_INTERNAL_VERSION or ROXEE_EXTERNAL where to find dependencies)
-    }
+#    isEmpty(ROXEE_EXTERNAL){
+#        error(You have to specify either a ROXEE_INTERNAL_VERSION or ROXEE_EXTERNAL where to find dependencies)
+#    }
 }
 
 # Build type
