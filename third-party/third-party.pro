@@ -16,20 +16,17 @@ mac{
 #        contains(TEMPLATE, app){
         contains(ROXEE_LINK_TYPE, static){
             LINKIN = $${DESTDIR}/bin/$${TARGET}.app/Contents/MacOS/
-            system(rm -f "$$LINKIN/lib")
-            system(ln -s "`pwd`/VLC.app/Contents/MacOS/lib" "$$LINKIN")
-            message(ln -s "`pwd`/VLC.app/Contents/MacOS/lib" "$$LINKIN")
+#            system(rm -f "$$LINKIN/lib/")
         }
 #        }
 #        contains(TEMPLATE, lib){
-            contains(ROXEE_LINK_TYPE, dynamic){
-                system(rm -f "$${DESTDIR}/lib/lib")
-                system(mkdir -p "$${DESTDIR}/lib")
-                system(ln -s "`pwd`/VLC.app/Contents/MacOS/lib" "$${DESTDIR}/lib")
-            }
-#        }
+        contains(ROXEE_LINK_TYPE, dynamic){
+            LINKIN = $${DESTDIR}/lib/
+        }
 
-
+        system(rm -Rf "$$LINKIN/lib")
+        system(mkdir -p "$$LINKIN")
+        system(ln -s "`pwd`/$${ROXEE_INTERNAL_PATH}/lib" "$$LINKIN")
     }
 }
 
