@@ -20,7 +20,9 @@ ROXEE_LINK_TYPE = dynamic
 
 # If you want to use the provided mechanism to fetch and link third-party dependencies, specify which version you want here
 # Otherwise, you must specify ROXEE_EXTERNAL (below)
-ROXEE_INTERNAL_VERSION = 2.0.3
+ROXEE_INTERNAL_VERSION = 2.0.7-x86_64-20130430-0318
+# 2.0.3
+#ROXEE_INTERNAL_VERSION = 2.1-trunk
 # 2.0.5 is crashing - even on a very simple vlc example - likely an upstream bug
 ROXEE_INTERNAL_PATH = VLC.app/Contents/MacOS
 
@@ -33,4 +35,5 @@ ROXEE_DESTDIR =
 
 ROXEE_WIN_LIBS = -llibvlc -llibvlccore
 ROXEE_NUX_LIBS = -lvlc
-ROXEE_OSX_LIBS = -Bstatic -lvlc -framework Cocoa
+ROXEE_OSX_LIBS = -lvlc
+# -Bstatic -framework Cocoa

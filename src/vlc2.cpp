@@ -378,7 +378,7 @@ void RoxeeVLC::video_set_scale(const float factor)
 // 	Get current video aspect ratio.
 QString RoxeeVLC::video_get_aspect_ratio()
 {
-    return libvlc_video_get_aspect_ratio(smile->player);
+    return QString(libvlc_video_get_aspect_ratio(smile->player));
 }
 
 //LIBVLC_API void 	libvlc_video_set_aspect_ratio (libvlc_media_player_t *p_mi, const char *psz_aspect)
@@ -541,7 +541,19 @@ void RoxeeVLC::video_set_track(const int i)
     libvlc_video_set_track (smile->player, i);
 }
 
-//LIBVLC_API int 	libvlc_video_take_snapshot (libvlc_media_player_t *p_mi, unsigned num, const char *psz_filepath, unsigned int i_width, unsigned int i_height)
+
+void RoxeeVLC::video_take_snapshot(const int i, const QString & path)
+{
+    qDebug() << "Going to do snapshot";
+    qDebug() << i;
+    const char * psz_filepath = path.toLocal8Bit();
+//    qDebug() << psz_filepath;
+    libvlc_video_take_snapshot(smile->player, i, psz_filepath, 0, 100);
+}
+
+
+
+//LIBVLC_API int
 // 	Take a snapshot of the current video window.
 //LIBVLC_API void 	libvlc_video_set_deinterlace (libvlc_media_player_t *p_mi, const char *psz_mode)
 // 	Enable or disable deinterlace filter.
@@ -725,6 +737,7 @@ void RoxeeVLC::media_player_new(){
 // 	Set the media that will be used by the media_player.
 void RoxeeVLC::media_player_set_media(const QString & path) {
     qDebug() << " [RoxeeLibVLC] Cat layer: media_player_set_media";
+    qDebug() << path.toLocal8Bit();
     libvlc_media_player_set_media(smile->player, libvlc_media_new_path(smile->instance, path.toLocal8Bit()));
 }
 
@@ -839,7 +852,7 @@ int RoxeeVLC::media_player_get_length()
 // 	Get the current movie time (in ms).
 int RoxeeVLC::media_player_get_time()
 {
-    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_get_time";
+//    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_get_time";
     return libvlc_media_player_get_time(smile->player);
 }
 
@@ -855,7 +868,7 @@ void RoxeeVLC::media_player_set_time(const int & time)
 // 	Get movie position as percentage between 0.0 and 1.0.
 float RoxeeVLC::media_player_get_position()
 {
-    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_get_position";
+//    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_get_position";
     return libvlc_media_player_get_position(smile->player);
 }
 

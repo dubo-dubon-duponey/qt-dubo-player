@@ -107,6 +107,8 @@ public:
     int video_get_track();
     void video_set_track(const int i);
 
+    void video_take_snapshot(const int i, const QString & path);
+
 };
 
 }

@@ -97,7 +97,9 @@ namespace RoxeePlayer
         Q_PROPERTY(int videoTrack READ videoTrack WRITE setVideoTrack)
 
         /*! \brief Take snapshot */
-        Q_INVOKABLE void takeSnapshot();
+        Q_INVOKABLE void takeSnapshot(const int i, const QString & id);
+//        void VideoControls::takeSnapshot(const int i)
+
         /*! \brief Toggle deinterlace mode */
         Q_INVOKABLE void setDeinterlace(const bool on);
 

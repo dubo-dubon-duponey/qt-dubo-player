@@ -54,6 +54,8 @@ void MediaPlayer::setMedia(const QString &path)
     QUrl * u = new QUrl(path);
     if(u->scheme() == "file")
         u->setScheme("");
+    qDebug() << "Setting new url";
+    qDebug() << u->toString();
     vlc->media_player_set_media(u->toString());
 }
 
