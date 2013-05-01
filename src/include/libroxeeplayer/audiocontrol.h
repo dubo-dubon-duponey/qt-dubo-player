@@ -51,6 +51,26 @@ namespace RoxeePlayer
         /*! \brief Retrieve audio tracks description */
         Q_PROPERTY(QStringList audioTrackDescription READ audioTrackDescription)
 
+
+        Q_INVOKABLE QStringList outputList()
+        {
+            return vlc->audio_output_list_get();
+        }
+        Q_INVOKABLE QStringList outputDeviceList(const QString & outd)
+        {
+            return vlc->audio_output_device_list_get(outd);
+        }
+
+        Q_INVOKABLE void setOutput(const QString & outd)
+        {
+            vlc->audio_output_set(outd);
+        }
+
+        Q_INVOKABLE void setOutputDevice(const QString & outd)
+        {
+            vlc->audio_output_set(outd);
+        }
+
         /*! \cond */
         bool mute();
         void setMute(const bool status);
@@ -68,5 +88,6 @@ namespace RoxeePlayer
         RoxeeVLC * vlc;
     };
 }
+
 
 #endif // ROXEEPLAYER_AUDIOCONTROLS_H

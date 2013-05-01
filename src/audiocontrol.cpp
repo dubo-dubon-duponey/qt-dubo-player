@@ -17,7 +17,6 @@
  *****************************************************************************/
 
 #include "libroxeeplayer/audiocontrol.h"
-#include <qDebug>
 
 /*! \cond */
 

@@ -197,19 +197,6 @@ QStringList RoxeeVLC::video_filter_list_get()
  * Audio Controls
  */
 
-//LIBVLC_API libvlc_audio_output_t * 	libvlc_audio_output_list_get (libvlc_instance_t *p_instance)
-// 	Gets the list of available audio outputs.
-//LIBVLC_API void 	libvlc_audio_output_list_release (libvlc_audio_output_t *p_list)
-// 	Frees the list of available audio outputs.
-//LIBVLC_API int 	libvlc_audio_output_set (libvlc_media_player_t *p_mi, const char *psz_name)
-// 	Sets the audio output.
-//LIBVLC_API
-//libvlc_audio_output_device_t * 	libvlc_audio_output_device_list_get (libvlc_instance_t *p_instance, const char *aout)
-// 	Gets a list of audio output devices for a given audio output.
-//LIBVLC_API void 	libvlc_audio_output_device_list_release (libvlc_audio_output_device_t *p_list)
-// 	Frees a list of available audio output devices.
-//LIBVLC_API void 	libvlc_audio_output_device_set (libvlc_media_player_t *p_mi, const char *psz_audio_output, const char *psz_device_id)
-// 	Configures an explicit audio output device for a given audio output plugin.
 //LIBVLC_API void 	libvlc_audio_toggle_mute (libvlc_media_player_t *p_mi)
 // 	Toggle mute status.
 void RoxeeVLC::audio_toggle_mute()
@@ -282,6 +269,66 @@ void RoxeeVLC::audio_set_track(const int i)
     libvlc_audio_set_track ( smile->player, i );
 }
 
+//LIBVLC_API libvlc_audio_output_t * 	libvlc_audio_output_list_get (libvlc_instance_t *p_instance)
+// 	Gets the list of available audio outputs.
+//LIBVLC_API void 	libvlc_audio_output_list_release (libvlc_audio_output_t *p_list)
+// 	Frees the list of available audio outputs.
+QStringList RoxeeVLC::audio_output_list_get()
+{
+    libvlc_audio_output_t * md = libvlc_audio_output_list_get ( smile->instance );
+    QStringList l = QStringList();
+    do{
+        l.append(QString().fromLocal8Bit(md->psz_name));
+        l.append(QString().fromLocal8Bit(md->psz_description));
+        md = md->p_next;
+    }while(md);
+    libvlc_audio_output_list_release(md);
+    return l;
+}
+
+//LIBVLC_API
+//libvlc_audio_output_device_t * 	libvlc_audio_output_device_list_get (libvlc_instance_t *p_instance, const char *aout)
+// 	Gets a list of audio output devices for a given audio output.
+//LIBVLC_API void 	libvlc_audio_output_device_list_release (libvlc_audio_output_device_t *p_list)
+// 	Frees a list of available audio output devices.
+QStringList RoxeeVLC::audio_output_device_list_get(const QString & outd)
+{
+//    const char * out = outd.toLocal8Bit();
+//    libvlc_audio_output_t * md = libvlc_audio_output_device_list_get ( smile->instance, out);
+    QStringList l = QStringList();
+//    do{
+//        l.append(QString().fromLocal8Bit(md->psz_device));
+//        l.append(QString().fromLocal8Bit(md->psz_description));
+//        md = md->p_next;
+//    }while(md);
+//    libvlc_audio_output_device_list_release(md);
+    return l;
+}
+
+//LIBVLC_API int 	libvlc_audio_output_set (libvlc_media_player_t *p_mi, const char *psz_name)
+// 	Sets the audio output.
+void RoxeeVLC::audio_output_set(const QString & outd)
+{
+    const char * out = outd.toLocal8Bit();
+    libvlc_audio_output_set (smile->player, out);
+}
+
+
+//LIBVLC_API void 	libvlc_audio_output_device_set (libvlc_media_player_t *p_mi, const char *psz_audio_output, const char *psz_device_id)
+// 	Configures an explicit audio output device for a given audio output plugin.
+void RoxeeVLC::audio_output_device_set(const QString & outd)
+{
+//    const char * out = outd.toLocal8Bit();
+//    libvlc_audio_output_device_set (smile->player, out);
+}
+
+
+
+
+
+
+
+
 //LIBVLC_API int 	libvlc_audio_get_channel (libvlc_media_player_t *p_mi)
 // 	Get current audio channel.
 //LIBVLC_API int 	libvlc_audio_set_channel (libvlc_media_player_t *p_mi, int channel)
@@ -290,6 +337,17 @@ void RoxeeVLC::audio_set_track(const int i)
 // 	Get current audio delay.
 //LIBVLC_API int 	libvlc_audio_set_delay (libvlc_media_player_t *p_mi, int64_t i_delay)
 // 	Set current audio delay.
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Video Controls

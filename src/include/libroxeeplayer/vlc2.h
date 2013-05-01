@@ -59,6 +59,10 @@ public:
     QStringList audio_get_track_description();
     int audio_get_track();
     void audio_set_track(const int i);
+    QStringList audio_output_list_get();
+    QStringList audio_output_device_list_get(const QString & outd);
+    void audio_output_set(const QString & outd);
+    void audio_output_device_set(const QString & outd);
 
     // Media Player
     void media_player_new();
@@ -106,6 +110,10 @@ public:
     QStringList video_get_track_description();
     int video_get_track();
     void video_set_track(const int i);
+
+
+
+
 
     void video_take_snapshot(const int i, const QString & path);
 
