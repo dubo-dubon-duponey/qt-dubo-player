@@ -18,7 +18,7 @@
 
 #include <vlc/vlc.h>
 #include "libroxeeplayer/vlc2.h"
-#include <qDebug>
+#include <QDebug>
 
 namespace RoxeePlayer{
 
@@ -91,7 +91,7 @@ RoxeeVLC& RoxeeVLC::operator=(const RoxeeVLC &other) {
  * @brief RoxeeVLC::Carroll
  */
 RoxeeVLC * RoxeeVLC::Carroll(){
-    RoxeeVLC::RoxeeVLC * cat;
+    RoxeeVLC * cat;
     qDebug() << " [RoxeeLibVLC] Cat layer: carroll";
     cat = this;
     libvlc_retain(smile->instance);
@@ -291,7 +291,7 @@ QStringList RoxeeVLC::audio_output_list_get()
 // 	Gets a list of audio output devices for a given audio output.
 //LIBVLC_API void 	libvlc_audio_output_device_list_release (libvlc_audio_output_device_t *p_list)
 // 	Frees a list of available audio output devices.
-QStringList RoxeeVLC::audio_output_device_list_get(const QString & outd)
+QStringList RoxeeVLC::audio_output_device_list_get(const QString & /*outd*/)
 {
 //    const char * out = outd.toLocal8Bit();
 //    libvlc_audio_output_t * md = libvlc_audio_output_device_list_get ( smile->instance, out);
@@ -316,7 +316,7 @@ void RoxeeVLC::audio_output_set(const QString & outd)
 
 //LIBVLC_API void 	libvlc_audio_output_device_set (libvlc_media_player_t *p_mi, const char *psz_audio_output, const char *psz_device_id)
 // 	Configures an explicit audio output device for a given audio output plugin.
-void RoxeeVLC::audio_output_device_set(const QString & outd)
+void RoxeeVLC::audio_output_device_set(const QString & /*outd*/)
 {
 //    const char * out = outd.toLocal8Bit();
 //    libvlc_audio_output_device_set (smile->player, out);

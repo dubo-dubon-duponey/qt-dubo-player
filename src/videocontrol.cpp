@@ -19,7 +19,7 @@
 #include "libroxeeplayer/videocontrol.h"
 #include "libroxeeplayer/vlc2.h"
 
-#include <qDebug>
+#include <QDebug>
 
 /*! \cond */
 
@@ -203,14 +203,14 @@ void VideoControls::setVideoTrack(const int i)
     vlc->video_set_track(i);
 }
 
-void VideoControls::takeSnapshot(const int i, const QString & id)
+void VideoControls::takeSnapshot(const int /*i*/, const QString & /*id*/)
 {
-    QDir wl = QDir(QStandardPaths::writableLocation(QStandardPaths::CacheLocation));
-    wl.cd(QString::fromLatin1("snapshots"));
-    // XXX check other uses of toLocal8bit
-//    const char *psz_filepath = (wl.absoluteFilePath(QString::fromLatin1("shot.png"))).toStdString().c_str();
+//    QDir wl = QDir(QStandardPaths::writableLocation(QStandardPaths::CacheLocation));
+//    wl.cd(QString::fromLatin1("snapshots"));
+//    // XXX check other uses of toLocal8bit
+////    const char *psz_filepath = (wl.absoluteFilePath(QString::fromLatin1("shot.png"))).toStdString().c_str();
 
-    vlc->video_take_snapshot(i, wl.absoluteFilePath(QString(id).append(QString::fromLatin1("-shot.png"))));
+//    vlc->video_take_snapshot(i, wl.absoluteFilePath(QString(id).append(QString::fromLatin1("-shot.png"))));
     //    const char *psz_filepath =
 
 }

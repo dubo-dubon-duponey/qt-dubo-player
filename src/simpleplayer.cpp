@@ -19,7 +19,7 @@
 #include "libroxeeplayer/simpleplayer.h"
 
 #include <QBoxLayout>
-#include <qDebug>
+#include <QDebug>
 
 /*! \cond */
 
