@@ -97,7 +97,7 @@ public:
         #if defined(Q_OS_WIN)
             return true;
         #else
-            return false:
+            return false;
         #endif
     }
 
