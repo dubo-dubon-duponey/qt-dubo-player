@@ -19,26 +19,65 @@
 #include "libroxeeplayer/simpleplayer.h"
 
 #include <QBoxLayout>
+#include <QStackedLayout>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QGridLayout>
 #include <QDebug>
+
+#include <QGraphicsWidget>
+//#include <stupidwidget.h>
 
 /*! \cond */
 
 namespace RoxeePlayer{
 
 SimplePlayer::SimplePlayer(QWidget *parent) :
-    QWidget(parent)
+    QWidget(parent)// , trailh(0), trailw(0)
 {
-    qDebug() << "     +++ [Lib] {Player}: single player constructor";
-    setAttribute(Qt::WA_NativeWindow, true);
-
-    QWidget * videoWidget = new QWidget;
-    QHBoxLayout *layout = new QHBoxLayout;
-    layout->addWidget(videoWidget);
-    this->setLayout(layout);
-
     RoxeeVLC * rvlc = new RoxeeVLC(this);
     rvlc->media_player_new();
-    rvlc->media_player_set_window((void *) videoWidget->winId());
+
+
+
+
+
+    qDebug() << " [RoxeeLibVLC] {Player}: single player constructor";
+
+//    QWidget * videoWrapperWidget = new QWidget(this);
+//    videoWidget = new QWidget(videoWrapperWidget);
+//    videoWrapperWidget->setFixedHeight(100);
+//    videoWrapperWidget->setFixedWidth(100);
+
+//    videoWrapperWidget->setLayout(new QVBoxLayout());
+////    this->layout()->setSizeConstraint(QLayout::SetFixedSize);
+//    videoWrapperWidget->layout()->setSpacing(0);
+//    videoWrapperWidget->layout()->setContentsMargins(0, 0, 0, 0);
+//    videoWrapperWidget->layout()->addWidget(videoWidget);
+
+//    this->setLayout(new QVBoxLayout());
+////    this->layout()->setSizeConstraint(QLayout::SetFixedSize);
+//    this->layout()->setSpacing(0);
+//    this->layout()->setContentsMargins(0, 0, 0, 0);
+//    this->layout()->addWidget(videoWrapperWidget);
+
+
+//    rvlc->media_player_set_window((void *) videoWidget->winId());
+////    rvlc->media_player_set_window((void *) this->winId());
+
+
+
+
+
+//    QWidget * videoWidget = new QWidget(this);
+
+//    this->setLayout(new QVBoxLayout());
+//    this->layout()->setSpacing(0);
+//    this->layout()->setContentsMargins(0, 0, 0, 0);
+//    this->layout()->addWidget(videoWidget);
+
+//    rvlc->media_player_set_window((void *) videoWidget->winId());
+    rvlc->media_player_set_window((void *) this->winId());
 
     connect(rvlc, SIGNAL(notify(QString)), this, SLOT(slotNotify(QString)));
 
@@ -46,16 +85,68 @@ SimplePlayer::SimplePlayer(QWidget *parent) :
     _rp_mediaplayer = new RoxeePlayer::MediaPlayer(rvlc, this);
     _rp_audio = new RoxeePlayer::AudioControls(rvlc, this);
     _rp_video = new RoxeePlayer::VideoControls(rvlc, this);
+
+    //    setAttribute(Qt::WA_PaintOnScreen, true);
+//    setAttribute(Qt::WA_NativeWindow, true);
+//    setAttribute(Qt::WA_DontCreateNativeAncestors, true);
+
+//    videoWidget->setUpdatesEnabled(false);
+
+//    inVideoWidget->layout()->addWidget(videoWidget);
+
+//    inVideoWidget->setAttribute(Qt::WA_PaintOnScreen, true);
+//    inVideoWidget->setAttribute(Qt::WA_NativeWindow, true);
+//    inVideoWidget->setAttribute(Qt::WA_DontCreateNativeAncestors, true);
+
+
+//    QGridLayout  *layout = new QGridLayout(parent);
+
+//    videoWidget->installEventFilter(this);
+////    inVideoWidget->installEventFilter(this);
+//    installEventFilter(this);
+
+
+//    videoWidget->setLayout(new QVBoxLayout());
+//    videoWidget->layout()->setSpacing(0);
+//    videoWidget->layout()->setContentsMargins(0, 0, 0, 0);
+//    videoWidget->layout()->addWidget(inVideoWidget);
+
 }
 
-SimplePlayer::~SimplePlayer()
-{
-    qDebug() << "************************************ DESTRUCTION *****************************";
-}
+//SimplePlayer::~SimplePlayer()
+//{
+//    qDebug() << "************************************ DESTRUCTION *****************************";
+//}
+
+
+
+//void SimplePlayer::hackSize(int w, int h)
+//{
+//    this->setFixedHeight(h);
+//    this->setFixedWidth(w);
+//    this->repaint();
+//    this->update();
+//    videoWidget->repaint();
+//    videoWidget->update();
+//}
 
 
 void SimplePlayer::slotNotify(const QString & seg)
 {
+//    int h = _rp_video->height();
+//    int w = _rp_video->width();
+//    if((h != 0) && (videoWidget->height() != trailh)){
+//        qDebug() << "Container" << trailh << trailw;
+//        qDebug() << "Current video" << videoWidget->height() << videoWidget->width();
+//        qDebug() << "VLC video" << h << w;
+
+//        int ref = trailh;
+//        if(!ref)
+//            ref = h;
+//        videoWidget->setFixedHeight(ref);
+//        videoWidget->setFixedWidth(w / h * ref);
+////        qDebug() << "Setting size to " << h << w << ref << (w / h * ref) << videoWidget->height() << videoWidget->width();
+//    }
     emit notify(seg);
 }
 
@@ -76,6 +167,16 @@ RoxeePlayer::MediaPlayer * SimplePlayer::mediaPlayer()
 {
     return _rp_mediaplayer;
 }
+
+//void SimplePlayer::resizeEvent(QResizeEvent * event)
+//{
+//    qDebug() << "RESIZE HAPPENED" << this->height() << this->width();
+////    trailh = this->height();
+////    trailw = this->width();
+//    event->accept();
+////        event->ignore();
+//}
+
 
 //RoxeePlayer::Aud * SimplePlayer::mediaPlayer()
 //{

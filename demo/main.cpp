@@ -1,47 +1,48 @@
 #include <QApplication>
-#include <QMainWindow>
-#include <QHBoxLayout>
+#include <QWebView>
+#include <QGraphicsWebView>
+#include <QWebInspector>
+#include <QGraphicsScene>
+#include <QGraphicsView>
 
 #include <libroxeeplayer/simpleplayer.h>
+#include <libroxeeplayer/webpluginfactory.h>
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
+    // Simple QWidget
     RoxeePlayer::SimplePlayer * player;
     player = new RoxeePlayer::SimplePlayer();
     player->show();
 
-//    player->core()->setUserAgent(QString("application name"), QString("13234"));
-    // Returns "clang: warning: argument unused during compilation: '-mmacosx-version-min=10.5'"
-//    qDebug() << player->core()->getCompiler();
-//    qDebug() << player->core()->getAudioFilterList();
-//    qDebug() << player->core()->getVideoFilterList();
-
-    qDebug() << player->mediaPlayer()->isPlaying();
-
-//    qDebug() << player->mediaPlayer()->media();
-    qDebug() << "************";
-    player->mediaPlayer()->setMedia(QString::fromUtf8("/Volumes/MacGrosse/Home/Movies/MyTraileréüß♥.mov"));
-    qDebug() << "************";
-//    qDebug() << player->mediaPlayer()->media();
-    qDebug() << "************";
-    qDebug() << player->mediaPlayer()->isPlaying();
+    player->mediaPlayer()->setMedia("http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4");
     player->mediaPlayer()->play();
-    qDebug() << player->mediaPlayer()->isPlaying();
+
+    //
+    // As a plugin inside HTML
+    QWebSettings::globalSettings()->setAttribute(QWebSettings::JavascriptEnabled, true);
+    QWebSettings::globalSettings()->setAttribute(QWebSettings::PluginsEnabled, true);
+    QWebSettings::globalSettings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
 
 
-//    RoxeePlayer::SimplePlayer * player2;
-//    player2 = new RoxeePlayer::SimplePlayer();
-//    player2->show();
-//    player2->mediaPlayer()->setMedia(QString("file:///Volumes/MacGrosse/Nip Tuck Season 4 - 01 - Cindy Plumb.avi"));
-//    player2->mediaPlayer()->play();
+//    QGraphicsScene * scene = new QGraphicsScene();
+//    QGraphicsView * vv = new QGraphicsView(scene);
+//    QGraphicsWebView *view = new QGraphicsWebView();
 
-//    player = 0;
-//    player2 = 0;
+    QWebView *view = new QWebView();
+    new QWebInspector( view );
+
+    RoxeePlayer::WebPluginFactory * factory = new RoxeePlayer::WebPluginFactory( view );
+    view->page()->setPluginFactory(factory);
+    view->page()->setProperty("_q_webInspectorServerPort", 12345);
+    view->load(QUrl("qrc:/video.html"));
+
+    view->show();
+  //    scene->addItem(view);
+//    vv->show();
 
     int a = app.exec();
-//    player->~SimplePlayer();
-//    player2->~SimplePlayer();
     return a;
 }

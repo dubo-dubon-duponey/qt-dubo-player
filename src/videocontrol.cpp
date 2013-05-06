@@ -17,7 +17,6 @@
  *****************************************************************************/
 
 #include "libroxeeplayer/videocontrol.h"
-#include "libroxeeplayer/vlc2.h"
 
 #include <QDebug>
 
@@ -217,8 +216,8 @@ void VideoControls::takeSnapshot(const int /*i*/, const QString & /*id*/)
 
 void VideoControls::setDeinterlace(const bool on)
 {
-    qDebug() << "Setting deinterlace to";
-    qDebug() << on;
+//    qDebug() << "Setting deinterlace to";
+//    qDebug() << on;
 }
 
 }

@@ -30,10 +30,10 @@ MediaPlayer::MediaPlayer(RoxeeVLC * rvlc, QObject *parent) :
     this->vlc = rvlc;
 }
 
-MediaPlayer::~MediaPlayer()
-{
-    qDebug() << "**** DESTRUCTION *** MediaPlayer";
-}
+//MediaPlayer::~MediaPlayer()
+//{
+//    qDebug() << "**** DESTRUCTION *** MediaPlayer";
+//}
 
 /*
     // XXX

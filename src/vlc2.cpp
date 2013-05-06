@@ -28,12 +28,9 @@ struct RoxeeVLC::CheshireCatInstance {
 
     static void libvlc_callback(const libvlc_event_t *p_event, void * p_user_data)
     {
-//        qDebug() << "Emitting shit";
-//        qDebug() << libvlc_event_type_name(p_event->type);
         RoxeeVLC * p_rox = (RoxeeVLC *) p_user_data;
         emit p_rox->notify(libvlc_event_type_name(p_event->type));
 //        char * toto = p_event->type;
-//        qDebug() << toto;
 //        emit notify(p_event->type);
     //    static int i_first_time_media_player_time_changed = 0;
     //    static bool b_media_player_title_changed = false;
@@ -58,6 +55,7 @@ RoxeeVLC::RoxeeVLC( QObject * parent)
         // Do we ever reach here or do we simply throw?
 //        qDebug() << QString::fromLatin1("Could not init libVLC");
     }
+    qDebug() << " [RoxeeLibVLC] Cat layer using VLC " << this->get_version();
 }
 
 RoxeeVLC::~RoxeeVLC(){
@@ -602,10 +600,7 @@ void RoxeeVLC::video_set_track(const int i)
 
 void RoxeeVLC::video_take_snapshot(const int i, const QString & path)
 {
-    qDebug() << "Going to do snapshot";
-    qDebug() << i;
     const char * psz_filepath = path.toLocal8Bit();
-//    qDebug() << psz_filepath;
     libvlc_video_take_snapshot(smile->player, i, psz_filepath, 0, 100);
 }
 
@@ -777,7 +772,6 @@ void RoxeeVLC::media_player_new(){
     //    int libvlc_event_attach( p_event_manager, libvlc_event_type_t i_event_type, libvlc_callback_t f_callback, void * user_data);
 }
 
-    //qDebug() << (int) pp_vlc_mediaObject << "event:" << libvlc_event_type_name(event->type);
 
 
 
@@ -794,8 +788,7 @@ void RoxeeVLC::media_player_new(){
 //LIBVLC_API void 	libvlc_media_player_set_media (libvlc_media_player_t *p_mi, libvlc_media_t *p_md)
 // 	Set the media that will be used by the media_player.
 void RoxeeVLC::media_player_set_media(const QString & path) {
-    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_set_media";
-    qDebug() << path.toLocal8Bit();
+    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_set_media " << path.toLocal8Bit();
     libvlc_media_player_set_media(smile->player, libvlc_media_new_path(smile->instance, path.toLocal8Bit()));
 }
 

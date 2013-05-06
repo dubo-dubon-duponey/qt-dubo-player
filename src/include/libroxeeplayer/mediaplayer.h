@@ -24,9 +24,7 @@
 #include <QtCore/qobject.h>
 #include <QtCore/qstringlist.h>
 
-#include "vlc2.h"
-
-// Need to implement events damnit http://www.videolan.org/developers/vlc/doc/doxygen/html/group__libvlc__event.html#_details
+#include "libroxeeplayer/vlc2.h"
 
 namespace RoxeePlayer
 {
@@ -37,7 +35,7 @@ namespace RoxeePlayer
     public:
         /*! \cond */
         explicit MediaPlayer(RoxeeVLC * rvlc, QObject *parent = 0);
-        ~MediaPlayer();
+//        ~MediaPlayer();
         /*! \endcond */
 
         /*! \brief Retrieve and set the media */

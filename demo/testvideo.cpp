@@ -10,7 +10,7 @@ TestVideo::TestVideo(QWidget *parent) :
         "--intf", "macosx"
     };
 
-    qDebug() << this->winId();
+//    qDebug() << this->winId();
     ins = libvlc_new(sizeof(vlcArgs) / sizeof(*vlcArgs), vlcArgs);
     mp = libvlc_media_player_new(ins);
     libvlc_media_player_set_nsobject( mp, (void *) this->winId());
@@ -26,7 +26,7 @@ TestVideo::TestVideo(QWidget *parent) :
 
 void TestVideo::scrapit()
 {
-    qDebug() << "Cleaning everything";
+//    qDebug() << "Cleaning everything";
     libvlc_media_player_stop(mp);
     libvlc_media_player_set_nsobject(mp, NULL);
     libvlc_media_player_release(mp);
