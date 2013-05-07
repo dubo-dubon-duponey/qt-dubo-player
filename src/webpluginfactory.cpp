@@ -79,6 +79,9 @@ QObject * WebPluginFactory::create ( const QString & mimeType, const QUrl & url,
     inner->mediaPlayer()->setMedia(url.toString());
 //    player->setMedia(QString::fromLatin1("http://sn.ackitup.net:5000/mkv/test.multi.mkv"));
 
+    // This is necessary so that mousevents are correctly forwarded afterwards to the webview (after deactivate + click on plugin)
+    inner->setMouseTracking(true);
+
 //    inner->mediaPlayer()->play();
 
 //    inner->autoFillBackground();
