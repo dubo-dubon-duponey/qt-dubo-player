@@ -17,13 +17,15 @@ INSTALLS += target
 copyToDestdir($$PWD/include/libroxeeplayer/*, $$DESTDIR/../include/libroxeeplayer)
 copyToDestdir($$PWD/../res/redist/*, $$DESTDIR/../share/libroxeeplayer)
 
+contains(ROXEE_LINK_TYPE, dynamic){
+    win32{
+        copyToDestdir($$ROXEE_EXTERNAL/lib/libvlc.dll, $$DESTDIR)
+        copyToDestdir($$ROXEE_EXTERNAL/lib/libvlccore.dll, $$DESTDIR)
+    #    copyToDestdir($$ROXEE_EXTERNAL/lib/plugins/*, $$DESTDIR/plugins)
+    }
+}
+
 !isEmpty(ROXEE_INTERNAL){
-    contains(ROXEE_LINK_TYPE, dynamic){
-        win32{
-            copyToDestdir($$ROXEE_EXTERNAL/lib/libvlc.dll, $$DESTDIR)
-            copyToDestdir($$ROXEE_EXTERNAL/lib/libvlccore.dll, $$DESTDIR)
-        #    copyToDestdir($$ROXEE_EXTERNAL/lib/plugins/*, $$DESTDIR/plugins)
-        }
         mac{
             system(rm -Rf $${DESTDIR}/lib)
             system(rm -Rf $${DESTDIR}/plugins)

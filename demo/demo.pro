@@ -17,12 +17,12 @@ RESOURCES += video.qrc
 
 contains(ROXEE_LINK_TYPE, static){
     DEFINES += LIBROXEEPLAYER_USE_STATIC
+    win32{
+        copyToDestdir($$ROXEE_EXTERNAL/lib/libvlc.dll, $$DESTDIR)
+        copyToDestdir($$ROXEE_EXTERNAL/lib/libvlccore.dll, $$DESTDIR)
+    #    copyToDestdir($$ROXEE_EXTERNAL/lib/plugins/*, $$DESTDIR/plugins)
+    }
     !isEmpty(ROXEE_INTERNAL){
-        win32{
-            copyToDestdir($$ROXEE_EXTERNAL/lib/libvlc.dll, $$DESTDIR)
-            copyToDestdir($$ROXEE_EXTERNAL/lib/libvlccore.dll, $$DESTDIR)
-        #    copyToDestdir($$ROXEE_EXTERNAL/lib/plugins/*, $$DESTDIR/plugins)
-        }
         mac{
             system(rm -Rf $${DESTDIR}/roxeeplayer.app/Contents/MacOS/lib)
             system(rm -Rf $${DESTDIR}/roxeeplayer.app/Contents/MacOS/plugins)
