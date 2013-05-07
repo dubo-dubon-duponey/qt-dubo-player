@@ -74,6 +74,10 @@ SimplePlayer::SimplePlayer(QWidget *parent) :
 //    this->setLayout(new QVBoxLayout());
 //    this->layout()->setSpacing(0);
 //    this->layout()->setContentsMargins(0, 0, 0, 0);
+#if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
+    this->setAttribute(Qt::WA_NativeWindow, true);
+    this->setAttribute(Qt::WA_DontCreateNativeAncestors, true);
+#endif
 //    this->layout()->addWidget(videoWidget);
 
 //    rvlc->media_player_set_window((void *) videoWidget->winId());
