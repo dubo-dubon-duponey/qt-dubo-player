@@ -67,6 +67,3 @@ defineTest(copyToDestdir) {
     export(QMAKE_POST_LINK)
 }
 
-defineTest(roxeeLibHelper) {
-
-}

@@ -26,6 +26,7 @@ contains(ROXEE_LINK_TYPE, dynamic){
 }
 
 !isEmpty(ROXEE_INTERNAL){
+    contains(ROXEE_LINK_TYPE, dynamic){
         mac{
             system(rm -Rf $${DESTDIR}/lib)
             system(rm -Rf $${DESTDIR}/plugins)

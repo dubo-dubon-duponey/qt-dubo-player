@@ -68,18 +68,17 @@ unencrypted http. You really shouldn't *release* anything using that method if y
 Caveats and compatibility.
 ================
 
-On windows, if you built statically, you need to DEFINES += LIBROXEEPLAYER_USE_STATIC in your app.
-
-Should build with either ming or msvc.
-
-This should compile against QT4 as well, though I mainly use QT5 nowadays, so if it doesn't ping me.
-
 Failure to start your application, or vlc complaining usually means it can't find either
 libvlc or the plugins folder.
+You need to ensure both are in the library output folder.
 
-Last, in its WebPlugin form, the shit will crash if your object tag is resized dynamically.
-Sounds like a QtWebKit bug...
-Only solution is to throttle resizes on the node in javascript.
+On windows:
+- 5.0.2: the WebPlugin will crash if your object tag has a dynamic size. Sounds like a QtWebKit bug...
+Only solution is to throttle resizes on the node in javascript (see video.html).
+On OSX, it would "simply" complain about QPainterDevice.
+- msvc dynamic builds crash if DEBUG (can still use them in RELEASE)
+- conversely, msvc static builds crash if RELEASE (can still use them in DEBUG)
+- 4.8 (msvc-dynamic): the WebPlugin doesn't work at all
 
 ================
 API
