@@ -107,6 +107,7 @@ var pollFun = function(){
 };
 
 var startPoller = function(newC, e){
+    console.warn('Trying my best to still forward mouse events');
     lastX = newC[0];
     lastY = newC[1];
     poller = window.setInterval(pollFun, 100);
