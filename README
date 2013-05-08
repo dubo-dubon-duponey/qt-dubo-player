@@ -124,3 +124,4 @@ Investigate the reason msvc crash with shared libs in somes cases.
 Package as a QT plugin.
 Find a way to copy plugins over on windows.
 Automatic network fetch on windows? Msys based, if present?
+Fix third-party (OSX) version / fetch (need 2.0.7 and a better system for nightly builds).

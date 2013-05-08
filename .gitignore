@@ -6,3 +6,7 @@ buildd*
 
 *.Release
 *.Debug
+*.app
+*.dmg
+*.zip
+vc100.pdb
