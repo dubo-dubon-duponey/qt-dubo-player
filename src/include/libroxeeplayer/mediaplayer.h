@@ -21,66 +21,65 @@
 
 #include "libroxeeplayer_global.h"
 
-#include <QtCore/qobject.h>
-#include <QtCore/qstringlist.h>
+#include <QObject>
+#include <QStringList>
 
 #include "libroxeeplayer/vlc2.h"
 
 namespace RoxeePlayer
 {
-    /*! \brief A media player class, exposed through the top-level classes. */
-    class LIBROXEEPLAYERSHARED_EXPORT MediaPlayer : public QObject
-    {
-        Q_OBJECT
-    public:
-        /*! \cond */
-        explicit MediaPlayer(RoxeeVLC * rvlc, QObject *parent = 0);
-//        ~MediaPlayer();
-        /*! \endcond */
+/*! \brief A media player class, exposed through the top-level SimplePlayer. */
+class LIBROXEEPLAYERSHARED_EXPORT MediaPlayer : public QObject
+{
+    Q_OBJECT
+public:
+    /*! \cond */
+    explicit MediaPlayer(RoxeeVLC * rvlc, QObject *parent = 0);
+    /*! \endcond */
 
-        /*! \brief Retrieve and set the media */
-        Q_PROPERTY(QString media READ media WRITE setMedia)
-        /*! \brief Whether playing or not */
-        Q_PROPERTY(bool isPlaying READ isPlaying)
-        /*! \brief Read length */
-        Q_PROPERTY(int length READ length)
-        /*! \brief Retrieve and set playback time */
-        Q_PROPERTY(int time READ time WRITE setTime)
-        /*! \brief Retrieve and set playbakc position */
-        Q_PROPERTY(float position READ position WRITE setPosition)
-        /*! \brief Retrieve and set chapter */
-        Q_PROPERTY(int chapter READ chapter WRITE setChapter)
-        /*! \brief Read chapter count */
-        Q_PROPERTY(int chapterCount READ chapterCount)
+    /*! \brief Retrieve and set the media */
+    Q_PROPERTY(QString media READ media WRITE setMedia)
+    /*! \brief Whether playing or not */
+    Q_PROPERTY(bool isPlaying READ isPlaying)
+    /*! \brief Read length */
+    Q_PROPERTY(int length READ length)
+    /*! \brief Retrieve and set playback time */
+    Q_PROPERTY(int time READ time WRITE setTime)
+    /*! \brief Retrieve and set playbakc position */
+    Q_PROPERTY(float position READ position WRITE setPosition)
+    /*! \brief Retrieve and set chapter */
+    Q_PROPERTY(int chapter READ chapter WRITE setChapter)
+    /*! \brief Read chapter count */
+    Q_PROPERTY(int chapterCount READ chapterCount)
 
-        /*! \brief Play */
-        Q_INVOKABLE void play();
-        /*! \brief Stop */
-        Q_INVOKABLE void stop();
-        /*! \brief Pause */
-        Q_INVOKABLE void pause();
+    /*! \brief Play */
+    Q_INVOKABLE void play();
+    /*! \brief Stop */
+    Q_INVOKABLE void stop();
+    /*! \brief Pause */
+    Q_INVOKABLE void pause();
 
 
-        /*! \cond */
-        QString media();
-        void setMedia(const QString & path);
-        bool isPlaying();
-        int length();
-        int time();
-        void setTime(const int & time);
-        float position();
-        void setPosition(const float & pos);
-        int chapter();
-        void setChapter(const int & chap);
-        int chapterCount();
-        /*! \endcond */
+    /*! \cond */
+    QString media();
+    void setMedia(const QString & path);
+    bool isPlaying();
+    int length();
+    int time();
+    void setTime(const int & time);
+    float position();
+    void setPosition(const float & pos);
+    int chapter();
+    void setChapter(const int & chap);
+    int chapterCount();
+    /*! \endcond */
 
-    signals:
+signals:
 
-    public slots:
-    private:
-        RoxeeVLC * vlc;
-    };
+public slots:
+private:
+    RoxeeVLC * vlc;
+};
 }
 
 #endif // ROXEEPLAYER_MEDIAPLAYER_H

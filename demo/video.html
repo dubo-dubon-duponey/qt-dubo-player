@@ -1,64 +1,9 @@
 <html>
 <head>
-<script>
-/*
-BEWARE: on windows, QT 5.0.2, if the object node has flexible dimensions, QtWebKit is gonna crash.
-In order to obtain a flexible widget (eg: width=75%), the following script helper is provided.
-This is not bullet-proof, but should work with percented width/height and in-flow, no kinky positioning.
-In case you would want to do some more kinky resizing stuff, and still count on the node to adapt,
-you should call:
-node.crashing && node.forceResize()
-whenever you need it to refresh itself.
-*/
-
-var chuckyTheEnforcer = function(node){
-    var parentStyle = getComputedStyle(node.parentNode);
-    if(node.originalWidth)
-        node.style.width = (parseInt(parentStyle.width, 10) * node.originalWidth) + 'px';
-    if(node.originalHeight)
-        node.style.height = (parseInt(parentStyle.height, 10) * node.originalHeight) + 'px';
-    // Dare to comment this out, and it will crash again. Interesting stuff, right?
-    var query = [parentStyle.width, parentStyle.height];
-};
-
-var forceManualResize = function(node){
-    if(node.originalWidth === undefined){
-        node.originalWidth = node.style.width.match(/([0-9-]+)%$/);
-        node.originalHeight = node.style.height.match(/([0-9-]+)%$/);
-        if(node.originalWidth)
-            node.originalWidth = node.originalWidth.pop() / 100;
-        if(node.originalHeight)
-            node.originalHeight = node.originalHeight.pop() / 100;
-            console.warn("hohoho", node.originalWidth, node.originalHeight);
-        if(node.originalWidth || node.originalHeight){
-            chuckyTheEnforcer(node);
-            node.forceResize = chuckyTheEnforcer.bind({}, node);
-            window.addEventListener('resize', node.forceResize, false);
-        }
-    }
-};
-
-window.addEventListener('load', function(){
-    var videos = document.getElementsByTagName('object');
-    for(var x = 0; x < videos.length; x++){
-        if(videos[x].crashing)
-            forceManualResize(videos[x]);
-    }
-}, true);
-
-document.addEventListener('DOMNodeInserted', function(e){
-    console.warn("inserted dom node listyener true", e.target);
-    if(e.target.crashing)
-        forceManualResize(e.target);
-}, true);
-
-
-</script>
+<!-- Contain various hacks to workaround platform limitations -->
+<script type="text/javascript" src="qrc:/hack.js"></script>
 </head>
 <body>
-<!--
-<div style="position: absolute; top: 0; left: 0; border: 5px solid red;">Video plugin</div>
--->
 <div id="container" style="position: absolute; top: 210px; left: 10px; bottom: 10px; right: 10px;">
     <object id="video1" style="width: 100%; height: 50%;" type="video/x-roxee" style="border: 1px solid red" data="http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4"></object>
 </div>
@@ -69,12 +14,14 @@ window.addEventListener('load', function(){
 /*
     Explore video.media, video.audio, video.video for the exposed API
 */
+// Already inserted DOM node
     var video1 = document.getElementById('video1');
     video1.media.play();
 
+// Dynamically inserted DOMNode
     var video2 = document.createElement('object');
     video2.setAttribute('type', 'video/x-roxee');
-    // Be sure to set flexible dimensions BEFORE inserting into DOM
+    // Be sure to set (any) flexible dimensions BEFORE inserting into DOM
     video2.style.width = '100%';
     document.body.appendChild(video2);
     // The API will be made available once inserted in the DOM, and IF DISPLAYED

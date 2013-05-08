@@ -1,7 +1,12 @@
-RoxeePlayer-0.8.0:
-    Working again on Windows (static and dynamic).
-    Fixed-up build.
-    Added WebPluginFactory to the main library.
+RoxeePlayer-1.0.0:
+    Tested on:
+    * windows 7
+    * Debian Testing
+    * Ubuntu 13/04
+    * OSX 10.8
+    Build improvements.
+    Large code cleanup.
+    Added WebPluginFactory expression, with proper mouse move event support and flexible node size.
 
 RoxeePlayer-0.7.0:
     Third-party manager to automatically download VLC on OSX.

@@ -17,11 +17,13 @@
  *****************************************************************************/
 
 #include "libroxeeplayer/mediaplayer.h"
-#include <QtCore/qdebug.h>
+#include <QUrl>
 
 /*! \cond */
 
 using namespace RoxeePlayer;
+// XXX
+// https://bugreports.qt.nokia.com//browse/QTBUG-16274
 
 namespace RoxeePlayer{
 MediaPlayer::MediaPlayer(RoxeeVLC * rvlc, QObject *parent) :
@@ -30,32 +32,12 @@ MediaPlayer::MediaPlayer(RoxeeVLC * rvlc, QObject *parent) :
     this->vlc = rvlc;
 }
 
-//MediaPlayer::~MediaPlayer()
-//{
-//    qDebug() << "**** DESTRUCTION *** MediaPlayer";
-//}
-
-/*
-    // XXX
-    // https://bugreports.qt.nokia.com//browse/QTBUG-16274
-
-
-//void MediaPlayer::setEventHandler(const QString &path)
-//{-> SHOULD EMIT / CONNECT
-//    libvlc_event_manager_t * p_event_manager = libvlc_media_player_event_manager(LRPCoreInstance::instance()->getPlayer());
-
-//    int libvlc_event_attach( p_event_manager, libvlc_event_type_t i_event_type, libvlc_callback_t f_callback, void * user_data);
-//}
-*/
-
-
 void MediaPlayer::setMedia(const QString &path)
 {
     QUrl * u = new QUrl(path);
+    // XXX likely to be changed with vlc 2.1
     if(u->scheme() == "file")
         u->setScheme("");
-    qDebug() << "Setting new url";
-    qDebug() << u->toString();
     vlc->media_player_set_media(u->toString());
 }
 
@@ -124,16 +106,6 @@ void MediaPlayer::setChapter(const int & chap)
     vlc->media_player_set_chapter(chap);
 }
 
-/*
-QtVlcAudioControls * MediaPlayer::getAudioControls()
-{
-}
-
-QtVlcVideoControls * MediaPlayer::getVideoControls()
-{
-
-}
-*/
 
 }
 

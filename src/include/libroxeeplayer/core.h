@@ -27,11 +27,12 @@
 
 namespace RoxeePlayer{
 
-/*! \brief A core object with a couple of random infos / helpers (this is a singleton) */
+/*! \brief A core object with a couple of random infos / helpers. Don't instanciate directly. Use SimplePlayer instead. */
 class LIBROXEEPLAYERSHARED_EXPORT Core : public QObject
 {
     Q_OBJECT
 public:
+    /*! \brief Should be created by passing a reference to the shadowed libvlc object. */
     explicit Core(RoxeeVLC * rvlc, QObject *parent = 0);
 
     /*! \brief Allows to control the UA string that will be set for http streams retrieval. */
@@ -45,7 +46,6 @@ public:
 
     /*! \cond */
     QString getCompiler();
-
     QStringList getAudioFilterList();
     QStringList getVideoFilterList();
     /*! \endcond */

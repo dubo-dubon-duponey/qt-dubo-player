@@ -32,8 +32,6 @@ VideoControls::VideoControls(RoxeeVLC * rvlc, QObject *parent) :
     vlc = rvlc;
 }
 
-
-
 void VideoControls::toggleFullscreen()
 {
     vlc->toggle_fullscreen();
@@ -214,7 +212,7 @@ void VideoControls::takeSnapshot(const int /*i*/, const QString & /*id*/)
 
 }
 
-void VideoControls::setDeinterlace(const bool on)
+void VideoControls::setDeinterlace(const bool /*on*/)
 {
 //    qDebug() << "Setting deinterlace to";
 //    qDebug() << on;

@@ -28,65 +28,64 @@
 
 namespace RoxeePlayer
 {
-    /*! \brief Audio controllers, exposed through the top-level classes */
-    class LIBROXEEPLAYERSHARED_EXPORT AudioControls : public QObject
+/*! \brief Audio controllers, exposed through the top-level SimplePlayer */
+class LIBROXEEPLAYERSHARED_EXPORT AudioControls : public QObject
+{
+    Q_OBJECT
+public:
+    /*! \cond */
+    explicit AudioControls(RoxeeVLC * rvlc, QObject *parent = 0);
+    /*! \endcond */
+
+    /*! \brief Toggle mute */
+    Q_INVOKABLE void toggleMute();
+    /*! \brief Retrieve and set mute */
+    Q_PROPERTY(bool mute READ mute WRITE setMute)
+    /*! \brief Retrieve and set volume */
+    Q_PROPERTY(int volume READ volume WRITE setVolume)
+    /*! \brief Read audio tracks count */
+    Q_PROPERTY(int audioTrackCount READ audioTrackCount)
+    /*! \brief Retrieve and set audio track */
+    Q_PROPERTY(int audioTrack READ audioTrack WRITE setAudioTrack)
+    /*! \brief Retrieve audio tracks description */
+    Q_PROPERTY(QStringList audioTrackDescription READ audioTrackDescription)
+
+
+    Q_INVOKABLE QStringList outputList()
     {
-        Q_OBJECT
-    public:
-        /*! \cond */
-        explicit AudioControls(RoxeeVLC * rvlc, QObject *parent = 0);
-        /*! \endcond */
+        return vlc->audio_output_list_get();
+    }
+    Q_INVOKABLE QStringList outputDeviceList(const QString & outd)
+    {
+        return vlc->audio_output_device_list_get(outd);
+    }
 
+    Q_INVOKABLE void setOutput(const QString & outd)
+    {
+        vlc->audio_output_set(outd);
+    }
 
-        /*! \brief Toggle mute */
-        Q_INVOKABLE void toggleMute();
-        /*! \brief Retrieve and set mute */
-        Q_PROPERTY(bool mute READ mute WRITE setMute)
-        /*! \brief Retrieve and set volume */
-        Q_PROPERTY(int volume READ volume WRITE setVolume)
-        /*! \brief Read audio tracks count */
-        Q_PROPERTY(int audioTrackCount READ audioTrackCount)
-        /*! \brief Retrieve and set audio track */
-        Q_PROPERTY(int audioTrack READ audioTrack WRITE setAudioTrack)
-        /*! \brief Retrieve audio tracks description */
-        Q_PROPERTY(QStringList audioTrackDescription READ audioTrackDescription)
+    Q_INVOKABLE void setOutputDevice(const QString & outd)
+    {
+        vlc->audio_output_set(outd);
+    }
 
+    /*! \cond */
+    bool mute();
+    void setMute(const bool status);
+    int volume();
+    void setVolume(const int vol);
+    int audioTrackCount();
+    int audioTrack();
+    void setAudioTrack(const int i);
+    QStringList audioTrackDescription();
+    /*! \endcond */
+signals:
 
-        Q_INVOKABLE QStringList outputList()
-        {
-            return vlc->audio_output_list_get();
-        }
-        Q_INVOKABLE QStringList outputDeviceList(const QString & outd)
-        {
-            return vlc->audio_output_device_list_get(outd);
-        }
-
-        Q_INVOKABLE void setOutput(const QString & outd)
-        {
-            vlc->audio_output_set(outd);
-        }
-
-        Q_INVOKABLE void setOutputDevice(const QString & outd)
-        {
-            vlc->audio_output_set(outd);
-        }
-
-        /*! \cond */
-        bool mute();
-        void setMute(const bool status);
-        int volume();
-        void setVolume(const int vol);
-        int audioTrackCount();
-        int audioTrack();
-        void setAudioTrack(const int i);
-        QStringList audioTrackDescription();
-        /*! \endcond */
-    signals:
-
-    public slots:
-    private:
-        RoxeeVLC * vlc;
-    };
+public slots:
+private:
+    RoxeeVLC * vlc;
+};
 }
 
 

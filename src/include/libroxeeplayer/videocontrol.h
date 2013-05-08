@@ -37,8 +37,6 @@ namespace RoxeePlayer
         explicit VideoControls(RoxeeVLC * rvlc, QObject *parent = 0);
         /*! \endcond */
 
-        // Video controls
-
         /*! \brief Toggles fullscreen */
         Q_INVOKABLE void toggleFullscreen();
 
@@ -55,7 +53,6 @@ namespace RoxeePlayer
         /*! \brief Retrieves width */
         Q_PROPERTY(uint width READ width)
 
-        /*cursor()*/
         /*! \brief Retrieves and sets scale */
         Q_PROPERTY(float scale READ scale WRITE setScale)
 
@@ -82,13 +79,14 @@ namespace RoxeePlayer
 
         // XXX unexposed
         // QStringList* chapterDescription(int i);
+        //        Q_INVOKABLE void toggleTeletext();
+        //        void VideoControls::takeSnapshot(const int i)
 
         /*! \brief Retrieves and set cropping geometry */
         Q_PROPERTY(QString cropGeometry READ cropGeometry WRITE setCropGeometry)
 
         /*! \brief Retrieves and set teletext */
         Q_PROPERTY(int teletext READ teletext WRITE setTeletext)
-//        Q_INVOKABLE void toggleTeletext();
         /*! \brief Read video track count */
         Q_PROPERTY(int videoTrackCount READ videoTrackCount)
         /*! \brief Read video tracks description */
@@ -98,7 +96,6 @@ namespace RoxeePlayer
 
         /*! \brief Take snapshot */
         Q_INVOKABLE void takeSnapshot(const int i, const QString & id);
-//        void VideoControls::takeSnapshot(const int i)
 
         /*! \brief Toggle deinterlace mode */
         Q_INVOKABLE void setDeinterlace(const bool on);

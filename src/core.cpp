@@ -17,13 +17,11 @@
  *****************************************************************************/
 
 #include "libroxeeplayer/core.h"
-#include <QtCore/qdebug.h>
-#include <QtCore/qmutex.h>
+#include <QDebug>
 
 /*! \cond */
 
 namespace RoxeePlayer{
-
 
 Core::Core(RoxeeVLC * rvlc, QObject *parent):
     QObject(parent)

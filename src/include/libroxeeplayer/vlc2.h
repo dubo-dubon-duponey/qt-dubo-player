@@ -19,9 +19,10 @@
 #ifndef ROXEEPLAYER_VLC_HPP
 #define ROXEEPLAYER_VLC_HPP
 
-#include <QtCore>
+#include <QObject>
 #include <QStringList>
 
+/*! \cond */
 namespace RoxeePlayer{
 
 class RoxeeVLC: public QObject
@@ -35,8 +36,8 @@ signals:
     void notify(const QString & type);
 
 public:
-    RoxeeVLC(QObject * parent = 0);                         // Constructor
-    RoxeeVLC(const RoxeeVLC&);            // Copy constructor
+    explicit RoxeeVLC(QObject * parent = 0);                         // Constructor
+    explicit RoxeeVLC(const RoxeeVLC&);            // Copy constructor
     RoxeeVLC& operator=(const RoxeeVLC&); // Copy assignment operator
     ~RoxeeVLC();                        // Destructor
 
@@ -120,5 +121,6 @@ public:
 };
 
 }
+/*! \endcond */
 
 #endif // ROXEEPLAYER_VLC_HPP

@@ -6,14 +6,25 @@ RoxeePlayer is a thin layer library on top of libvlc that exposes a QT-ified (sc
 
 It is meant:
 - to be cross-platform (specifically sports OSX, unlike other libraries)
-- to be usable either as a simple QWidget or as a WebView plugin for HTML oriented webrunners
+- to be usable either as a simple QWidget, or as a WebView plugin for HTML oriented webrunners
 - primarily to serve as part of the Roxee runner application, though other people might find interest in it
+- depend solely on libvlc, and QWidget (no QML crap)
+- provide a get-go-ready solution, leaving the implementor only to bother about the player controls
 
-There exist at least two other implementations with similar purpose (save scriptability, strict libvlc isolation and OSX support):
+It currently supports:
+- most of vlc API, including events (through slots)
+- multiple simultaneous players
+- works from QT 4.8 and libvlc 2.0 (the WebPlugin requires QT5)
+
+There exist at least two other implementations with a somewhat similar purpose (save scriptability, strict libvlc isolation and OSX support):
 - https://bitbucket.org/trollixx/qtvlc/
 - https://github.com/ntadej/vlc-qt/tree/master/src/core
 
-This is licensed under LGPL (same as libvlc).
+================
+License
+================
+
+LGPL (same as libvlc).
 
 ================
 For the impatients
@@ -21,42 +32,54 @@ For the impatients
 
 Open qt-roxeeplayer.pro with QtCreator.
 
-Edit src/vars/vars.pri and point ROXEE_EXTERNAL to your vlc sdk folder
+Edit src/config/$PLATFORM.pri (win, mac, other) and point the ROXEE_EXTERNAL variable to your vlc sdk folder lives (OSX users don't need to do that
+as the SDK is fetched over the network magically).
 
-Build.
+Then nuild.
 
-Run the demo.
-
+Then run the demo.
 
 ================
-How to build (details)
+Doesn't work?
 ================
 
-Inside src/vars/vars.pri, you may additionally pick an output build folder (ROXEE_DESTDIR),
+Failure to start your application, or vlc complaining about "plugins", usually means it can't find either
+libvlc, or the plugins folder.
+You need to ensure both are in the library output folder.
+
+================
+Build details
+================
+
+Inside src/config/$PLATFORM.pri, you may additionally pick an output build folder (ROXEE_DESTDIR),
 
 You can also decide to build a dynamic or static library.
 
-By default, the project builds a shared library, and on OSX fetches VLC from the network.
+By default, the project builds a shared library on OSX and Other, and a static one on Windows.
+On OSX, the default behavior is to fetch a binary VLC over the network.
 
-Note that any of the vars.pri variables (ROXEE_*) may be overriden from the environment.
+Note that any of these variables (ROXEE_*) may be overriden from the environment.
 eg: ROXEE_LINK_TYPE=static qmake CONFIG+=debug
-
 
 ================
 How to create your own application
 ================
 
-Link against the builded roxeeplayer library, and include the includes...
+Check your build dir ("buildd", by default).
+You will find a lib and include folder.
+Link and include against these, then link against the "roxeeplayer" library.
 
-Don't forget to put libvlc, libvlccore and the vlc plugins folder near the binary (if statically compiled)
+Don't forget to put libvlc, libvlccore and the vlc plugins folder near the binary (if statically compiled),
+or near the roxee library if dynamically compiled.
 
-Look into the demo subproject for inspiration, and read the headers.
+Look into the demo subproject for inspiration, and read the headers (or the doxygen doc when there will be one).
 
-You can use either the SimplePlayer, which is a QWidget, or the WebPlugin factory if you
-want an html-usable plugin.
+There are two ways to use it, mainly:
+- use the SimplePlayer class, which is a QWidget
+- use the WebPlugin factory if you want an html-usable plugin.
 
 ================
-About the "third-party" folder
+About that "third-party" folder
 ================
 
 On OSX, ./bootstrap.sh is called and does fetch VLC *binary* release to be linked by the project.
@@ -68,17 +91,16 @@ unencrypted http. You really shouldn't *release* anything using that method if y
 Caveats and compatibility.
 ================
 
-Failure to start your application, or vlc complaining usually means it can't find either
-libvlc or the plugins folder.
-You need to ensure both are in the library output folder.
-
-On windows:
-- 5.0.2: the WebPlugin will crash if your object tag has a dynamic size. Sounds like a QtWebKit bug...
-Only solution is to throttle resizes on the node in javascript (see video.html).
+On windows, for the WebPlugin:
+- QT 5.0.2: the WebPlugin will crash if your object tag has a dynamic size. Sounds like a QtWebKit bug...
+Only solution is to throttle resizes on the node in javascript (just add hack.js to your view, and you are safe).
 On OSX, it would "simply" complain about QPainterDevice.
-- msvc dynamic builds crash if DEBUG (can still use them in RELEASE)
-- conversely, msvc static builds crash if RELEASE (can still use them in DEBUG)
-- 4.8 (msvc-dynamic): the WebPlugin doesn't work at all
+- QT 5.0.2: obtaining mouse move events from the plugin is tricky (again handled by hack.js)
+- QT 5.0.2, msvc dynamic builds: crash if DEBUG (can still use them in RELEASE)
+Conversely, msvc static builds crash if RELEASE (can still use them in DEBUG).
+Mixing mingw-vlc and msvc is a kinky idea anyhow...
+But maybe investigate QMAKE_LFLAGS_RELEASE += /DEBUG
+- QT 4.8, msvc (not sure about mingw): the WebPlugin doesn't work at all, due to qtwebkit/qt limitations
 
 ================
 API
@@ -86,3 +108,19 @@ API
 
 Doxygen documentation should be generated as part of the build if you have the doxygen binary,
 though the doc effort is slick right now...
+
+================
+TODO
+================
+
+Switch license to GPL.
+Write better documentation (especially a javascript API).
+Express dependency on libvlc version.
+Migrate to libvlc 2.1.
+Verify windows behavior on key and clicks events.
+Finish up and test remaining missing bits (aspectRatio comes to mind).
+Better lib versioning (specially on windows?).
+Investigate the reason msvc crash with shared libs in somes cases.
+Package as a QT plugin.
+Find a way to copy plugins over on windows.
+Automatic network fetch on windows? Msys based, if present?

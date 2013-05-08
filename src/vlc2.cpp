@@ -20,6 +20,8 @@
 #include "libroxeeplayer/vlc2.h"
 #include <QDebug>
 
+/*! \cond */
+
 namespace RoxeePlayer{
 
 struct RoxeeVLC::CheshireCatInstance {
@@ -30,7 +32,8 @@ struct RoxeeVLC::CheshireCatInstance {
     {
         RoxeeVLC * p_rox = (RoxeeVLC *) p_user_data;
         emit p_rox->notify(libvlc_event_type_name(p_event->type));
-//        char * toto = p_event->type;
+
+        //        char * toto = p_event->type;
 //        emit notify(p_event->type);
     //    static int i_first_time_media_player_time_changed = 0;
     //    static bool b_media_player_title_changed = false;
@@ -993,3 +996,5 @@ int RoxeeVLC::media_player_get_chapter_count()
 
 }
 
+
+/*! \endcond */
