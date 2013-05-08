@@ -114,7 +114,7 @@ TODO
 ================
 
 Switch license to GPL.
-Write better documentation (especially a javascript API).
+Write better documentation (especially a javascript API) - and fix existing one.
 Express dependency on libvlc version.
 Migrate to libvlc 2.1.
 Verify windows behavior on key and clicks events.
@@ -125,3 +125,4 @@ Package as a QT plugin.
 Find a way to copy plugins over on windows.
 Automatic network fetch on windows? Msys based, if present?
 Fix third-party (OSX) version / fetch (need 2.0.7 and a better system for nightly builds).
+Have bug tests (regression testing on libvlc).
