@@ -113,7 +113,21 @@ though the doc effort is slick right now...
 TODO
 ================
 
-Switch license to GPL.
+Urgent:
+
+Check every platform (windows done).
+Backport hack #2 into jscore.
+
+Medium:
+
+Find a way to copy plugins over on windows.
+Fix third-party (OSX) version / fetch (need 2.0.7 and a better system for nightly builds).
+Automatic network fetch on windows? Msys based, if present?
+Integrate a platform dependent "app packager" for demo in order to ease testing.
+
+Low priority:
+
+Have a way to turn on / off debug messages
 Write better documentation (especially a javascript API) - and fix existing one.
 Express dependency on libvlc version.
 Migrate to libvlc 2.1.
@@ -121,8 +135,8 @@ Verify windows behavior on key and clicks events.
 Finish up and test remaining missing bits (aspectRatio comes to mind).
 Better lib versioning (specially on windows?).
 Investigate the reason msvc crash with shared libs in somes cases.
+Switch license to GPL.
 Package as a QT plugin.
-Find a way to copy plugins over on windows.
-Automatic network fetch on windows? Msys based, if present?
-Fix third-party (OSX) version / fetch (need 2.0.7 and a better system for nightly builds).
 Have bug tests (regression testing on libvlc).
+Enhance build system to detect more efficiently if the system is working.
+Better website for the project.
