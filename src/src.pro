@@ -1,5 +1,5 @@
 TEMPLATE = lib
-QT = core gui webkit webkitwidgets
+QT = core widgets webkit webkitwidgets
 
 DEFINES += LIBROXEEPLAYER_LIBRARY
 

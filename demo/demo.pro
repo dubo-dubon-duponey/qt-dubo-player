@@ -1,5 +1,5 @@
 TEMPLATE = app
-QT = core gui webkit webkitwidgets
+QT = core widgets webkit webkitwidgets
 
 SOURCES +=  $$PWD/main.cpp
 
