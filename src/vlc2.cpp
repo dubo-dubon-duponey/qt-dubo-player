@@ -18,7 +18,7 @@
 
 #include <vlc/vlc.h>
 #include "libroxeeplayer/vlc2.h"
-#include <QDebug>
+//#include <QDebug>
 
 /*! \cond */
 
@@ -45,7 +45,7 @@ struct RoxeeVLC::CheshireCatInstance {
 
 RoxeeVLC::RoxeeVLC( QObject * parent)
     : QObject(parent), smile(new CheshireCatInstance()) {
-    qDebug() << " [RoxeeLibVLC] Cat layer: constructing";
+//    qDebug() << " [RoxeeLibVLC] Cat layer: constructing";
     const char * const vlcArgs[] = {
         "-I", "dummy", /* Don't use any interface */
         "--ignore-config", /* Don't use VLC's config */
@@ -58,11 +58,11 @@ RoxeeVLC::RoxeeVLC( QObject * parent)
         // Do we ever reach here or do we simply throw?
 //        qDebug() << QString::fromLatin1("Could not init libVLC");
     }
-    qDebug() << " [RoxeeLibVLC] Cat layer using VLC " << this->get_version();
+//    qDebug() << " [RoxeeLibVLC] Cat layer using VLC " << this->get_version();
 }
 
 RoxeeVLC::~RoxeeVLC(){
-    qDebug() << " [RoxeeLibVLC] Cat layer: destructing";
+//    qDebug() << " [RoxeeLibVLC] Cat layer: destructing";
     if(smile->player){
         libvlc_media_player_release(smile->player);
         smile->player = 0;
@@ -78,11 +78,11 @@ RoxeeVLC::~RoxeeVLC(){
 RoxeeVLC::RoxeeVLC(const RoxeeVLC& other)
     : QObject(), smile(new CheshireCatInstance(*(other.smile))) {
     // do nothing
-    qDebug() << " [RoxeeLibVLC] Cat layer: copy constructor";
+//    qDebug() << " [RoxeeLibVLC] Cat layer: copy constructor";
 }
 
 RoxeeVLC& RoxeeVLC::operator=(const RoxeeVLC &other) {
-    qDebug() << " [RoxeeLibVLC] Cat layer: copy assignment";
+//    qDebug() << " [RoxeeLibVLC] Cat layer: copy assignment";
     *smile = *(other.smile);
     return* this;
 }
@@ -93,7 +93,7 @@ RoxeeVLC& RoxeeVLC::operator=(const RoxeeVLC &other) {
  */
 RoxeeVLC * RoxeeVLC::Carroll(){
     RoxeeVLC * cat;
-    qDebug() << " [RoxeeLibVLC] Cat layer: carroll";
+//    qDebug() << " [RoxeeLibVLC] Cat layer: carroll";
     cat = this;
     libvlc_retain(smile->instance);
     if(smile->player)
@@ -645,7 +645,7 @@ void RoxeeVLC::video_take_snapshot(const int i, const QString & path)
 // 	Create an empty Media Player object.
 
 void RoxeeVLC::media_player_new(){
-    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_new";
+//    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_new";
     if(smile->player)
         libvlc_media_player_release(smile->player);
     smile->player = libvlc_media_player_new(smile->instance);
@@ -791,7 +791,7 @@ void RoxeeVLC::media_player_new(){
 //LIBVLC_API void 	libvlc_media_player_set_media (libvlc_media_player_t *p_mi, libvlc_media_t *p_md)
 // 	Set the media that will be used by the media_player.
 void RoxeeVLC::media_player_set_media(const QString & path) {
-    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_set_media " << path.toLocal8Bit();
+//    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_set_media " << path.toLocal8Bit();
     libvlc_media_player_set_media(smile->player, libvlc_media_new_path(smile->instance, path.toLocal8Bit()));
 }
 
@@ -799,7 +799,7 @@ void RoxeeVLC::media_player_set_media(const QString & path) {
 // 	Get the media used by the media_player.
 QString RoxeeVLC::media_player_get_media()
 {
-    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_get_media";
+//    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_get_media";
     libvlc_media_t * m = libvlc_media_player_get_media(smile->player);
     if(m){
         return QString::fromUtf8(libvlc_media_get_mrl(m));
@@ -818,14 +818,14 @@ QString RoxeeVLC::media_player_get_media()
 // 	is_playing
 bool RoxeeVLC::media_player_is_playing()
 {
-    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_is_playing";
+//    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_is_playing";
     return libvlc_media_player_is_playing(smile->player);
 }
 
 //LIBVLC_API int 	libvlc_media_player_play (libvlc_media_player_t *p_mi)
 // 	Play.
 void RoxeeVLC::media_player_play() {
-    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_play";
+//    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_play";
     libvlc_media_player_play(smile->player);
 }
 
@@ -836,7 +836,7 @@ void RoxeeVLC::media_player_play() {
 // 	Toggle pause (no effect if there is no media).
 void RoxeeVLC::media_player_pause()
 {
-    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_pause";
+//    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_pause";
     libvlc_media_player_pause(smile->player);
 }
 
@@ -844,7 +844,7 @@ void RoxeeVLC::media_player_pause()
 // 	Stop (no effect if there is no media).
 void RoxeeVLC::media_player_stop()
 {
-    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_stop";
+//    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_stop";
     libvlc_media_player_stop(smile->player);
 }
 
@@ -873,7 +873,7 @@ void RoxeeVLC::media_player_stop()
 //LIBVLC_API void * 	libvlc_media_player_get_hwnd (libvlc_media_player_t *p_mi)
 // 	Get the Windows API window handle (HWND) previously set with libvlc_media_player_set_hwnd().
 void RoxeeVLC::media_player_set_window(void * id) {
-    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_set_window";
+//    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_set_window";
 #if defined ( Q_OS_MAC )
     libvlc_media_player_set_nsobject( smile->player, (void *) id );
 #elif defined ( Q_OS_UNIX )
@@ -898,7 +898,7 @@ void RoxeeVLC::media_player_set_window(void * id) {
 // 	Get the current movie length (in ms).
 int RoxeeVLC::media_player_get_length()
 {
-    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_get_length";
+//    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_get_length";
     return libvlc_media_player_get_length(smile->player);
 }
 
@@ -914,7 +914,7 @@ int RoxeeVLC::media_player_get_time()
 // 	Set the movie time (in ms).
 void RoxeeVLC::media_player_set_time(const int & time)
 {
-    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_set_time";
+//    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_set_time";
     libvlc_media_player_set_time(smile->player, time);
 }
 
@@ -930,7 +930,7 @@ float RoxeeVLC::media_player_get_position()
 // 	Set movie position as percentage between 0.0 and 1.0.
 void RoxeeVLC::media_player_set_position(const float & pos)
 {
-    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_set_position";
+//    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_set_position";
     libvlc_media_player_set_position(smile->player, pos);
 }
 
@@ -938,7 +938,7 @@ void RoxeeVLC::media_player_set_position(const float & pos)
 // 	Set movie chapter (if applicable).
 void RoxeeVLC::media_player_set_chapter(const int & chap)
 {
-    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_set_chapter";
+//    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_set_chapter";
     libvlc_media_player_set_chapter(smile->player, chap);
 }
 
@@ -946,7 +946,7 @@ void RoxeeVLC::media_player_set_chapter(const int & chap)
 // 	Get movie chapter.
 int RoxeeVLC::media_player_get_chapter()
 {
-    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_get_chapter";
+//    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_get_chapter";
     return libvlc_media_player_get_chapter(smile->player);
 }
 
@@ -954,7 +954,7 @@ int RoxeeVLC::media_player_get_chapter()
 // 	Get movie chapter count.
 int RoxeeVLC::media_player_get_chapter_count()
 {
-    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_get_chapter_count";
+//    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_get_chapter_count";
     return libvlc_media_player_get_chapter_count(smile->player);
 }
 

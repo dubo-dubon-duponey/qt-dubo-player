@@ -21,7 +21,7 @@
 
 #include "libroxeeplayer/simpleplayer.h"
 
-#include <QDebug>
+//#include <QDebug>
 #include <QGridLayout>
 
 
@@ -38,12 +38,12 @@ namespace RoxeePlayer{
 WebPluginFactory::WebPluginFactory(QObject *parent) :
     QWebPluginFactory(parent)
 {
-    qDebug() << " [RoxeeLibVLC] PluginFactory: constructor";
+//    qDebug() << " [RoxeeLibVLC] PluginFactory: constructor";
 }
 
 QList<QWebPluginFactory::Plugin> WebPluginFactory::plugins () const
 {
-    qDebug() << " [RoxeeLibVLC] PluginFactory: get plugins";
+//    qDebug() << " [RoxeeLibVLC] PluginFactory: get plugins";
     QWebPluginFactory::MimeType mimeType;
     mimeType.name = QString::fromLatin1("video/x-roxee");
     mimeType.description = QString::fromLatin1("Roxee");
@@ -62,12 +62,12 @@ QList<QWebPluginFactory::Plugin> WebPluginFactory::plugins () const
 
 void WebPluginFactory::refreshPlugins ()
 {
-    qDebug() << " [RoxeeLibVLC]  PluginFactory: refresh plugins";
+//    qDebug() << " [RoxeeLibVLC]  PluginFactory: refresh plugins";
 }
 
 QObject * WebPluginFactory::create ( const QString & mimeType, const QUrl & url, const QStringList & /*argumentNames*/, const QStringList & /*argumentValues*/ ) const
 {
-    qDebug() << " [RoxeeLibVLC]  PluginFactory: create plugin for mimetype";
+//    qDebug() << " [RoxeeLibVLC]  PluginFactory: create plugin for mimetype";
 
     if(mimeType != QString::fromLatin1("video/x-roxee"))
         return 0;

@@ -18,8 +18,6 @@
 
 #include "libroxeeplayer/simpleplayer.h"
 
-#include <QDebug>
-
 /*! \cond */
 
 namespace RoxeePlayer{
@@ -29,8 +27,6 @@ SimplePlayer::SimplePlayer(QWidget *parent) :
 {
     RoxeeVLC * rvlc = new RoxeeVLC(this);
     rvlc->media_player_new();
-
-    qDebug() << " [RoxeeLibVLC] {Player}: single player constructor";
 
 #if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
     this->setAttribute(Qt::WA_NativeWindow, true);

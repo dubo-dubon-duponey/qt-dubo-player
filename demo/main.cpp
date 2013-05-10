@@ -19,6 +19,7 @@
 #include <QApplication>
 #include <QWebView>
 #include <QWebInspector>
+#include <QDebug>
 
 #include <libroxeeplayer/simpleplayer.h>
 #include <libroxeeplayer/webpluginfactory.h>
@@ -34,6 +35,24 @@ int main(int argc, char *argv[])
 
     player->mediaPlayer()->setMedia("http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4");
     player->mediaPlayer()->play();
+
+    qDebug() << player->root()->getName();
+    qDebug() << player->root()->getBuildType();
+    qDebug() << player->root()->getLinkType();
+    qDebug() << player->root()->getQt();
+    qDebug() << player->root()->getVendor();
+    qDebug() << player->root()->getVersion();
+    qDebug() << player->root()->getRevision();
+    qDebug() << player->root()->getChangeset();
+
+    qDebug() << player->root()->getLibName();
+    qDebug() << player->root()->getLibVersion();
+    qDebug() << player->root()->getLibRevision();
+
+    qDebug() << player->core()->getCompiler();
+    qDebug() << player->core()->getAudioFilterList();
+    qDebug() << player->core()->getVideoFilterList();
+
 
     // As a plugin inside HTML
     QWebSettings::globalSettings()->setAttribute(QWebSettings::JavascriptEnabled, true);

@@ -18,8 +18,6 @@
 
 #include "libroxeeplayer/videocontrol.h"
 
-#include <QDebug>
-
 /*! \cond */
 
 using namespace RoxeePlayer;
