@@ -30,14 +30,13 @@ LGPL (same as libvlc).
 For the impatients
 ================
 
-Open qt-roxeeplayer.pro with QtCreator.
+Edit src/config/$PLATFORM.pri (win, mac, other) and point the ROXEE_EXTERNAL variable to your vlc sdk folder lives (OSX users can use
+the SDK automatically fetched from the network instead, and Linux user should just apt-get libvlc-dev).
 
-Edit src/config/$PLATFORM.pri (win, mac, other) and point the ROXEE_EXTERNAL variable to your vlc sdk folder lives (OSX users don't need to do that
-as the SDK is fetched over the network magically).
+qmake
+make
 
-Then nuild.
-
-Then run the demo.
+Run.
 
 ================
 Doesn't work?
