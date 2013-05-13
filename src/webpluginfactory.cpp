@@ -75,7 +75,7 @@ QObject * WebPluginFactory::create ( const QString & mimeType, const QUrl & url,
     RoxeePlayer::SimplePlayer * inner  = new RoxeePlayer::SimplePlayer();// QString::fromLatin1("whatever")
     inner->mediaPlayer()->setMedia(url.toString());
 
-    inner->setAutoFillBackground(true);
+//    inner->setAutoFillBackground(true);
     inner->setMouseTracking(true);
 
     return inner;
