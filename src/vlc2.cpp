@@ -858,12 +858,12 @@ bool RoxeeVLC::vlm_play_media(const QString & broadcastName) {
 
 //http://stackoverflow.com/questions/6449226/how-to-stream-from-vlc-linux-to-ipod-with-web-service-complete-process
 
-    //#transcode{\
-//        vcodec=h264,venc=x264{\
-//            aud,profile=baseline,level=30,keyint=30,bframes=0,ref=1,nocabac\
-//        },\
-//        acodec=mp4a,ab=56,deinterlace\
-//    }:\
+    //#transcode{
+//        vcodec=h264,venc=x264{
+//            aud,profile=baseline,level=30,keyint=30,bframes=0,ref=1,nocabac
+//        },
+//        acodec=mp4a,ab=56,deinterlace
+//    }:
 //    duplicate{dst=std{access=file,mux=ts,dst=-}}
 
     // http://confluence.codewave.de/display/mytunesrss/Using+VLC+for+transcoding,+HTTP+live+streaming+and+remote+control
