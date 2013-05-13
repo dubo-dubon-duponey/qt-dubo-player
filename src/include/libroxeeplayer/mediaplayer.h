@@ -58,7 +58,8 @@ public:
     Q_INVOKABLE void stop();
     /*! \brief Pause */
     Q_INVOKABLE void pause();
-
+    /*! \brief Preliminary broadcast support */
+    Q_INVOKABLE void experimental(const QString & broadcastName, const QString &path, const QString & args);
 
     /*! \cond */
     QString media();
@@ -73,6 +74,8 @@ public:
     void setChapter(const int & chap);
     int chapterCount();
     /*! \endcond */
+
+
 
 signals:
 

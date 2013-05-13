@@ -118,6 +118,11 @@ public:
 
     void video_take_snapshot(const int i, const QString & path);
 
+
+    bool vlm_play_media(const QString & broadcastName);
+    bool vlm_add_broadcast(const QString & broadcastName, const QString & path, const QString & args);
+
+
 };
 
 }

@@ -32,6 +32,13 @@ MediaPlayer::MediaPlayer(RoxeeVLC * rvlc, QObject *parent) :
     this->vlc = rvlc;
 }
 
+// XXX experimental
+void MediaPlayer::experimental(const QString & broadcastName, const QString &path, const QString & args)
+{
+    vlc->vlm_add_broadcast(broadcastName, path, args);
+    vlc->vlm_play_media(broadcastName);
+}
+
 void MediaPlayer::setMedia(const QString &path)
 {
     QUrl * u = new QUrl(path);

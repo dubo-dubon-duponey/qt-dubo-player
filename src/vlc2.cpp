@@ -795,6 +795,120 @@ void RoxeeVLC::media_player_set_media(const QString & path) {
     libvlc_media_player_set_media(smile->player, libvlc_media_new_path(smile->instance, path.toLocal8Bit()));
 }
 
+/**
+ * Add a broadcast, with one input.
+ *
+ * \param p_instance the instance
+ * \param psz_name the name of the new broadcast
+ * \param psz_input the input MRL
+ * \param psz_output the output MRL (the parameter to the "sout" variable)
+ * \param i_options number of additional options
+ * \param ppsz_options additional options
+ * \param b_enabled boolean for enabling the new broadcast
+ * \param b_loop Should this broadcast be played in loop ?
+ * \return 0 on success, -1 on error
+ */
+
+bool RoxeeVLC::vlm_add_broadcast(const QString & broadcastName, const QString & path, const QString & args) {
+    int err = libvlc_vlm_add_broadcast(
+        smile->instance,
+        broadcastName.toLocal8Bit(),
+        path.toLocal8Bit(),
+        // mp4a
+        //
+        // rtp{sdp=rtsp://:8080/}
+//        "#transcode{vcodec=h264,vb=0,scale=0,acodec=mp4a,ab=56}:http{mux=ts,dst=:8080/}",
+        args.toLocal8Bit(),
+        0,
+        NULL,
+        1,
+        0
+    );
+    if(err == -1)
+        return false;
+    return true;
+}
+
+/**
+ * Play the named broadcast.
+ *
+ * \param p_instance the instance
+ * \param psz_name the name of the broadcast
+ * \return 0 on success, -1 on error
+ */
+bool RoxeeVLC::vlm_play_media(const QString & broadcastName) {
+    int err = libvlc_vlm_play_media(smile->instance, broadcastName.toLocal8Bit());
+    if(err == -1)
+        return false;
+    return true;
+}
+
+// http://www.videolan.org/doc/streaming-howto/en/ch04.html#id349864
+
+    //    LIBVLC_API int libvlc_vlm_add_broadcast	(	libvlc_instance_t * 	p_instance,
+    //    const char * 	psz_name,
+    //    const char * 	psz_input,
+    //    const char * 	psz_output,
+    //    int 	i_options,
+    //    const char *const * 	ppsz_options,
+    //    int 	b_enabled,
+    //    int 	b_loop
+    //    )
+
+
+//http://stackoverflow.com/questions/6449226/how-to-stream-from-vlc-linux-to-ipod-with-web-service-complete-process
+
+    //#transcode{\
+//        vcodec=h264,venc=x264{\
+//            aud,profile=baseline,level=30,keyint=30,bframes=0,ref=1,nocabac\
+//        },\
+//        acodec=mp4a,ab=56,deinterlace\
+//    }:\
+//    duplicate{dst=std{access=file,mux=ts,dst=-}}
+
+    // http://confluence.codewave.de/display/mytunesrss/Using+VLC+for+transcoding,+HTTP+live+streaming+and+remote+control
+
+// "" -I rc dshow:// vdev="XSplitBroadcaster" adev="XSplitBroadcaster" size="1280x720"
+
+//    --sout=#transcode{width=1280,height=720,fps=25,vcodec=h264,vb=256,venc=x264{aud,profile=baseline,level=30,keyint=30,ref=1},
+//            acodec=mp3,ab=96,channels=2}:std{access=livehttp{seglen=10,delsegs=true,numsegs=5,index=C:\inetpub\wwwroot\stream\stream.m3u8,index-url=http://dennis/stream/stream-########.ts},
+//            mux=ts{use-key-frames},dst=C:\inetpub\wwwroot\stream\stream-########.ts}
+
+
+//    libvlc_vlm_add_broadcast(
+//                smile->instance,
+//                "raymon",
+//                path.toLocal8Bit(),
+//                // mp4a
+//                //
+//                // rtp{sdp=rtsp://:8080/}
+
+//                "#transcode{vcodec=h264,vb=0,scale=0,acodec=mp4a,ab=56}:http{mux=ts,dst=:8080/}",
+//                0,
+//                NULL,
+//                1,
+//                0
+//                );
+
+
+    // WORKS WITH VLC    CLIENT
+//        libvlc_vlm_add_broadcast(
+//                    smile->instance,
+//                    "raymon",
+//                    path.toLocal8Bit(),
+//                    // mp4a
+//                    //
+//                    // rtp{sdp=rtsp://:8080/}
+
+// //                   "#transcode{vcodec=h264,vb=0,scale=0,acodec=aac,ab=128,channels=2,samplerate=44100}:http{mux=ts,dst=:8080/}",
+//                    "#transcode{vcodec=h264,vb=0,scale=0,acodec=mp3,ab=128,channels=2,samplerate=44100}:http{mux=ts,dst=:8080/}",
+//                    0,
+//                    NULL,
+//                    1,
+//                    0
+//                    );
+//        libvlc_vlm_play_media(smile->instance, "raymon");
+
 //LIBVLC_API libvlc_media_t * 	libvlc_media_player_get_media (libvlc_media_player_t *p_mi)
 // 	Get the media used by the media_player.
 QString RoxeeVLC::media_player_get_media()
@@ -825,7 +939,8 @@ bool RoxeeVLC::media_player_is_playing()
 //LIBVLC_API int 	libvlc_media_player_play (libvlc_media_player_t *p_mi)
 // 	Play.
 void RoxeeVLC::media_player_play() {
-//    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_play";
+
+    //    qDebug() << " [RoxeeLibVLC] Cat layer: media_player_play";
     libvlc_media_player_play(smile->player);
 }
 
