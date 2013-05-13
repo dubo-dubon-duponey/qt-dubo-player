@@ -21,6 +21,7 @@ window.addEventListener('load', function(){
 // Dynamically inserted DOMNode
     var video2 = document.createElement('object');
     video2.setAttribute('type', 'video/x-roxee');
+    video2.setAttribute('autofill', 'autofill');
     // Be sure to set (any) flexible dimensions BEFORE inserting into DOM
     video2.style.width = '100%';
     document.body.appendChild(video2);

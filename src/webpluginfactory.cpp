@@ -65,7 +65,7 @@ void WebPluginFactory::refreshPlugins ()
 //    qDebug() << " [RoxeeLibVLC]  PluginFactory: refresh plugins";
 }
 
-QObject * WebPluginFactory::create ( const QString & mimeType, const QUrl & url, const QStringList & /*argumentNames*/, const QStringList & /*argumentValues*/ ) const
+QObject * WebPluginFactory::create ( const QString & mimeType, const QUrl & url, const QStringList & argumentNames, const QStringList & /* argumentValues */ ) const
 {
 //    qDebug() << " [RoxeeLibVLC]  PluginFactory: create plugin for mimetype";
 
@@ -75,7 +75,9 @@ QObject * WebPluginFactory::create ( const QString & mimeType, const QUrl & url,
     RoxeePlayer::SimplePlayer * inner  = new RoxeePlayer::SimplePlayer();// QString::fromLatin1("whatever")
     inner->mediaPlayer()->setMedia(url.toString());
 
-//    inner->setAutoFillBackground(true);
+    if(argumentNames.contains("autofill")){
+        inner->setAutoFillBackground(true);
+    }
     inner->setMouseTracking(true);
 
     return inner;
