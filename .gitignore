@@ -1,0 +1,12 @@
+Makefile*
+buildd/
+.DS_Store
+*.pro.user
+buildd*
+
+*.Release
+*.Debug
+*.app
+*.dmg
+*.zip
+vc100.pdb

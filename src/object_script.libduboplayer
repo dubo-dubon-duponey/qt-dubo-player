@@ -1,0 +1,16 @@
+CREATE /Users/dmp/Projects/runners/webroxer/buildd/win/i686-w64-mingw32.static-gcc-qt4.8-static-release/lib/libduboplayer.a
+ADDMOD /Users/dmp/Projects/runners/webroxer/buildd/win-tmp/i686-w64-mingw32.static-gcc-qt4.8-static-release/duboplayer/obj/root.o
+ADDMOD /Users/dmp/Projects/runners/webroxer/buildd/win-tmp/i686-w64-mingw32.static-gcc-qt4.8-static-release/duboplayer/obj/core.o
+ADDMOD /Users/dmp/Projects/runners/webroxer/buildd/win-tmp/i686-w64-mingw32.static-gcc-qt4.8-static-release/duboplayer/obj/mediaplayer.o
+ADDMOD /Users/dmp/Projects/runners/webroxer/buildd/win-tmp/i686-w64-mingw32.static-gcc-qt4.8-static-release/duboplayer/obj/simpleplayer.o
+ADDMOD /Users/dmp/Projects/runners/webroxer/buildd/win-tmp/i686-w64-mingw32.static-gcc-qt4.8-static-release/duboplayer/obj/audiocontrol.o
+ADDMOD /Users/dmp/Projects/runners/webroxer/buildd/win-tmp/i686-w64-mingw32.static-gcc-qt4.8-static-release/duboplayer/obj/videocontrol.o
+ADDMOD /Users/dmp/Projects/runners/webroxer/buildd/win-tmp/i686-w64-mingw32.static-gcc-qt4.8-static-release/duboplayer/obj/vlc2.o
+ADDMOD /Users/dmp/Projects/runners/webroxer/buildd/win-tmp/i686-w64-mingw32.static-gcc-qt4.8-static-release/duboplayer/obj/moc_core.o
+ADDMOD /Users/dmp/Projects/runners/webroxer/buildd/win-tmp/i686-w64-mingw32.static-gcc-qt4.8-static-release/duboplayer/obj/moc_root.o
+ADDMOD /Users/dmp/Projects/runners/webroxer/buildd/win-tmp/i686-w64-mingw32.static-gcc-qt4.8-static-release/duboplayer/obj/moc_simpleplayer.o
+ADDMOD /Users/dmp/Projects/runners/webroxer/buildd/win-tmp/i686-w64-mingw32.static-gcc-qt4.8-static-release/duboplayer/obj/moc_mediaplayer.o
+ADDMOD /Users/dmp/Projects/runners/webroxer/buildd/win-tmp/i686-w64-mingw32.static-gcc-qt4.8-static-release/duboplayer/obj/moc_audiocontrol.o
+ADDMOD /Users/dmp/Projects/runners/webroxer/buildd/win-tmp/i686-w64-mingw32.static-gcc-qt4.8-static-release/duboplayer/obj/moc_videocontrol.o
+ADDMOD /Users/dmp/Projects/runners/webroxer/buildd/win-tmp/i686-w64-mingw32.static-gcc-qt4.8-static-release/duboplayer/obj/moc_vlc2.o
+SAVE

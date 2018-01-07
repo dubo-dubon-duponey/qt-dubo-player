@@ -1,0 +1,39 @@
+<html>
+<head>
+<!-- Contain various hacks to workaround platform limitations -->
+<script type="text/javascript" src="qrc:/hack.js"></script>
+</head>
+<body>
+<div id="container" style="position: absolute; top: 210px; left: 10px; bottom: 10px; right: 10px;">
+    <object id="video1" style="width: 100%; height: 50%;" type="video/x-dubo" style="border: 1px solid red" data="http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4"></object>
+</div>
+
+<script>
+
+window.addEventListener('load', function(){
+/*
+    Explore video.media, video.audio, video.video for the exposed API
+*/
+// Already inserted DOM node
+    var video1 = document.getElementById('video1');
+    video1.media.play();
+
+// Dynamically inserted DOMNode
+    var video2 = document.createElement('object');
+    video2.setAttribute('type', 'video/x-dubo');
+    video2.setAttribute('autofill', 'autofill');
+    // Be sure to set (any) flexible dimensions BEFORE inserting into DOM
+    video2.style.width = '100%';
+    document.body.appendChild(video2);
+    // The API will be made available once inserted in the DOM, and IF DISPLAYED
+    video2.media.media = 'http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4';
+    video2.media.play();
+
+}, true);
+
+
+
+</script>
+</body>
+</html>
+

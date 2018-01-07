@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>video.html</file>
+        <file>hack.js</file>
+    </qresource>
+</RCC>
