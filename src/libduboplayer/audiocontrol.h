@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Copyright (c) 2018, Dubo Dubon Duponey <dubodubonduponey@gmail.com>
+ * Copyright (c) 2018, Dubo Dubon Duponey <dubodubonduponey+github@pm.me>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -19,12 +19,12 @@
 #ifndef DUBOPLAYER_AUDIOCONTROLS_H
 #define DUBOPLAYER_AUDIOCONTROLS_H
 
-#include "libduboplayer_global.h"
+#include "global.h"
 
 #include <QObject>
 #include <QStringList>
 
-#include "libduboplayer/vlc2.h"
+#include "vlc2.h"
 
 namespace DuboPlayer
 {
@@ -34,7 +34,7 @@ class LIBDUBOPLAYERSHARED_EXPORT AudioControls : public QObject
     Q_OBJECT
 public:
     /*! \cond */
-    explicit AudioControls(DuboVLC * rvlc, QObject *parent = 0);
+    explicit AudioControls(DuboVLC * rvlc, QObject * parent = nullptr);
     /*! \endcond */
 
     /*! \brief Toggle mute */

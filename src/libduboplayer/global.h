@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Copyright (c) 2012, WebItUp <contact@webitup.fr>
+ * Copyright (c) 2018, Dubo Dubon Duponey <dubodubonduponey+github@pm.me>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -16,10 +16,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-#ifndef DUBOPLAYER_LIBDUBOPLAYER_GLOBAL_H
-#define DUBOPLAYER_LIBDUBOPLAYER_GLOBAL_H
+#ifndef DUBOPLAYER_GLOBAL_H
+#define DUBOPLAYER_GLOBAL_H
 
-#include <QtCore/qglobal.h>
+#include <QtGlobal>
 
 #if defined(LIBDUBOPLAYER_USE_STATIC)
 #  define LIBDUBOPLAYERSHARED_EXPORT
@@ -29,4 +29,4 @@
 #  define LIBDUBOPLAYERSHARED_EXPORT Q_DECL_IMPORT
 #endif
 
-#endif // DUBOPLAYER_LIBDUBOPLAYER_GLOBAL_H
+#endif // DUBOPLAYER_GLOBAL_H

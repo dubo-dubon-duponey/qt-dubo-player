@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Copyright (c) 2018, Dubo Dubon Duponey <dubodubonduponey@gmail.com>
+ * Copyright (c) 2018, Dubo Dubon Duponey <dubodubonduponey+github@pm.me>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -21,13 +21,13 @@
 #ifdef DUBO_WITH_WEBKIT
 #include <QWebView>
 #include <QWebInspector>
-#include <libduboplayer/webpluginfactory.h>
+#include "libduboplayer/webpluginfactory.h"
 /*#else
 #include <QWebEngineView>
 #include <QWebEngineSettings>*/
 #endif
 
-#include <libduboplayer/simpleplayer.h>
+#include "libduboplayer/simpleplayer.h"
 
 int main(int argc, char *argv[])
 {

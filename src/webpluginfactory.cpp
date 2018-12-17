@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Copyright (c) 2018, Dubon Dubon Duponey <dubodubonduponey@gmail.com>
+ * Copyright (c) 2018, Dubon Dubon Duponey <dubodubonduponey+github@pm.me>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by

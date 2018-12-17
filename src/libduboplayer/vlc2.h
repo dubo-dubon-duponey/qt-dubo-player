@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Copyright (c) 2018, Dubo Dubon Duponey <dubodubonduponey@gmail.com>
+ * Copyright (c) 2018, Dubo Dubon Duponey <dubodubonduponey+github@pm.me>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -36,7 +36,7 @@ signals:
     void notify(const QString & type);
 
 public:
-    explicit DuboVLC(QObject * parent = 0);                         // Constructor
+    explicit DuboVLC(QObject * parent = nullptr);                         // Constructor
     explicit DuboVLC(const DuboVLC&);            // Copy constructor
     DuboVLC& operator=(const DuboVLC&); // Copy assignment operator
     ~DuboVLC();                        // Destructor

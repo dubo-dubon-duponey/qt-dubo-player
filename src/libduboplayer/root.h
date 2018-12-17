@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Copyright (c) 2018, Dubo Dubon Duponey <dubodubonduponey@gmail.com>
+ * Copyright (c) 2018, Dubo Dubon Duponey <dubodubonduponey+github@pm.me>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -19,7 +19,8 @@
 #ifndef DUBOPLAYER_ROOT_H
 #define DUBOPLAYER_ROOT_H
 
-#include "libduboplayer_global.h"
+#include "global.h"
+
 #include <QObject>
 
 /*!
@@ -54,29 +55,29 @@ class LIBDUBOPLAYERSHARED_EXPORT Root: public QObject {
     Q_OBJECT
 public:
     /*! \brief The name of the library.*/
-    Q_PROPERTY(const QString DUBO_NAME READ getName)
+    Q_PROPERTY(const QString NAME READ getName CONSTANT)
     /*! \brief The name of the vendor.*/
-    Q_PROPERTY(const QString DUBO_VENDOR READ getVendor)
+    Q_PROPERTY(const QString VENDOR READ getVendor CONSTANT)
     /*! \brief The version of the library.*/
-    Q_PROPERTY(const QString DUBO_VERSION READ getVersion)
+    Q_PROPERTY(const QString VERSION READ getVersion CONSTANT)
     /*! \brief The (git) revision of the library.*/
-    Q_PROPERTY(const QString DUBO_REVISION READ getRevision)
+    Q_PROPERTY(const QString REVISION READ getRevision CONSTANT)
     /*! \brief The (git) changeset of the library.*/
-    Q_PROPERTY(const QString DUBO_CHANGESET READ getChangeset)
+    Q_PROPERTY(const QString CHANGESET READ getChangeset CONSTANT)
 
     /*! \brief The build type (release / debug of the library).*/
-    Q_PROPERTY(const QString DUBO_BUILD READ getBuildType)
+    Q_PROPERTY(const QString BUILD READ getBuildType CONSTANT)
     /*! \brief The type of the library (static / dynamic).*/
-    Q_PROPERTY(const QString DUBO_LINK READ getLinkType)
+    Q_PROPERTY(const QString LINK READ getLinkType CONSTANT)
     /*! \brief QT Version used to build.*/
-    Q_PROPERTY(const QString DUBO_QT READ getQt)
+    Q_PROPERTY(const QString QT READ getQt CONSTANT)
 
     /*! \brief The nameof the underlying player library.*/
-    Q_PROPERTY(const QString PLUGIN_NAME READ getLibName)
+    Q_PROPERTY(const QString PLUGIN_NAME READ getLibName CONSTANT)
     /*! \brief The version of the underlying player library.*/
-    Q_PROPERTY(const QString PLUGIN_VERSION READ getLibVersion)
+    Q_PROPERTY(const QString PLUGIN_VERSION READ getLibVersion CONSTANT)
     /*! \brief The revision of the underlying player library.*/
-    Q_PROPERTY(const QString PLUGIN_REVISION READ getLibRevision)
+    Q_PROPERTY(const QString PLUGIN_REVISION READ getLibRevision CONSTANT)
 
     /*! \cond */
     const QString getName();

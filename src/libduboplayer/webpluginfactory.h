@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Copyright (c) 2018, Dubo Dubon Duponey <dubodubonduponey@gmail.com>
+ * Copyright (c) 2018, Dubo Dubon Duponey <dubodubonduponey+github@pm.me>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -19,7 +19,7 @@
 #ifndef DUBOPLAYER_WEBPLUGINFACTORY_H
 #define DUBOPLAYER_WEBPLUGINFACTORY_H
 
-#include "libduboplayer_global.h"
+#include "global.h"
 
 #include <QWebPluginFactory>
 #include <QList>
@@ -35,7 +35,7 @@ class LIBDUBOPLAYERSHARED_EXPORT WebPluginFactory : public QWebPluginFactory
     Q_OBJECT
 public:
     /*! \brief. See QWebPluginFactory. */
-    explicit WebPluginFactory(QObject *parent = 0);
+    explicit WebPluginFactory(QObject * parent = nullptr);
 
     /*! \cond */
     virtual QList<QWebPluginFactory::Plugin> plugins() const;

@@ -1,6 +1,4 @@
-================
-DuboPlayer
-================
+# Player
 
 DuboPlayer is a thin layer library on top of libvlc that exposes a QT-ified (scriptable) API for it.
 
@@ -20,15 +18,11 @@ There exist at least two other implementations with a somewhat similar purpose (
 - https://bitbucket.org/trollixx/qtvlc/
 - https://github.com/ntadej/vlc-qt/tree/master/src/core
 
-================
-License
-================
+## License
 
 LGPL (same as libvlc).
 
-================
-For the impatients
-================
+## TL;DR
 
 qmake
 make
@@ -39,16 +33,12 @@ By default, this build against a network fetched vlc (OSX), the system installed
 If you want to build against a specific vlc version, edit src/config/$PLATFORM.pri (win, mac, other) and point the DUBO_EXTERNAL
 variable to where your vlc sdk folder lives.
 
-================
-Doesn't work?
-================
+## Doesn't work?
 
 Failure to start your application, or vlc complaining about "plugins", usually means it can't find either libvlc, or the plugins folder.
 You need to ensure both are in the library output folder.
 
-================
-Build details
-================
+## Build details
 
 Inside src/config/$PLATFORM.pri, you may additionally pick an output build folder (DUBO_DESTDIR),
 
@@ -59,9 +49,7 @@ By default, the project builds a shared library on OSX and Other, and a static o
 Note that any of these variables (DUBO_*) may be overriden from the environment.
 eg: DUBO_LINK_TYPE=static qmake CONFIG+=debug
 
-================
-How to create your own application
-================
+## How to create your own application
 
 Check your build dir ("buildd", by default).
 You will find a lib and include folder.
@@ -76,18 +64,14 @@ There are two ways to use it, mainly:
 - use the SimplePlayer class, which is a QWidget
 - use the WebPlugin factory if you want an html-usable plugin.
 
-================
-About that "third-party" folder
-================
+## About that "third-party" folder
 
 On OSX, ./bootstrap.sh is called and does fetch VLC *binary* release to be linked by the project.
 
 BE AWARE that no verification of any sort is performed on the retrieved binary, and that it is fetched over
 unencrypted http. You really shouldn't *release* anything using that method if you give a fuck.
 
-================
-Caveats and compatibility.
-================
+## Caveats and compatibility.
 
 On windows, for the WebPlugin:
 - QT 5.0.2: the WebPlugin will crash if your object tag has a dynamic size. Sounds like a QtWebKit bug...
@@ -100,15 +84,11 @@ Mixing mingw-vlc and msvc is a kinky idea anyhow...
 But maybe investigate QMAKE_LFLAGS_RELEASE += /DEBUG
 - QT 4.8, msvc (not sure about mingw): the WebPlugin doesn't work at all, due to qtwebkit/qt limitations
 
-================
-API
-================
+## API
 
 Doxygen documentation should be generated as part of the build if you have the doxygen binary, though the doc effort is slick right now...
 
-================
-TODO
-================
+## TODO
 
 Urgent:
 

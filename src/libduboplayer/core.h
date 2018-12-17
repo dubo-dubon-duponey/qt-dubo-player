@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Copyright (c) 2018, Dubo Dubon Duponey <dubodubonduponey@gmail.com>
+ * Copyright (c) 2018, Dubo Dubon Duponey <dubodubonduponey+github@pm.me>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -19,11 +19,11 @@
 #ifndef DUBOPLAYER_CORE_H
 #define DUBOPLAYER_CORE_H
 
-#include "libduboplayer_global.h"
-#include "libduboplayer/vlc2.h"
+#include "global.h"
+#include "vlc2.h"
 
-#include <QtCore/qobject.h>
-#include <QtCore/qstringlist.h>
+#include <QObject>
+#include <QStringlist.h>
 
 namespace DuboPlayer{
 
@@ -33,7 +33,7 @@ class LIBDUBOPLAYERSHARED_EXPORT Core : public QObject
     Q_OBJECT
 public:
     /*! \brief Should be created by passing a reference to the shadowed libvlc object. */
-    explicit Core(DuboVLC * rvlc, QObject *parent = 0);
+    explicit Core(DuboVLC * rvlc, QObject * parent = nullptr);
 
     /*! \brief Allows to control the UA string that will be set for http streams retrieval. */
     Q_INVOKABLE void setUserAgent(const QString &appName, const QString &appVersion);

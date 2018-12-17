@@ -23,11 +23,11 @@ contains(DUBO_LINK_TYPE, static){
     DEFINES += LIBDUBOPLAYER_USE_STATIC
 }
 
-copyToDestdir($$PWD/lib$${TARGET}/*, $$DESTDIR/../include/lib$${TARGET})
+copyToDestdir($$PWD/lib$${TARGET}/*.h, $$DESTDIR/../include/lib$${TARGET})
 copyToDestdir($$PWD/../res/redist/*, $$DESTDIR/../share/lib$${TARGET})
 
 HEADERS += \
-    $$PWD/lib$${TARGET}/lib$${TARGET}_global.h \
+    $$PWD/lib$${TARGET}/global.h \
     $$PWD/lib$${TARGET}/core.h \
     $$PWD/lib$${TARGET}/root.h \
     $$PWD/lib$${TARGET}/simpleplayer.h \
