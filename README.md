@@ -1,4 +1,4 @@
-# Player
+# DuboPlayer
 
 DuboPlayer is a thin layer library on top of libvlc that exposes a QT-ified (scriptable) API for it.
 

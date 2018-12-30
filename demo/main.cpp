@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Copyright (c) 2018, Dubo Dubon Duponey <dubodubonduponey+github@pm.me>
+ * Copyright (c) 2019, Dubo Dubon Duponey <dubodubonduponey+github@pm.me>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -18,14 +18,6 @@
 
 #include <QApplication>
 #include <QDebug>
-#ifdef DUBO_WITH_WEBKIT
-#include <QWebView>
-#include <QWebInspector>
-#include "libduboplayer/webpluginfactory.h"
-/*#else
-#include <QWebEngineView>
-#include <QWebEngineSettings>*/
-#endif
 
 #include "libduboplayer/simpleplayer.h"
 
@@ -60,21 +52,9 @@ int main(int argc, char *argv[])
 
 
     // As a plugin inside HTML
-#ifdef DUBO_WITH_WEBKIT
-    QWebSettings::globalSettings()->setAttribute(QWebSettings::JavascriptEnabled, true);
-    QWebSettings::globalSettings()->setAttribute(QWebSettings::PluginsEnabled, true);
-    QWebSettings::globalSettings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
-    QWebView *view = new QWebView();
-    new QWebInspector( view );
-    DuboPlayer::WebPluginFactory * factory = new DuboPlayer::WebPluginFactory( view );
-    view->page()->setPluginFactory(factory);
-    view->load(QUrl("qrc:/video.html"));
-    view->show();
-#else
 /*    QWebEngineView *view = new QWebEngineView();
     view->settings()->setAttribute(QWebEngineSettings::JavascriptEnabled, true);
     view->settings()->setAttribute(QWebEngineSettings::PluginsEnabled, true);*/
-#endif
 
     int a = app.exec();
     return a;

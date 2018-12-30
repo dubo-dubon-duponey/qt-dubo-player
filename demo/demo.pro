@@ -1,25 +1,36 @@
 TEMPLATE = app
-QT = core widgets
+QT = core widgets webengine webenginewidgets webchannel
 
 PROJECT_ROOT = $$PWD/..
 include($$PROJECT_ROOT/config/qmakeitup.pri)
-
-renv=$$(DUBO_WITH_WEBKIT)
-!isEmpty(renv){
-    DUBO_WITH_WEBKIT = $$renv
-}
-isEqual(DUBO_WITH_WEBKIT, true) {
-    QT += webkit webkitwidgets
-    DEFINES += DUBO_WITH_WEBKIT=true
-}
 
 INCLUDEPATH += $$PWD
 
 LIBS += -l$${DUBO_LINK_NAME}
 
 contains(DUBO_LINK_TYPE, static){
-    # Define that if you want to use it statically (msvc at least)
     DEFINES += LIBDUBOPLAYER_USE_STATIC
+}
+
+SOURCES += $$PWD/main.cpp
+RESOURCES += $$PWD/demo.qrc
+
+mac{
+    # Add plist, and a nice icon
+    OTHER_FILES += $$PWD/Info.plist \
+        $$PWD/demo.icns
+
+    QMAKE_INFO_PLIST = $${PWD}/Info.plist
+    ICON = $${PWD}/demo.icns
+}
+
+
+
+
+
+
+
+contains(DUBO_LINK_TYPE, static){
     win32{
         copyToDestdir($$DUBO_EXTERNAL/lib/libvlc.dll, $$DESTDIR)
         copyToDestdir($$DUBO_EXTERNAL/lib/libvlccore.dll, $$DESTDIR)
@@ -40,9 +51,3 @@ contains(DUBO_LINK_TYPE, static){
         }
     }
 }
-
-SOURCES +=  $$PWD/main.cpp
-
-OTHER_FILES += video.html
-OTHER_FILES += hack.js
-RESOURCES += video.qrc
