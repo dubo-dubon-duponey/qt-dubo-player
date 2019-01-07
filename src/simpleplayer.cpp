@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Copyright (c) 2018, Dubo Dubon Duponey <dubodubonduponey+github@pm.me>
+ * Copyright (c) 2019, Dubo Dubon Duponey <dubodubonduponey+github@pm.me>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -23,18 +23,13 @@
 namespace DuboPlayer{
 
 SimplePlayer::SimplePlayer(QWidget *parent) :
-    QWidget(parent), ooWidget(0)
+    QWidget(parent), ooWidget(nullptr)
 {
     QStackedLayout * sl = new QStackedLayout();
     this->setLayout(sl);
 
     DuboVLC * rvlc = new DuboVLC(this);
     rvlc->media_player_new();
-
-#if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
-    this->setAttribute(Qt::WA_NativeWindow, true);
-    this->setAttribute(Qt::WA_DontCreateNativeAncestors, true);
-#endif
 
     this->setAccessibleName("video player");
 

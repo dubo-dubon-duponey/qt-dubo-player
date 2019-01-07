@@ -49,7 +49,7 @@ DuboVLC::DuboVLC( QObject * parent): QObject(parent), smile(new CheshireCatInsta
     };
 
     // Do we ever reach here or do we simply throw?
-    if((smile->instance = libvlc_new(sizeof(vlcArgs) / sizeof(*vlcArgs), vlcArgs)) == NULL) {
+    if((smile->instance = libvlc_new(sizeof(vlcArgs) / sizeof(*vlcArgs), vlcArgs)) == nullptr) {
 //        qDebug() << QString::fromLatin1("Could not init libVLC");
     }
 }
@@ -59,11 +59,11 @@ DuboVLC::~DuboVLC()
 {
     if(smile->player){
         libvlc_media_player_release(smile->player);
-        smile->player = 0;
+        smile->player = nullptr;
     }
     if(smile->instance){
         libvlc_release(smile->instance);
-        smile->instance = 0;
+        smile->instance = nullptr;
     }
     delete smile;
 }

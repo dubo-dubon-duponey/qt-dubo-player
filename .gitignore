@@ -10,3 +10,4 @@ buildd*
 *.dmg
 *.zip
 vc100.pdb
+.qmake.*

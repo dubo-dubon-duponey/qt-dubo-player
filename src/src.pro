@@ -1,20 +1,10 @@
+CONFIG += c++14
+
 TEMPLATE = lib
 QT = core widgets opengl
 
 PROJECT_ROOT = $$PWD/..
 include($$PROJECT_ROOT/config/qmakeitup.pri)
-
-renv=$$(DUBO_WITH_WEBKIT)
-!isEmpty(renv){
-    DUBO_WITH_WEBKIT = $$renv
-}
-isEqual(DUBO_WITH_WEBKIT, true) {
-    QT += webkit webkitwidgets
-    DEFINES += DUBO_WITH_WEBKIT=true
-    # Plugin factory is only available for webkit based QTs
-    HEADERS += $$PWD/lib$${TARGET}/webpluginfactory.h
-    SOURCES += $$PWD/webpluginfactory.cpp
-}
 
 INCLUDEPATH += $$PWD
 

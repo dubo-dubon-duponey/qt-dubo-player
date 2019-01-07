@@ -46,7 +46,7 @@ class LIBDUBOPLAYERSHARED_EXPORT SimplePlayer : public QWidget
     Q_OBJECT
 public:
     /*! \brief Constructor */
-    explicit SimplePlayer(QWidget *parent = 0);
+    explicit SimplePlayer(QWidget *parent = nullptr);
 
     /*! \brief Access the media controller of this player */
     Q_PROPERTY(QVariant media READ getMediaPlayer)
