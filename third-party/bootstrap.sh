@@ -3,28 +3,26 @@
 TP_VERSION=${1:-2.2.8}
 
 curlit(){
-    local url=$1
-    local artifact=$2
+    local url="$1"
+    local artifact="$2"
     if [ ! -f $artifact ]; then
-        curl -L "$url" > $artifact
-        if [[ $? != 0 ]]; then
-            echo "FAILED. Cleaning-up."
-            rm $artifact
+        if ! curl -L "$url" > "$artifact"; then
+            echo "FAILED downloading. Cleaning-up."
+            rm "$artifact"
             exit 1
         fi
     fi
 }
 
 unpack(){
-    local artifact=$1
-    local unpacked=$2
+    local artifact="$1"
+    local unpacked="$2"
     if [ ! -d "$unpacked" ]; then
         mkdir "$unpacked"
         cd "$unpacked"
-        # unzip ../$artifact > /dev/null
-        7z x ../$artifact > /dev/null
-        if [[ $? != 0 ]]; then
-            echo "FAILED. Cleaning-up."
+        if ! 7z x ../$artifact > /dev/null; then
+            echo "FAILED extracting ZIP. Cleaning-up."
+            cd - >/dev/null
             rm -Rf "$unpacked"
             exit 1
         fi
@@ -33,16 +31,17 @@ unpack(){
 }
 
 undmg(){
-    local artifact=$1
-    local unpacked=$2
-    local version=$3
+    local artifact="$1"
+    local unpacked="$2"
+    local version="$3"
     if [ ! -d "$unpacked" ]; then
-        local volume=$(hdiutil attach $artifact | grep "$version")
-        volume=($volume)
-        cp -R /Volumes/vlc-$version/VLC.app $unpacked
-        hdiutil detach $volume
-        if [[ $? != 0 ]]; then
-            echo "FAILED. Cleaning-up."
+        local volume="$(hdiutil attach "$artifact" | grep "VLC")"
+        # Version 2
+        # cp -R "/Volumes/vlc-$version/VLC.app" "$unpacked"
+        # Version 3
+        cp -R "/Volumes/VLC media player/VLC.app" "$unpacked"
+        if ! hdiutil detach "${volume%% *}"; then
+            echo "FAILED extracting DMG. Cleaning-up."
             rm -Rf "$unpacked"
             exit 1
         fi
@@ -50,49 +49,37 @@ undmg(){
 }
 
 download_windows(){
-    local app=$1
-    local platform=$2
-    local version=$3
+    local platform="$1"
+    local version="$2"
     local url=https://download.videolan.org/pub/videolan/vlc/$version/$platform/vlc-$version-$platform.7z
 
     local artifact=$version-$platform.7z
     local unpacked=$version-$platform.bin
 
-    echo "Downloading $app for $platform $version into $artifact"
-    curlit $url $artifact
+    echo "Downloading for $platform $version into $artifact"
+    curlit "$url" "$artifact"
 
-    echo "Extracting $app for $platform $version into $unpacked"
+    echo "Extracting for $platform $version into $unpacked"
     unpack "$artifact" "$unpacked"
 }
 
 
 download_mac(){
-    local app=$1
-    local platform=$2
-    local version=$3
+    local platform="$1"
+    local version="$2"
+    # nightlies: "https://nightlies.videolan.org/build/macosx-intel/vlc-$version.zip"
     local url=https://download.videolan.org/pub/videolan/vlc/$version/$platform/vlc-$version.dmg
 
     local artifact=$version-$platform.dmg
     local unpacked=$version-$platform.app
 
-    echo "Downloading $app for $platform $version into $artifact"
-    curlit $url $artifact
+    echo "Downloading for $platform $version into $artifact"
+    curlit "$url" "$artifact"
 
-    echo "Extracting $app for $platform $version into $unpacked"
-    undmg "$artifact" "$unpacked" $version
+    echo "Extracting for $platform $version into $unpacked"
+    undmg "$artifact" "$unpacked" "$version"
 
 }
 
-download_windows    VLC     win64   $TP_VERSION
-download_mac        VLC     macosx  $TP_VERSION
-
-exit
-
-xxxdownloadNightly(){
-    rm -Rf "$TP_VERSION.zip" || echo "Nothing to clean-up"
-    curl -o $TP_VERSION.zip "https://nightlies.videolan.org/build/macosx-intel/vlc-$version.zip"
-    # Tired of this shit
-    rm -Rf vlc-$TP_VERSION
-    unzip "$TP_VERSION.zip"
-    mv vlc-$TP_VERSION/VLC.app VLC-${TP_VERSION}.app
-}
+download_mac        macosx  $TP_VERSION
+download_windows    win64   $TP_VERSION

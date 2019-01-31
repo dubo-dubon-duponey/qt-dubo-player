@@ -6,14 +6,6 @@ include($$PROJECT_ROOT/config/qmakeitup.pri)
 
 INCLUDEPATH += $$PWD
 
-DEFINES += LIBDUBOPLAYER_LIBRARY
-contains(DUBO_LINK_TYPE, static){
-    DEFINES += LIBDUBOPLAYER_USE_STATIC
-}
-
-copyToDestdir($$PWD/lib$${TARGET}/*.h, $$DESTDIR/../include/lib$${TARGET})
-copyToDestdir($$PWD/../res/redist/*, $$DESTDIR/../share/lib$${TARGET})
-
 HEADERS += \
     $$PWD/lib$${TARGET}/global.h \
     $$PWD/lib$${TARGET}/core.h \
@@ -24,7 +16,8 @@ HEADERS += \
     $$PWD/lib$${TARGET}/videocontrol.h \
     $$PWD/lib$${TARGET}/vlc2.h
 
-SOURCES +=  $$PWD/root.cpp \
+SOURCES += \
+    $$PWD/root.cpp \
     $$PWD/core.cpp \
     $$PWD/mediaplayer.cpp \
     $$PWD/simpleplayer.cpp \
@@ -64,6 +57,7 @@ contains(DUBO_LINK_TYPE, dynamic){
             # system(rm -Rf $${DESTDIR}/plugins)
             # Post 2.2
             system(mkdir -p $${DESTDIR}/lib/vlc)
+            # XXX when compiling dynamically, this ends-up with lib/lib
             system(cp "$$DUBO_EXTERNAL/lib/libvl*.dylib" "$$DESTDIR/lib")
             # Pre 2.2
             system(cp -R "$$DUBO_EXTERNAL/plugins" "$${DESTDIR}")

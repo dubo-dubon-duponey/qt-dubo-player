@@ -30,8 +30,8 @@ Core::Core(DuboVLC * rvlc, QObject *parent):
 
 void Core::setUserAgent(const QString &appName, const QString &appVersion)
 {
-    QString applicationOutput = appName + " " + appVersion;
-    QString httpOutput = appName + "/" + appVersion + " " + PROJECT_NAME + "/" + VERSION_FULL + "(" + vlc->get_version() + " " + vlc->get_compiler() +")";
+    QString applicationOutput = appName + QString::fromLatin1(" ") + appVersion;
+    QString httpOutput = appName + QString::fromLatin1("/") + appVersion + QString::fromLatin1(" ") + QString::fromUtf8(PROJECT_NAME) + QString::fromLatin1("/") + QString::fromUtf8(VERSION_FULL) + QString::fromLatin1("(") + vlc->get_version() + QString::fromLatin1(" ") + vlc->get_compiler() + QString::fromLatin1(")");
     vlc->set_user_agent(applicationOutput, httpOutput);
 }
 

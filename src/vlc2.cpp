@@ -31,8 +31,8 @@ struct DuboVLC::CheshireCatInstance
 
     static void libvlc_callback(const libvlc_event_t *p_event, void * p_user_data)
     {
-        DuboVLC * p_rox = (DuboVLC *) p_user_data;
-        emit p_rox->notify(libvlc_event_type_name(p_event->type));
+        DuboVLC * p_rox = static_cast<DuboVLC *>(p_user_data);
+        emit p_rox->notify(QString::fromLatin1(libvlc_event_type_name(p_event->type)));
     }
 
 };
@@ -126,7 +126,7 @@ void DuboVLC::set_user_agent(const QString &appOutput, const QString &httpOutput
 // 	Retrieve libvlc version.
 const QString DuboVLC::get_version()
 {
-    return QString(libvlc_get_version());
+    return QString::fromLatin1(libvlc_get_version());
 }
 
 //const char * 	libvlc_get_compiler (void)
@@ -135,14 +135,14 @@ const QString DuboVLC::get_compiler()
 {
 //    const char * 	libvlc_get_compiler (void)
 //            Retrieve libvlc compiler version.
-    return QString(libvlc_get_compiler());
+    return QString::fromLatin1(libvlc_get_compiler());
 }
 
 //const char * 	libvlc_get_changeset (void)
 // 	Retrieve libvlc changeset.
 const QString DuboVLC::get_changeset()
 {
-    return QString(libvlc_get_changeset());
+    return QString::fromLatin1(libvlc_get_changeset());
 }
 
 //void 	libvlc_module_description_list_release (libvlc_module_description_t *p_list)
@@ -394,7 +394,7 @@ uint DuboVLC::video_get_width(int t)
 {
     uint px = 0;
     uint py = 0;
-    libvlc_video_get_size(smile->player, t, & px, & py);
+    libvlc_video_get_size(smile->player, static_cast<uint>(t), & px, & py);
     return px;
 }
 
@@ -436,7 +436,7 @@ void DuboVLC::video_set_scale(const float factor)
 // 	Get current video aspect ratio.
 QString DuboVLC::video_get_aspect_ratio()
 {
-    return QString(libvlc_video_get_aspect_ratio(smile->player));
+    return QString::fromLatin1(libvlc_video_get_aspect_ratio(smile->player));
 }
 
 //LIBVLC_API void 	libvlc_video_set_aspect_ratio (libvlc_media_player_t *p_mi, const char *psz_aspect)
@@ -530,7 +530,7 @@ void DuboVLC::video_set_spu_delay(const int & i)
 // 	Get current crop filter geometry.
 QString DuboVLC::video_get_crop_geometry()
 {
-    return QString(libvlc_video_get_crop_geometry(smile->player));
+    return QString::fromLatin1(libvlc_video_get_crop_geometry(smile->player));
 }
 
 //LIBVLC_API void 	libvlc_video_set_crop_geometry (libvlc_media_player_t *p_mi, const char *psz_geometry)

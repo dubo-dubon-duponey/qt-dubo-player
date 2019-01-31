@@ -31,7 +31,7 @@ SimplePlayer::SimplePlayer(QWidget *parent) :
     DuboVLC * rvlc = new DuboVLC(this);
     rvlc->media_player_new();
 
-    this->setAccessibleName("video player");
+    this->setAccessibleName(QString::fromLatin1("video player"));
 
     QWidget * container = new QWidget(this);
     this->layout()->addWidget(container);

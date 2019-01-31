@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     player = new DuboPlayer::SimplePlayer();
     player->show();
 
-    player->mediaPlayer()->setMedia("http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4");
+    player->mediaPlayer()->setMedia(QString::fromLatin1("http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4"));
     player->mediaPlayer()->play();
 
     qDebug() << player->root()->getName();

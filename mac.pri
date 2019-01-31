@@ -7,7 +7,8 @@
 # DUBO_INTERNAL_VERSION = 2.1.1
 # DUBO_INTERNAL_VERSION = 2.1.5
 # Changes in the plugins resolution model made the move to 2.2 PAINFUL - 2.1 support is now untested
-DUBO_INTERNAL_VERSION = 2.2.8
+# DUBO_INTERNAL_VERSION = 2.2.8
+DUBO_INTERNAL_VERSION = 3.0.6
 DUBO_INTERNAL_PATH = $${DUBO_INTERNAL_VERSION}-macosx.app/Contents/MacOS
 
 # If you rather want to link against your own, specify DUBO_EXTERNAL, a directory that must contain include and lib folders with the necessary dependencies

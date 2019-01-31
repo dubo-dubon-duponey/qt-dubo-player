@@ -23,7 +23,7 @@
 #include "vlc2.h"
 
 #include <QObject>
-#include <QStringlist.h>
+#include <QStringList>
 
 namespace DuboPlayer{
 

@@ -65,31 +65,31 @@ public:
 
     QVariant getMediaPlayer()
     {
-        QVariant var = QVariant::fromValue((QObject*) _rp_mediaplayer);
+        QVariant var = QVariant::fromValue(static_cast<QObject*>(_rp_mediaplayer));
         return var;
     }
 
     QVariant getAudio()
     {
-        QVariant var = QVariant::fromValue((QObject*) _rp_audio);
+        QVariant var = QVariant::fromValue(static_cast<QObject*>(_rp_audio));
         return var;
     }
 
     QVariant getVideo()
     {
-        QVariant var = QVariant::fromValue((QObject*) _rp_video);
+        QVariant var = QVariant::fromValue(static_cast<QObject*>(_rp_video));
         return var;
     }
 
     QVariant getCore()
     {
-        QVariant var = QVariant::fromValue((QObject*) _rp_core);
+        QVariant var = QVariant::fromValue(static_cast<QObject*>(_rp_core));
         return var;
     }
 
     QVariant getRoot()
     {
-        QVariant var = QVariant::fromValue((QObject*) this->root());
+        QVariant var = QVariant::fromValue(static_cast<QObject*>(this->root()));
         return var;
     }
 
@@ -108,7 +108,7 @@ public:
         QStringList l = QStringList();
         QPoint pos = QCursor::pos();
         QWidget * under = qApp->widgetAt(pos);
-        if(under && under->accessibleName() == "video player"){
+        if(under && under->accessibleName() == QString::fromLatin1("video player")){
             l.append(QString::number(pos.x()));
             l.append(QString::number(pos.y()));
         }
