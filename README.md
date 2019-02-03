@@ -88,7 +88,6 @@ On OSX, it would "simply" complain about QPainterDevice.
 Conversely, msvc static builds crash if RELEASE (can still use them in DEBUG).
 Mixing mingw-vlc and msvc is a kinky idea anyhow...
 But maybe investigate QMAKE_LFLAGS_RELEASE += /DEBUG
-- QT 4.8, msvc (not sure about mingw): the WebPlugin doesn't work at all, due to qtwebkit/qt limitations
 
 ## API
 
