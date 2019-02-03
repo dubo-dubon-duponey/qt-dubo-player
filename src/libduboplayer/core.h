@@ -20,7 +20,7 @@
 #define DUBOPLAYER_CORE_H
 
 #include "global.h"
-#include "vlc2.h"
+#include "vlc3.h"
 
 #include <QObject>
 #include <QStringList>

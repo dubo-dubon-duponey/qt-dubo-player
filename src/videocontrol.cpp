@@ -172,11 +172,6 @@ void VideoControls::setTeletext(const int & i)
     vlc->video_set_teletext(i);
 }
 
-void VideoControls::toggleTeletext()
-{
-    vlc->toggle_teletext();
-}
-
 int VideoControls::videoTrackCount()
 {
     return vlc->video_get_track_count();

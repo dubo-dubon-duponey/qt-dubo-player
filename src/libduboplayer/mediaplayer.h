@@ -24,7 +24,7 @@
 #include <QObject>
 #include <QStringList>
 
-#include "vlc2.h"
+#include "vlc3.h"
 
 namespace DuboPlayer
 {
@@ -42,9 +42,9 @@ public:
     /*! \brief Whether playing or not */
     Q_PROPERTY(bool isPlaying READ isPlaying)
     /*! \brief Read length */
-    Q_PROPERTY(int length READ length)
+    Q_PROPERTY(long long length READ length)
     /*! \brief Retrieve and set playback time */
-    Q_PROPERTY(int time READ time WRITE setTime)
+    Q_PROPERTY(long long time READ time WRITE setTime)
     /*! \brief Retrieve and set playbakc position */
     Q_PROPERTY(float position READ position WRITE setPosition)
     /*! \brief Retrieve and set chapter */
@@ -65,8 +65,8 @@ public:
     QString media();
     void setMedia(const QString & path);
     bool isPlaying();
-    int length();
-    int time();
+    long long length();
+    long long time();
     void setTime(const int & time);
     float position();
     void setPosition(const float & pos);

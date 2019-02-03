@@ -17,6 +17,9 @@
  *****************************************************************************/
 
 #include <QApplication>
+#include <QtWebEngine>
+#include <QWebEngineView>
+#include <QWebChannel>
 #include <QDebug>
 
 #include "libduboplayer/simpleplayer.h"
@@ -28,11 +31,44 @@ int main(int argc, char *argv[])
     // Simple QWidget
     DuboPlayer::SimplePlayer * player;
     player = new DuboPlayer::SimplePlayer();
-    player->show();
+    DuboPlayer::Root * root = new DuboPlayer::Root();
+
+    // player->setAutoFillBackground(true);
+    // player->setMouseTracking(true);
+
+    // player->setWindowFlags(Qt::FramelessWindowHint);
+    // player->setWindowFlags(Qt::CoverWindow);
+
+    /*
+    Widget = 0x00000000,
+    Window = 0x00000001,
+    Dialog = 0x00000002 | Window,
+    Sheet = 0x00000004 | Window,
+    Drawer = Sheet | Dialog,
+    Popup = 0x00000008 | Window,
+    Tool = Popup | Dialog,
+    ToolTip = Popup | Sheet,
+    SplashScreen = ToolTip | Dialog,
+    Desktop = 0x00000010 | Window,
+    SubWindow = 0x00000012,
+    ForeignWindow = 0x00000020 | Window,
+    CoverWindow = 0x00000040 | Window,
+    */
+
+    /*
+    player->setAttribute(Qt::WA_TranslucentBackground, true);
+    player->setAttribute(Qt::WA_NoSystemBackground, true);
+    player->setAttribute(Qt::WA_OpaquePaintEvent, false);
+    player->setAttribute(Qt::WA_PaintOnScreen, true);
+    player->setStyleSheet(QString::fromLatin1("background-color: red;"));
+    player->setWindowOpacity(0.5);
+    */
 
     player->mediaPlayer()->setMedia(QString::fromLatin1("http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4"));
     player->mediaPlayer()->play();
+    player->show();
 
+    /*
     qDebug() << player->root()->getName();
     qDebug() << player->root()->getBuildType();
     qDebug() << player->root()->getLinkType();
@@ -49,12 +85,31 @@ int main(int argc, char *argv[])
     qDebug() << player->core()->getCompiler();
     qDebug() << player->core()->getAudioFilterList();
     qDebug() << player->core()->getVideoFilterList();
-
+*/
 
     // As a plugin inside HTML
 /*    QWebEngineView *view = new QWebEngineView();
     view->settings()->setAttribute(QWebEngineSettings::JavascriptEnabled, true);
     view->settings()->setAttribute(QWebEngineSettings::PluginsEnabled, true);*/
+
+    // Display the webview
+    QFileInfo jsFileInfo(QDir::currentPath() + QString::fromUtf8("/qwebchannel.js"));
+
+    if (!jsFileInfo.exists())
+        QFile::copy(QString::fromUtf8(":/qtwebchannel/qwebchannel.js"), jsFileInfo.absoluteFilePath());
+
+    QtWebEngine::initialize();
+    QWebEngineView * view = new QWebEngineView();
+
+    QWebChannel * channel = new QWebChannel(view->page());
+    view->page()->setWebChannel(channel);
+    view->load(QUrl(QString::fromUtf8("qrc:/demo.html")));
+
+    view->show();
+    // player->setOverlayWidget(view);
+
+    channel->registerObject(QString::fromUtf8("Root"), root);
+    channel->registerObject(QString::fromUtf8("Player"), player);
 
     int a = app.exec();
     return a;

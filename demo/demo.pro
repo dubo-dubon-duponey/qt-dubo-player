@@ -35,14 +35,10 @@ contains(DUBO_LINK_TYPE, static){
     !isEmpty(DUBO_INTERNAL){
         mac{
             system(rm -Rf $${DESTDIR}/$${TARGET}.app/Contents/MacOS/lib)
-            system(rm -Rf $${DESTDIR}/$${TARGET}.app/Contents/MacOS/plugins)
             system(mkdir -p $${DESTDIR}/$${TARGET}.app/Contents/MacOS/lib/vlc)
             # XXX this is creating copies of the symlinked, unversioned libs
             system(cp "$${DUBO_EXTERNAL}/lib/libvl*.dylib" "$$DESTDIR/$${TARGET}.app/Contents/MacOS/lib")
-            # Pre 2.2
-            system(cp -R "$${DUBO_EXTERNAL}/plugins" "$${DESTDIR}/$${TARGET}.app/Contents/MacOS")
-            # Post 2.2
-            system(ln -s "../../plugins" "$${DESTDIR}/$${TARGET}.app/Contents/MacOS/lib/vlc")
+            system(cp -R "$${DUBO_EXTERNAL}/plugins" "$${DESTDIR}/$${TARGET}.app/Contents/MacOS/lib/vlc")
             QMAKE_LFLAGS += -Wl,-rpath,@executable_path/lib
 
         }

@@ -74,12 +74,12 @@ bool MediaPlayer::isPlaying()
     return vlc->media_player_is_playing();
 }
 
-int MediaPlayer::length()
+long long MediaPlayer::length()
 {
     return vlc->media_player_get_length();
 }
 
-int MediaPlayer::time()
+long long MediaPlayer::time()
 {
     return vlc->media_player_get_time();
 }

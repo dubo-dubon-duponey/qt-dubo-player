@@ -24,7 +24,7 @@
 #include <QObject>
 #include <QStringList>
 
-#include "vlc2.h"
+#include "vlc3.h"
 
 namespace DuboPlayer
 {
@@ -79,7 +79,6 @@ namespace DuboPlayer
 
         // XXX unexposed
         // QStringList* chapterDescription(int i);
-        //        Q_INVOKABLE void toggleTeletext();
         //        void VideoControls::takeSnapshot(const int i)
 
         /*! \brief Retrieves and set cropping geometry */
@@ -117,7 +116,6 @@ namespace DuboPlayer
         void setCropGeometry(const QString &crop);
         int teletext();
         void setTeletext(const int & i);
-        void toggleTeletext();
         int videoTrackCount();
         QStringList videoTrackDescription();
         int videoTrack();

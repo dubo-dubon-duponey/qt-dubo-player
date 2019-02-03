@@ -23,6 +23,7 @@
 
 #include <QWidget>
 #include <QLayout>
+#include <QDebug>
 #include <QStackedLayout>
 #include <QApplication>
 #include <QMoveEvent>
@@ -132,7 +133,7 @@ public:
     void setOverlayWidget(QWidget *widget)
     {
         ooWidget = widget;
-        ((QStackedLayout *) this->layout())->insertWidget(0, ooWidget);
+        (static_cast<QStackedLayout *> (this->layout()))->insertWidget(0, ooWidget);
         ooWidget->show();
     }
     /*! \endcond */
@@ -142,9 +143,9 @@ signals:
     /*! \brief lbvlc events are piped through this. */
     void notify(const QString & seg);
 
-public slots:
+//public slots:
     /*! \brief public slot for notifications */
-    void slotNotify(const QString & seg);
+//    void slotNotify(const QString & seg);
 
 private:
     DuboPlayer::Root * _rp_root;
@@ -158,18 +159,22 @@ private:
 
 protected:
     /*! \cond */
-    void moveEvent(QMoveEvent *event)
-    {
-//        if (ooWidget)
-//            ooWidget->move(this->window()->pos());
-        if (ooWidget)
-            ooWidget->move(event->pos());
-    }
-
     void resizeEvent(QResizeEvent *event)
     {
-        if (ooWidget)
-            ooWidget->resize(event->size());
+        qDebug() << event->size();
+        // ooWidget->move(100, 100);
+//        if (ooWidget)
+//            ooWidget->resize(event->size());
+    }
+
+    /*
+    void moveEvent(QMoveEvent *event)
+    {
+        qDebug() << "Move event" << event;
+//        if (ooWidget)
+//            ooWidget->move(this->window()->pos());
+//        if (ooWidget)
+//            ooWidget->move(event->pos());
     }
 
     void hideEvent(QHideEvent *)
@@ -189,6 +194,7 @@ protected:
         if (ooWidget)
             ooWidget->close();
     }
+    */
     /*! \endcond */
 
 };

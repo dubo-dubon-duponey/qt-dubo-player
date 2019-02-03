@@ -100,7 +100,7 @@ var sayHello = function(x, y){
 
 var pollFun = function(){
     var newC = checkInfluence();
-    if(newC[0] != lastX || newC[1] != lastY)
+    if(newC[0] !== lastX || newC[1] !== lastY)
         sayHello(newC[0], newC[1]);
     lastX = newC[0];
     lastY = newC[1];

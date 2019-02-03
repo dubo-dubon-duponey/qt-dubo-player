@@ -35,9 +35,10 @@ SimplePlayer::SimplePlayer(QWidget *parent) :
 
     QWidget * container = new QWidget(this);
     this->layout()->addWidget(container);
-    rvlc->media_player_set_window((void *) container->winId());
+    rvlc->media_player_set_window(reinterpret_cast<void *>(container->winId()));
 
-    connect(rvlc, SIGNAL(notify(QString)), this, SLOT(slotNotify(QString)));
+    // connect(rvlc, SIGNAL(notify(QString)), this, SLOT(slotNotify(QString)));
+    connect(rvlc, SIGNAL(notify(QString)), this, SIGNAL(notify(QString)));
 
     _rp_core = new DuboPlayer::Core(rvlc, this);
     _rp_mediaplayer = new DuboPlayer::MediaPlayer(rvlc, this);
@@ -45,10 +46,12 @@ SimplePlayer::SimplePlayer(QWidget *parent) :
     _rp_video = new DuboPlayer::VideoControls(rvlc, this);
 }
 
+/*
 void SimplePlayer::slotNotify(const QString & seg)
 {
     emit notify(seg);
 }
+*/
 
 DuboPlayer::Root * SimplePlayer::root()
 {

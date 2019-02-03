@@ -18,7 +18,7 @@
 
 #include "libduboplayer/root.h"
 
-#include "libduboplayer/vlc2.h"
+#include "libduboplayer/vlc3.h"
 
 /*! \cond */
 

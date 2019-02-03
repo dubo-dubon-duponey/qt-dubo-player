@@ -17,7 +17,7 @@
  *****************************************************************************/
 
 #include <vlc/vlc.h>
-#include "libduboplayer/vlc2.h"
+#include "libduboplayer/vlc3.h"
 #include <QDebug>
 
 /*! \cond */
@@ -390,15 +390,15 @@ void DuboVLC::video_set_mouse_input(const bool on)
 
 //LIBVLC_API int 	libvlc_video_get_size (libvlc_media_player_t *p_mi, unsigned num, unsigned *px, unsigned *py)
 // 	Get the pixel dimensions of a video.
-uint DuboVLC::video_get_width(int t)
+uint DuboVLC::video_get_width(uint t)
 {
     uint px = 0;
     uint py = 0;
-    libvlc_video_get_size(smile->player, static_cast<uint>(t), & px, & py);
+    libvlc_video_get_size(smile->player, t, & px, & py);
     return px;
 }
 
-uint DuboVLC::video_get_height(int t)
+uint DuboVLC::video_get_height(uint t)
 {
     uint px = 0;
     uint py = 0;
@@ -479,21 +479,23 @@ QStringList DuboVLC::video_get_spu_description()
 
 //LIBVLC_API int 	libvlc_video_set_spu (libvlc_media_player_t *p_mi, unsigned i_spu)
 // 	Set new video subtitle.
-void DuboVLC::video_set_spu(uint i)
+void DuboVLC::video_set_spu(int i)
 {
     libvlc_video_set_spu(smile->player, i);
 }
 
 //LIBVLC_API int 	libvlc_video_set_subtitle_file (libvlc_media_player_t *p_mi, const char *psz_subtitle)
 // 	Set new video subtitle file.
+// XXX fix signature to include "select" (true right now)
 void DuboVLC::video_set_subtitle_file(const QString &path)
 {
-    libvlc_video_set_subtitle_file(smile->player, path.toLocal8Bit());
+    libvlc_media_player_add_slave(smile->player, libvlc_media_slave_type_subtitle, path.toLocal8Bit(), true);
+    // libvlc_video_set_subtitle_file(smile->player, path.toLocal8Bit());
 }
 
 //LIBVLC_API int64_t 	libvlc_video_get_spu_delay (libvlc_media_player_t *p_mi)
 // 	Get the current subtitle delay.
-int DuboVLC::video_get_spu_delay()
+long long DuboVLC::video_get_spu_delay()
 {
     return libvlc_video_get_spu_delay(smile->player);
 }
@@ -554,15 +556,6 @@ void DuboVLC::video_set_teletext(const int & i)
     libvlc_video_set_teletext(smile->player, i);
 }
 
-//LIBVLC_API void 	libvlc_toggle_teletext (libvlc_media_player_t *p_mi)
-// 	Toggle teletext transparent status on video output.
-void DuboVLC::toggle_teletext()
-{
-//LIBVLC_API void 	libvlc_toggle_teletext (libvlc_media_player_t *smile->player)
-//        Toggle teletext transparent status on video output.
-     libvlc_toggle_teletext(smile->player);
-}
-
 //LIBVLC_API int 	libvlc_video_get_track_count (libvlc_media_player_t *p_mi)
 // 	Get number of available video tracks.
 int DuboVLC::video_get_track_count()
@@ -604,7 +597,7 @@ void DuboVLC::video_set_track(const int i)
 void DuboVLC::video_take_snapshot(const int i, const QString & path)
 {
     const char * psz_filepath = path.toLocal8Bit();
-    libvlc_video_take_snapshot(smile->player, i, psz_filepath, 0, 100);
+    libvlc_video_take_snapshot(smile->player, static_cast<uint>(i), psz_filepath, 0, 100);
 }
 
 
@@ -820,7 +813,7 @@ bool DuboVLC::vlm_add_broadcast(const QString & broadcastName, const QString & p
 //        "#transcode{vcodec=h264,vb=0,scale=0,acodec=mp4a,ab=56}:http{mux=ts,dst=:8080/}",
         args.toLocal8Bit(),
         0,
-        NULL,
+        nullptr,
         1,
         0
     );
@@ -990,7 +983,7 @@ void DuboVLC::media_player_stop()
 void DuboVLC::media_player_set_window(void * id) {
 //    qDebug() << " [DuboLibVLC] Cat layer: media_player_set_window";
 #if defined ( Q_OS_MAC )
-    libvlc_media_player_set_nsobject( smile->player, (void *) id );
+    libvlc_media_player_set_nsobject( smile->player, static_cast<void *>(id) );
 #elif defined ( Q_OS_UNIX )
     libvlc_media_player_set_xwindow( smile->player, reinterpret_cast<intptr_t>( id ) );
 #elif defined ( Q_OS_WIN )
@@ -1011,7 +1004,7 @@ void DuboVLC::media_player_set_window(void * id) {
 
 //LIBVLC_API libvlc_time_t 	libvlc_media_player_get_length (libvlc_media_player_t *p_mi)
 // 	Get the current movie length (in ms).
-int DuboVLC::media_player_get_length()
+long long DuboVLC::media_player_get_length()
 {
 //    qDebug() << " [DuboLibVLC] Cat layer: media_player_get_length";
     return libvlc_media_player_get_length(smile->player);
@@ -1019,7 +1012,7 @@ int DuboVLC::media_player_get_length()
 
 //LIBVLC_API libvlc_time_t 	libvlc_media_player_get_time (libvlc_media_player_t *p_mi)
 // 	Get the current movie time (in ms).
-int DuboVLC::media_player_get_time()
+long long DuboVLC::media_player_get_time()
 {
 //    qDebug() << " [DuboLibVLC] Cat layer: media_player_get_time";
     return libvlc_media_player_get_time(smile->player);
